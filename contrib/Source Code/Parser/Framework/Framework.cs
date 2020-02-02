@@ -15,35 +15,6 @@ namespace ATT
     public static partial class Framework
     {
         #region Database
-        /// <summary>
-        /// The current version of Retail WoW.
-        /// </summary>
-        private static readonly int[] CURRENT_VERSION_ARR = new int[] { 8, 2, 0, 30918 };
-
-        /// <summary>
-        /// The current version of Retail WoW. [Format: ABBBCCCFFFFFF]
-        /// </summary>
-        private static readonly long CURRENT_VERSION = CURRENT_VERSION_ARR.ConvertVersion();
-
-        /// <summary>
-        /// The initial build version for the Warlords of Draenor Expansion.
-        /// </summary>
-        private static readonly int[] WARLORDS_VERSION_ARR = new int[] { 6, 0, 1, 18471 };
-
-        /// <summary>
-        /// The initial build version for the Warlords of Draenor Expansion.
-        /// </summary>
-        private static readonly long WARLORDS_VERSION = WARLORDS_VERSION_ARR.ConvertVersion();
-
-        /// <summary>
-        /// The initial build version for the Legion Expansion.
-        /// </summary>
-        private static readonly int[] LEGION_VERSION_ARR = new int[] { 7, 0, 3, 22248 };
-
-        /// <summary>
-        /// The initial build version for the Legion Expansion.
-        /// </summary>
-        private static readonly long LEGION_VERSION = LEGION_VERSION_ARR.ConvertVersion();
 
         /// <summary>
         /// All of the NPC IDs that have been referenced somewhere in the database.
@@ -224,7 +195,7 @@ namespace ATT
             }
             if (data.TryGetValue("s", out f))
             {
-                if (f < 1 || CURRENT_VERSION < LEGION_VERSION) data.Remove("s");
+                if (f < 1 || Version.CURRENT_VERSION < Version.LEGION_VERSION) data.Remove("s");
             }
 
             if (data.TryGetValue("q", out f))
@@ -282,7 +253,7 @@ namespace ATT
                 foreach (var entry in timeline)
                 {
                     var commandSplit = Convert.ToString(entry).Split(' ');
-                    var version = commandSplit[1].Split('.').ConvertVersion();
+                    var version = Version.ConvertVersion(commandSplit[1].Split('.'));
                     if (version > lastVersion) lastVersion = version;
                     switch (commandSplit[0])
                     {
@@ -297,22 +268,22 @@ namespace ATT
                                 if (index == 0)
                                 {
                                     firstVersion = version;
-                                    if (CURRENT_VERSION < version) removed = 1;
+                                    if (Version.CURRENT_VERSION < version) removed = 1;
                                 }
                                 else
                                 {
-                                    if (CURRENT_VERSION >= version) removed = 0;
+                                    if (Version.CURRENT_VERSION >= version) removed = 0;
                                 }
                                 break;
                             }
                         case "removed":
                             {
-                                if (CURRENT_VERSION >= version) removed = 1;
+                                if (Version.CURRENT_VERSION >= version) removed = 1;
                                 break;
                             }
                         case "blackmarket":
                             {
-                                if (CURRENT_VERSION >= version) removed = 2;
+                                if (Version.CURRENT_VERSION >= version) removed = 2;
                                 break;
                             }
                     }
@@ -328,7 +299,7 @@ namespace ATT
                     else
                     {
                         // If the version is the same as the last version, mark it as "Never Implemented".
-                        if (firstVersion == lastVersion || firstVersion > CURRENT_VERSION) data["u"] = 1;
+                        if (firstVersion == lastVersion || firstVersion > Version.CURRENT_VERSION) data["u"] = 1;
                         else if (data.TryGetValue("b", out int b))
                         {
                             switch (b)
