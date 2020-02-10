@@ -22,6 +22,9 @@ _.Instances = { tier(8, {	-- Battle for Azeroth
 		},
 		["g"] = {
 			n(-1,  {	-- Common Boss Drop
+				i(171202),	-- Vantus Rune Technique: Ny'alotha, the Waking City(Rank 1)
+				i(171201),	-- Vantus Rune Technique: Ny'alotha, the Waking City(Rank 2)
+				i(171200),	-- Vantus Rune Technique: Ny'alotha, the Waking City(Rank 3)
 			}),
 			d(17, {	-- LFR
 				n(0, {	-- Zone Drops
@@ -81,7 +84,7 @@ _.Instances = { tier(8, {	-- Battle for Azeroth
 				}),
 				ach(14194, {	-- Halls of Devotion
 					e(2377, {	-- Dark Inquisitor Xanesh
-						["crs"] = { 160229 },
+						["crs"] = { 160229, 156575 },
 						["g"] = {
 							i(172196),	-- Vorzz Yoq'al
 							i(172190),	-- Uhnish Vwah
@@ -224,6 +227,11 @@ _.Instances = { tier(8, {	-- Battle for Azeroth
 				n(-4, {	-- Achievements
 					ach(14146, {	-- Glory of the Ny'alotha Raider
 						i(174861),	-- Wriggling Parasite
+					}),
+				}),
+				n(-17, {	-- Quests
+					q(58373, {	-- Ny'alotha: MOTHER's Guidance
+						["provider"] = { "n", 160177 },	-- Wrathion
 					}),
 				}),
 				n(0, {	-- Zone Drops
@@ -436,6 +444,11 @@ _.Instances = { tier(8, {	-- Battle for Azeroth
 						i(174861),	-- Wriggling Parasite
 					}),
 				}),
+				n(-17, {	-- Quests
+					q(58374, {	-- Ny'alotha: MOTHER's Guidance
+						["provider"] = { "n", 160177 },	-- Wrathion
+					}),
+				}),
 				n(0, {	-- Zone Drops
 					i(175004),	-- Legwraps of Horrifying Figments
 					i(175005),	-- Belt of Concealed Intent
@@ -494,7 +507,7 @@ _.Instances = { tier(8, {	-- Battle for Azeroth
 					},
 				}),
 				e(2377, {	-- Dark Inquisitor Xanesh
-					["crs"] = { 160229 },
+					["crs"] = { 160229, 156575 },
 					["g"] = {
 						ach(14024),	-- Buzzer Beater
 						i(172196),	-- Vorzz Yoq'al
@@ -715,7 +728,7 @@ _.Instances = { tier(8, {	-- Battle for Azeroth
 					},
 				}),
 				e(2377, {	-- Dark Inquisitor Xanesh
-					["crs"] = { 160229 },
+					["crs"] = { 160229, 156575 },
 					["g"] = {
 						ach(14045),	-- Mythic: Dark Inquisitor Xanesh
 						ach(14024),	-- Buzzer Beater

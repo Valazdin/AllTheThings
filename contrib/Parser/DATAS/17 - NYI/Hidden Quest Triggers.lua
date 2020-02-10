@@ -142,9 +142,22 @@ _.NeverImplemented =
 		q(30552),	-- [DNT] The Master Strategist TRACKER - triggers after completing The Master Strategist (questID 29451)
 		q(30560),	-- [DNT] Tools of Divination TRACKER - triggers after completing Tools of Divination (questID 29464)
 		q(30546),	-- [DNT] Writing the Future TRACKER - triggers after completing Writing the Future (questID 29515)
+		-- DMF Arcade 8.3
+		q(45038),	-- Hexsweeper lvl 1
+		q(45039),	-- Hexsweeper lvl 2
+		q(45040),	-- Hexsweeper lvl 3
+		q(45041),	-- Hexsweeper lvl 4
+		q(45042),	-- Hexsweeper lvl 5
+		q(59312),	-- Hexsweeper lvl X
+		q(57827),	-- Rune Matching easy
+		q(57828),	-- Rune Matching normal
+		q(57829),	-- Rune Matching hard
+		q(57835),	-- Totems lvl 1
+		q(57836),	-- Totems lvl 2
+		q(57837),	-- Totems lvl 3
+		q(57838),	-- Totems lvl 4
+		q(57839),	-- Totems lvl 5
 		
-		
-
 		-------------------
 		---   CLASSIC   ---
 		-------------------
@@ -791,7 +804,9 @@ _.NeverImplemented =
 		q(39058),	-- Critters of Draenor — looks like an unused version of #38299
 		q(36492),	-- Garrison Pet Battle — discord report, "for today's EU garrison menagerie fight, the Blingtron/protectron one"
 		q(36886),	-- Ogre Waygate — opening waygate in gorgrond
-
+		q(36294),	-- Lumber Mill — Phylarch the Evergreen first attack
+		q(36295),	-- Lumber Mill — Phylarch the Evergreen second attack
+		
 	--	TREASURES
 		q(34521),	-- Treasure: Glowing Obsidian Shard (secondary quest triggered when looting Burning Pearl in Frostfire Ridge)
 		q(34968),	-- Treasure: Ice-Covered Supplies (secondary quest triggered when looting Forgotten Supplies in Frostfire Ridge)
@@ -1313,6 +1328,7 @@ _.NeverImplemented =
 		q(49610),	-- looting Adventurer's Society Loot Stash to unlock the Nigel Rifthold pet vendor
 		q(56684),	-- Flag used to track if 160489 (340 engineering goggles) had been crafted. This identifies if the recipe for rank 2 can drop
 		q(49037),	-- triggered after getting achievement The Reining Champion
+		q(55494),	-- Torcali quest of the day completed
 
 		q(54704),	-- War Campaign - triggered when turning in "Time for War"
 		q(53147),	-- Zuldazar - Triggered when turning in "The Zanchuli Council". No idea what the ID is used to track
@@ -1369,8 +1385,9 @@ _.NeverImplemented =
 		q(57060),	-- IE-related mission — not sure if this is the Stalwart Worldvein Rank 2 one or one that awarded Saurok Scale Headgear
 		q(56528),	-- IE-related mission — Investigating the Rumors (done on Alliance, awarded Captured Documents, which procs the mission "Finding a Key")
 		q(56529),	-- IE-related mission — Finding a Key (done on Alliance, awarded Resonance Locator, which procs the mission "Tracking the Worldvein")
-		q(56530),	-- IE-related mission — Tracking the Worldvein (done on Alliance, awarded Fluctuating Worldvein, Rank 3 Worldvein Resonance, popped while mission complete thing played
+		q(56530),	-- IE-related mission — Tracking the Worldvein (done on Alliance, awarded Fluctuating Worldvein, Rank 3 Worldvein Resonance, popped while mission complete thing played)
 		q(57061),	-- popped when i manually refreshed after fully completing the mission / getting Fluctuating Worldvein in my inventory
+		q(57332),	-- using Map to the Last Worldvein to get mission The Last Worldvein (rank 4 Worldvein Resonance)
 		
 
 	--	PVP / WAR MODE
@@ -1803,6 +1820,7 @@ _.NeverImplemented =
 		q(51363),	-- Weekly m+ chest looted (Horde, probably alliance too?)
 		
 	-- Nazjatar
+		q(57167),	-- Killed Vyz'olgo the Mind-Taker. Probably related to a daily loot flag from the lieutenants
 		q(57097),	-- ??? Triggered after the cutscene for "Scouting the Palace" in Nazjatar on Alliance
 		q(56505),	-- Triggered when walking through the Alliance crash site as horde. Bodyguard dialog fires
 		q(56881),	-- Triggered upon first entry into Nazjatar
@@ -1983,7 +2001,8 @@ _.NeverImplemented =
 		q(55903),	-- Triggered when completing "Armed for Action" achievement. May be related to picking up the weapon (e.g. Bolt Spitter)
 		q(56330),	-- Triggered shortly after completing "Chopped Bots". Possibly shuts down the magnet?
 		q(56660),	-- Triggered on Mechagon randomly
-		
+		q(56840),	-- Toys of Destruction - made the Volatile Blaster. Maybe triggers for all the toys to indicate the toy extra action button is available?
+		q(56627),	-- collected Roadtrogg mini
 	--	Dungeons
 		q(53623),	-- Battle for Azeroth Dungeon Reward Quest
 	
@@ -2044,6 +2063,7 @@ _.NeverImplemented =
 		q(58512),	-- Grand Empress Shek'zara bonus roll
 		q(59060),	-- choosing Bitey McStabface as the name for your Aqir Hatchling
 		q(59062),	-- choosing Spike as the name for your Aqir Hatchling
+		q(58906),	-- using Troop Requisition: Ramkahen Lancer
 
 		-- Horrific Visions
 		q(57841),	-- first horrific vision cleared as horde
@@ -2126,7 +2146,7 @@ _.NeverImplemented =
 		-- "Combating the Corruption" completion flags. The IDs appear to be reused and aren't specific to any one mob. Track all mobs until we can make sense of the pattern.
 		q(58690),	-- Corrupted Acolyte - Vale of Eternal Blossoms, Corrupted Fleshbeat - Uldum?
 		q(58689),	-- Corrupted Doomsayer - Uldum
-		q(58691),	-- Corrupted Doomsayer - Vale of Eternal Blossoms, Corrupted Putrification - Uldum
+		q(58691),	-- Corrupted Doomsayer/Bonestripper - Vale of Eternal Blossoms, Corrupted Putrification/Dominator - Uldum
 		q(58688),	-- Corrupted Mind Eater - Uldum
 		
 		-- Mechagon unlock chain
@@ -2143,6 +2163,7 @@ _.NeverImplemented =
 		q(59558),	-- kill Maut
 		q(58547),	-- kill skitra - probably triggers when first wing clears?
 		q(58548),	-- kill skitra - probably triggers when first wing clears?
+		q(58549),	-- kill skitra on heroic?
 		q(59559),	-- kill skitra - kill credit
 		q(59136),	-- after coming up the elevator after first wing. Likely the RP and respawn point reset
 		q(59561),	-- kill dark inquisitor xanesh
@@ -2155,13 +2176,14 @@ _.NeverImplemented =
 		q(59048),	-- kill Deresh of the Nothingness, big add with 200 Mementos as loot
 		q(59566),	-- kill drest'agath
 		q(59560),	-- kill hivemind
-		q(58535),	--\
-		q(58536),	--| got these three after defeating Il'gynoth, getting Gift of Flesh achievement (wing clear?) and looting [Encrypted Ny'alothian Text]x4
-		q(59564),	--/ so probably need more data to find out what's what here
+		q(58535),	-- Il'gynoth wing clear. probably triggers the azerite beacon
+		q(58536),	-- Il'gynoth wing clear. triggers dialog?
+		q(59564),	-- kill Il'gynoth
 		q(59565),	-- kill ra-den
 		q(58543),	-- kill ra-den - either the wing clear OR the beacon placement
 		q(58544),	-- kill ra-den - either the wing clear OR the beacon placement
 		q(58527),	-- combined 15 nyalotha pages
+		q(59567),	-- kill Carapce of N'Zoth (Fury of N'Zoth)
 		
 		-- World Bosses
 		q(58510),	-- Vuk'laz the Earthbreaker first kill??

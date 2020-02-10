@@ -354,6 +354,10 @@ _.ExpansionFeatures =
 						["coord"] = { 64.5, 22.7, 1527 },
 						["isWorldQuest"] = true,
 					}),
+					q(55359, {	-- Ritual of Ascendancy
+						["lvl"] = 120,
+						["isWorldQuest"] = true,
+					}),
 					q(57234, {	-- Solar Collector
 						["lvl"] = 120,
 						["coord"] = { 80.3, 66.1, 1527 },
@@ -917,6 +921,12 @@ _.ExpansionFeatures =
 						["provider"] = { "n", 155095 },	-- King Phaoris
 						["sourceQuest"] = 56472,	-- The Uldum Accord
 					}),
+					q(58236, {	-- Symbolic Destruction
+						["coord"] = { 54.8, 32.9, 1527 },
+						["isDaily"] = true,
+						["provider"] = { "n", 155096 },	-- High Commander Kamses
+						["sourceQuest"] = 56472,	-- The Uldum Accord
+					}),
 					q(58233, {	-- Twisted Corruptors
 						["coord"] = { 54.6, 32.8, 1527 },
 						["isDaily"] = true,
@@ -936,9 +946,9 @@ _.ExpansionFeatures =
 						["coord"] = { 66.8, 74.3, 1527 },
 						["isDaily"] = true,
 					}),
-					n(157593, {	-- Amalgamation of Fless
+					n(157593, {	-- Amalgamation of Flesh
 						["description"] = "This rare will only spawn when the event is up",
-						--["questID"] = ,
+						["questID"] = 57429,
 						["coord"] = { 59.8, 72.4, 1527 },
 						["isDaily"] = true,
 						["g"] = {
@@ -1185,8 +1195,19 @@ _.ExpansionFeatures =
 						["coord"] = { 50.6, 82.4, 1527 },
 						["isWorldQuest"] = true,
 					}),
-					q(55359, {	-- Ritual of Ascendancy
+					q(58330, {	-- Pyre of the Amalgamated One
 						["lvl"] = 120,
+						["coord"] = { 59.77, 72.41, 1527 },
+						["isWorldQuest"] = true,
+					}),
+					q(57586, {	-- Spirit Drinker
+						["lvl"] = 120,
+						["coord"] = { 47.8, 32.7, 1527 },
+						["isWorldQuest"] = true,
+					}),
+					q(57587, {	-- Spirit Drinker
+						["lvl"] = 120,
+						["coord"] = { 52.3, 31.6, 1527 },
 						["isWorldQuest"] = true,
 					}),
 					q(57588, {	-- Spirit Drinker
@@ -1194,9 +1215,19 @@ _.ExpansionFeatures =
 						["coord"] = { 59.0, 28.0, 1527 },
 						["isWorldQuest"] = true,
 					}),
+					q(57589, {	-- Spirit Drinker
+						["lvl"] = 120,
+						["coord"] = { 64.2, 65.5, 1527 },
+						["isWorldQuest"] = true,
+					}),
 					q(57456, {	-- Spirit Drinker
 						["lvl"] = 120,
 						["coord"] = { 47.0, 41.0, 1527 },
+						["isWorldQuest"] = true,
+					}),
+					q(57591, {	-- Spirit Drinker
+						["lvl"] = 120,
+						["coord"] = { 60.0, 53.0, 1527 },
 						["isWorldQuest"] = true,
 					}),
 					q(58271, {	-- Voidflame Ritual
@@ -1734,7 +1765,10 @@ _.ExpansionFeatures =
 					n(160714, {	-- Provisioner Qorra
 						["coord"] = { 55.1, 32.9, 1527 },
 						["g"] = {
-							i(174995, {	-- Void Tendril Pet Leash
+							i(174925, {	-- Void Tendril Pet Leash
+								["cost"] = { { "c", 1719, 1 }, },	-- 1x Corrupted Memento
+							}),
+							i(174995, {	-- Void Tendril Pet Leash (Toy)
 								["cost"] = {
 									{ "i", 163036, 20 },	-- Polished Pet Charm
 									{ "c", 1719, 100 },		-- 100x Corrupted Memento
@@ -1742,6 +1776,9 @@ _.ExpansionFeatures =
 							}),
 							i(172011, {	-- Recipe: Contract: Uldum Accord
 								["cost"] = 13300000,	-- 1,330 gold
+							}),
+							i(174904, {	-- Troop Requisition: Ramkahen Lancer
+								["cost"] = { { "c", 1560, 500 }, },	-- 500x War Resources
 							}),
 							i(174477, {	-- Pygmy Camel
 								["cost"] = { { "i", 163036, 300 }, },	-- 300x Polished Pet Charm

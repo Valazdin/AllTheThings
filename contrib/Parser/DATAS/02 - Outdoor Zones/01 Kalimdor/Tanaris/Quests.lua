@@ -100,25 +100,25 @@ _.Zones =
 				q(9269,  {	-- Atiesh, Greatstaff of the Guardian
 					["u"] = 40,
 					["provider"] = { "n", 15192 },	-- Anachronos
-					["classes"] = { 11 },	-- Druid
+					["classes"] = { DRUID },
 					["sourceQuest"] = 9251,	-- Atiesh, the Befouled Greatstaff
 				}),
 				q(9270,  {	-- Atiesh, Greatstaff of the Guardian
 					["u"] = 40,
 					["provider"] = { "n", 15192 },	-- Anachronos
-					["classes"] = { 8 },	-- Mage
+					["classes"] = { MAGE },
 					["sourceQuest"] = 9251,	-- Atiesh, the Befouled Greatstaff
 				}),
 				q(9271,  {	-- Atiesh, Greatstaff of the Guardian
 					["u"] = 40,
 					["provider"] = { "n", 15192 },	-- Anachronos
-					["classes"] = { 9 },	-- Warlock
+					["classes"] = { WARLOCK },
 					["sourceQuest"] = 9251,	-- Atiesh, the Befouled Greatstaff
 				}),
 				q(9257,  {	-- Atiesh, Greatstaff of the Guardian
 					["u"] = 40,
 					["provider"] = { "n", 15192 },	-- Anachronos
-					["classes"] = { 5 },	-- Priest
+					["classes"] = { PRIEST },
 					["sourceQuest"] = 9251,	-- Atiesh, the Befouled Greatstaff
 				}),
 				q(9251,  {	-- Atiesh, the Befouled Greatstaff
@@ -597,6 +597,7 @@ _.Zones =
 					-- Some people are still able to get this.  Not sure what the exact criteria are that need to be met.
 					["provider"] = { "n", 28126 },	-- Don Carlos
 					["coord"] = { 50.7, 27.5, 71 },
+					["races"] = ALLIANCE_ONLY,
 					["isBreadcrumb"] = true,
 					["g"] = {
 						i(38276, {	-- Haliscan Brimmed Hat
@@ -608,6 +609,7 @@ _.Zones =
 					-- CRIEVE NOTE: Got this on Druid, who doesn't have 12513 completed. [5/4/2019]
 					["provider"] = { "n", 28126 },	-- Don Carlos
 					["coord"] = { 50.7, 27.5, 71 },
+					["races"] = HORDE_ONLY,
 					["isBreadcrumb"] = true,
 					["g"] = {
 						i(38276, {	-- Haliscan Brimmed Hat
@@ -1218,6 +1220,10 @@ _.Zones =
 					["races"] = ALLIANCE_ONLY,
 					["isBreadcrumb"] = true,
 				}),
+				q(10445, {	-- The Vials of Eternity (legacy version)
+					["u"] = 40,
+					["provider"] = 	{ "n", 19935 },	-- Soridormi
+				}),
 				q(13432, {	-- The Vials of Eternity
 					["description"] = "The questgiver can be found walking around the Caverns of Time.",
 					["providers"] = {
@@ -1225,6 +1231,7 @@ _.Zones =
 						{ "n", 19936 },	-- Arazmodu
 					},
 					["lvl"] = 70,
+					["altQuests"] = { 10445 },	-- The Vials of Eternity (legacy version)
 				}),
 				q(2772,  {	-- The World At Your Feet
 					["provider"] = { "n", 7804 },	-- Trenton Lighthammer
@@ -1475,10 +1482,10 @@ _.Zones =
 						{ "n", 19935 },	-- Soridormi
 						{ "n", 19936 },	-- Arazmodu
 					},
+					["classes"] = { WARRIOR, PALADIN, DEATHKNIGHT, MONK, DRUID, DEMONHUNTER },
 					["g"] = {
 						i(29297),	-- Band of the Eternal Defender
 					},
-					["classes"] = { 1, 2, 6, 10, 11, 12 },
 				}),
 				q(10471, {	-- Defender's Oath
 					["minReputation"] = { 990, REVERED },
@@ -1488,19 +1495,19 @@ _.Zones =
 						{ "n", 19935 },	-- Soridormi
 						{ "n", 19936 },	-- Arazmodu
 					},
+					["classes"] = { WARRIOR, PALADIN, DEATHKNIGHT, MONK, DRUID, DEMONHUNTER },
 					["g"] = {
 						i(29296),	-- Band of Eternity
 					},
-					["classes"] = { 1, 2, 6, 10, 11, 12 },
 				}),
 				q(10460, {	-- Defender's Pledge
 					["minReputation"] = { 990, FRIENDLY },
 					["isBreadcrumb"] = true,	-- Prequest/Friendly Tank Ring. Only 1 out of 4 Quests per reputation level can be done.
 					["provider"] = { "n", 19936 },	-- Arazmodu
+					["classes"] = { WARRIOR, PALADIN, DEATHKNIGHT, MONK, DRUID, DEMONHUNTER },
 					["g"] = {
 						i(29294),	-- Band of Eternity
 					},
-					["classes"] = { 1, 2, 6, 10, 11, 12 },
 				}),
 				q(10467, {	-- Defender's Vow
 					["minReputation"] = { 990, HONORED },
@@ -1509,10 +1516,10 @@ _.Zones =
 						{ "n", 19935 },	-- Soridormi
 						{ "n", 19936 },	-- Arazmodu
 					},
+					["classes"] = { WARRIOR, PALADIN, DEATHKNIGHT, MONK, DRUID, DEMONHUNTER },
 					["g"] = {
 						i(29295),	-- Band of Eternity
 					},
-					["classes"] = { 1, 2, 6, 10, 11, 12 },
 				}),
 				-- Scale of Sands / Healer Ring
 				q(10473, {	-- Restorer's Covenant
@@ -1520,29 +1527,29 @@ _.Zones =
 					["isBreadcrumb"] = true,	-- Exalted Healer Ring. Only 1 out of 4 Quests per reputation level can be done.
 					["provider"] = { "n", 19935 },	-- Soridormi
 					["sourceQuest"] = 10469,	-- Restorer's Oath
+					["classes"] = { PALADIN, PRIEST, SHAMAN, MONK, DRUID },
 					["g"] = {
 						i(29309),	-- Band of the Eternal Restorer
 					},
-					["classes"] = { 2, 5, 7, 10, 11 },
 				}),
 				q(10469, {	-- Restorer's Oath
 					["minReputation"] = { 990, REVERED },
 					["isBreadcrumb"] = true,	-- Revered Healer Ring. Only 1 out of 4 Quests per reputation level can be done.
 					["provider"] = { "n", 19935 },	-- Soridormi
 					["sourceQuest"] = 10465,	-- Restorer's Vow
+					["classes"] = { PALADIN, PRIEST, SHAMAN, MONK, DRUID },
 					["g"] = {
 						i(29308),	-- Band of Eternity
 					},
-					["classes"] = { 2, 5, 7, 10, 11 },
 				}),
 				q(10461, {	-- Restorer's Pledge
 					["minReputation"] = { 990, FRIENDLY },
 					["isBreadcrumb"] = true,	-- Prequest/Friendly Healer Ring. Only 1 out of 4 Quests per reputation level can be done.
 					["provider"] = { "n", 19936 },	-- Arazmodu
+					["classes"] = { PALADIN, PRIEST, SHAMAN, MONK, DRUID },
 					["g"] = {
 						i(29307),	-- Band of Eternity
 					},
-					["classes"] = { 2, 5, 7, 10, 11 },
 				}),
 				q(10465, {	-- Restorer's Vow
 					["minReputation"] = { 990, HONORED },
@@ -1551,10 +1558,10 @@ _.Zones =
 						{ "n", 19935 },	-- Soridormi
 						{ "n", 19936 },	-- Arazmodu
 					},
+					["classes"] = { PALADIN, PRIEST, SHAMAN, MONK, DRUID },
 					["g"] = {
 						i(29306),	-- Band of Eternity
 					},
-					["classes"] = { 2, 5, 7, 10, 11 },
 				}),
 				-- Scale of Sands / Caster Ring
 				q(10472, {	-- Sage's Covenant
