@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ATT
 {
@@ -16,6 +14,7 @@ namespace ATT
         public class ObjectData
         {
             #region Static Functionality
+
             /// <summary>
             /// All of the objects that have been created. (in order, first in, first out)
             /// </summary>
@@ -87,7 +86,7 @@ namespace ATT
             /// <param name="data">The data.</param>
             /// <param name="objectData">The object data container.</param>
             /// <returns>Whether or not the most signficant object type was found.</returns>
-            public static bool TryGetMostSignificantObjectType(Dictionary<string, object> data, out ObjectData objectData)
+            public static bool TryGetMostSignificantObjectType(IDictionary<string, object> data, out ObjectData objectData)
             {
                 ObjectData defaultValue = null;
                 foreach (var objectType in ALL_OBJECTS)
@@ -132,8 +131,11 @@ namespace ATT
                 if (objectData == null) return false;
                 return true;
             }
-            #endregion
+
+            #endregion Static Functionality
+
             #region Properties
+
             /// <summary>
             /// The blacklisted fields.
             /// </summary>
@@ -153,8 +155,11 @@ namespace ATT
             /// The object type.
             /// </summary>
             public string ObjectType { get; private set; }
-            #endregion
+
+            #endregion Properties
+
             #region Functionality
+
             /// <summary>
             /// Build the object.
             /// This writes the primary field and removes it from the list of available fields.
@@ -252,7 +257,8 @@ namespace ATT
                 MarkShortcut(shortcut, function);
                 builder.Append(shortcut).Append('(');
             }
-            #endregion
+
+            #endregion Functionality
         }
     }
 }
