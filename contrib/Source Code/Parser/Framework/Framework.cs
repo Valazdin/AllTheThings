@@ -771,7 +771,7 @@ namespace ATT
                         properties.Remove("g");
                     }
 
-                    Database.Quests.Add(questID, properties ?? new Dictionary<string, object>());
+                    Database.Quests.Add(questID, new Data.Types.Quest(properties));
                 }
             }
         }

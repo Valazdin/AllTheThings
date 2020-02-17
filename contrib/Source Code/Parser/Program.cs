@@ -1,14 +1,14 @@
-﻿using System;
+﻿using NLua;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using NLua;
 
 namespace ATT
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Setup tracing to the console.
             Tracer.OnWrite += Console.Write;
@@ -19,7 +19,7 @@ namespace ATT
             // Load all of the RAW JSON Data into the database.
             var files = Directory.EnumerateFiles(".", "*.json", SearchOption.AllDirectories).ToList();
             files.Sort();
-            foreach(var fileName in files)
+            foreach (var fileName in files)
             {
                 Trace.Write(fileName);
                 Trace.Write("... ");
@@ -68,7 +68,7 @@ namespace ATT
                         Framework.Merge(lua.GetTable("AllTheThings"));
                         break;
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Trace.WriteLine(fileName);
                         Trace.WriteLine(e);
