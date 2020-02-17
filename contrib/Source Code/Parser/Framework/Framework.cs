@@ -1565,7 +1565,7 @@ namespace ATT
             var outputFolder = Directory.CreateDirectory("../../db");
             if (outputFolder.Exists)
             {
-                Database.WriteToFile(Database.Quests, "Quests", outputFolder.FullName);
+                Database.Export(outputFolder.FullName);
                 // Export various debug information to the output folder.
                 Objects.Export(outputFolder.FullName);
             }

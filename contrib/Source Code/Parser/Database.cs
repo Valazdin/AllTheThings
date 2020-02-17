@@ -9,38 +9,41 @@ namespace ATT
 {
     public static class Database
     {
-        public static IDictionary<int, IDictionary<string, object>> Achievements = new Dictionary<int, IDictionary<string, object>>();
-        public static IDictionary<int, IDictionary<string, object>> Quests = new Dictionary<int, IDictionary<string, object>>();
+        public static readonly IDictionary<int, IDictionary<string, object>> Achievements = new Dictionary<int, IDictionary<string, object>>();
+        public static readonly IDictionary<int, IDictionary<string, object>> Quests = new Dictionary<int, IDictionary<string, object>>();
 
-        public static void WriteToFile(IDictionary<int, IDictionary<string, object>> Database, string CategoryName, string TargetPath)
+        public static void Export(string targetPath)
+        {
+            WriteToFile(Quests, "QuestDB", targetPath, "questID");
+        }
+
+        private static void WriteToFile(IDictionary<int, IDictionary<string, object>> Database, string CategoryName, string TargetPath, string mostSignificantField)
         {
             if (string.IsNullOrWhiteSpace(CategoryName))
                 throw new ArgumentNullException("CategoryName");
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"AllTheThings.{CategoryName} = {{");
+            sb.AppendLine($"select(2, ...).{CategoryName} = {{");
             foreach (var record in Database.OrderBy(x => x.Key))
             {
-                sb.AppendLine($"[{record.Key}] = {{{CompressLUA(record.Value ?? new Dictionary<string, object>())}}},");
+                sb.AppendLine($"[{record.Key}] = {{{CompressLUA(mostSignificantField, record.Value ?? new Dictionary<string, object>())}}},");
             }
             sb.Append("};");
             File.WriteAllText(Path.Combine(TargetPath, $"{CategoryName}.lua"), sb.ToString());
         }
 
-        private static string CompressLUA(IDictionary<string, object> data)
+        private static string CompressLUA(string fieldName, IDictionary<string, object> data)
         {
-            if (data.Count > 0 && Export.ObjectData.TryGetMostSignificantObjectType(data, out Export.ObjectData mostSignificantField))
+            if (data.Count > 0 && ATT.Export.ObjectData.TryGetMostSignificantObjectType(data, out Export.ObjectData mostSignificantField))
             {
                 StringBuilder sb = new StringBuilder();
-                // for now, only write the info if the most significant value is a questID. e.g. omit writing questIDs associated to itemIDs/objectIDs directly
-                if (mostSignificantField.ObjectType == "questID")
+                if (mostSignificantField.ObjectType.Equals(fieldName, StringComparison.InvariantCultureIgnoreCase))
                 {
                     data.Remove(mostSignificantField.ObjectType);
 
                     foreach (var field in data)
                     {
-                        if (field.Key == "g" && data.Count == 1) // "g" is the only field here. If so, we don't have write it, but we want the child objects
+                        if (field.Key == "g" && data.Count == 1) // ignore ["g"] for now. Should this be left to Categories for structure? What does it offer for metadata in a DB file?
                         {
-                            // TODO: shift to ["g"] value and compress object data from there
                         }
                         else
                             CompressField(sb, field.Key, field.Value);
