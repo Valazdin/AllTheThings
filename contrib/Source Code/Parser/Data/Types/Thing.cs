@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ATT.Data.Types
 {
     public abstract class Thing
     {
-        private static readonly List<string> BlacklistFields = new List<string>();
-        private readonly Dictionary<string, object> Properties = new Dictionary<string, object>();
+        // Global blacklist. Each derived type can append to this
+        internal static readonly List<string> BlacklistFields = new List<string> { "ignoreBonus", "ignoreSource", "timeline", "ilvl", "name", "q", "equippable", "class", "subclass", "inventoryType" };
+
+        internal readonly Dictionary<string, object> Properties = new Dictionary<string, object>();
 
         internal static void SetBlacklist(params string[] Blacklist)
         {
@@ -72,40 +75,83 @@ namespace ATT.Data.Types
             }
         }
 
-        private static bool IsEnumerable(object obj) => !(obj is string) && typeof(IEnumerable).IsAssignableFrom(obj.GetType());
+        protected bool IsEnumerable(object obj) => !(obj is string) && typeof(IEnumerable).IsAssignableFrom(obj.GetType());
 
-        private static void CompressField(StringBuilder sb, string Key, object Value)
+        protected void CompressField(StringBuilder sb, string Key, object Value)
         {
             sb.Append($"{Key}=");
             CompressValue(sb, Value);
         }
 
-        private static void CompressValue(StringBuilder sb, object Value)
+        protected void CompressValue(StringBuilder sb, object Value)
         {
-            if (Value is int || Value is long || Value is float)
+            if (Value is int || Value is long || Value is float || Value is double) // e.g. lvl, f (filter)
             {
                 sb.Append($"{Value}");
             }
-            else if (Value is bool)
+            else if (Value is bool) // e.g. isDaily, isWeekly
             {
                 sb.Append($"{(((bool)Value) ? "true" : "false")}");
             }
-            else if (Value is string)
+            else if (Value is string) // e.g. description, icon
             {
                 sb.Append($"\"{Value?.ToString().Trim()}\"");
             }
-            else if (Value is List<object>)
+            else if (Value is List<object>) // e.g. races, classes
             {
                 var listValue = Value as List<object>;
                 bool complex = IsEnumerable(Value);
-                sb.Append($"{(complex ? "{" : string.Empty)}");
+                sb.Append("{");
                 for (int idx = 0; idx < listValue.Count; idx++)
                 {
                     if (idx > 0)
                         sb.Append(",");
                     CompressValue(sb, listValue[idx]);
                 }
-                sb.Append($"{(complex ? "}" : string.Empty)}");
+                sb.Append("}");
+            }
+            else if (Value is List<List<object>>) // e.g. cost
+            {
+                // TODO:: this can likely be simplified or merged with the List<object> comparison above since it's effectively doing the same thing
+                var listValue = Value as List<List<object>>;
+                bool complex = IsEnumerable(Value);
+                sb.Append("{");
+                for (int idx = 0; idx < listValue.Count; idx++)
+                {
+                    if (idx > 0)
+                        sb.Append(",");
+                    CompressValue(sb, listValue[idx]);
+                }
+                sb.Append("}");
+            }
+            else if (Value is Dictionary<int, int>) // e.g. modIDs
+            {
+                var modIDs = Value as Dictionary<int, int>;
+                sb.Append("{");
+                foreach (var modID in modIDs)
+                {
+                    sb.Append($"[{modID.Key}]={modID.Value}");
+                    if (modID.Key != modIDs.Last().Key)
+                        sb.Append(",");
+                }
+                sb.Append("}");
+            }
+            else if (Value is Dictionary<object, object>) // e.g. some symlink formats
+            {
+                var vals = Value as Dictionary<object, object>;
+                sb.Append("{");
+                foreach (var val in vals)
+                {
+                    CompressValue(sb, val.Value);
+                    if (val.Key != vals.Last().Key)
+                        sb.Append(",");
+                }
+                sb.Append("}");
+            }
+            else
+            {
+                // TODO: nothing should make it here, but if it does, maybe we should write something to console to indicate an issue
+                sb.Append("nil");
             }
         }
     }

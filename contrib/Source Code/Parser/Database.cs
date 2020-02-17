@@ -10,11 +10,13 @@ namespace ATT
     public static class Database
     {
         public static readonly IDictionary<int, IDictionary<string, object>> Achievements = new Dictionary<int, IDictionary<string, object>>();
+        public static readonly IDictionary<int, Item> Items = new Dictionary<int, Item>();
         public static readonly IDictionary<int, Quest> Quests = new Dictionary<int, Quest>();
 
         public static void Export(string targetPath)
         {
             WriteToFile(Quests, "QuestDB", targetPath);
+            WriteToFile(Items, "ItemDB", targetPath);
         }
 
         private static void WriteToFile<T>(IDictionary<int, T> Database, string CategoryName, string TargetPath) where T : Thing

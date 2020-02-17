@@ -774,6 +774,15 @@ namespace ATT
                     Database.Quests.Add(questID, new Data.Types.Quest(properties));
                 }
             }
+
+            if (Items.AllItems.Any())
+            {
+                foreach (var item in Items.AllItems)
+                {
+                    int itemID = Convert.ToInt32(item["itemID"]);
+                    Database.Items.Add(itemID, new Data.Types.Item(item));
+                }
+            }
         }
 
         private static Dictionary<int, Dictionary<string, object>> GetChildren()
