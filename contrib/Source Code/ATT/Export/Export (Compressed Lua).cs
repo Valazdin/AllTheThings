@@ -89,8 +89,20 @@ namespace ATT
                 // Cache the fields
                 var fields = data.Keys.ToList();
 
+                // Get the most significant object type.
+                ObjectData.TryGetMostSignificantObjectType(data, out ObjectData objectType);
+
                 // If this is a constructed object type, then we need to write a parenthesis afterward.
                 var constructed = ExportShortcut(builder, data, fields);
+
+                // TEMP: if the object is a quest, we only want to output groups.
+                if (objectType is QuestData)
+                {
+                    if (fields.Contains("g"))
+                        fields = new List<string>() { "g" };
+                    else
+                        fields.Clear();
+                }
 
                 // If there are still fields to write, then do so.
                 if (fields.Count > 0)
@@ -223,7 +235,7 @@ namespace ATT
                     builder.Append('{');
 
                     // Export Fields
-                    for (int i = 0,count = list.Count; i < count; ++i)
+                    for (int i = 0, count = list.Count; i < count; ++i)
                     {
                         // If this is NOT the first field, append a comma.
                         if (i > 0) builder.Append(',');
