@@ -95,7 +95,7 @@ namespace ATT.Data.Types
             }
             else if (Value is string) // e.g. description, icon
             {
-                sb.Append($"\"{Value?.ToString().Trim()}\"");
+                sb.Append($"\"{Value?.ToString().Trim().Replace("\"", "\\\"")}\"");
             }
             else if (Value is List<object>) // e.g. races, classes
             {
