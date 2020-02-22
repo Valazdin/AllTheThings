@@ -1574,9 +1574,10 @@ namespace ATT
             var outputFolder = Directory.CreateDirectory("../../db");
             if (outputFolder.Exists)
             {
-                Database.Export(outputFolder.FullName);
                 // Export various debug information to the output folder.
                 Objects.Export(outputFolder.FullName);
+
+                Database.Export(outputFolder.FullName);
             }
         }
     }
