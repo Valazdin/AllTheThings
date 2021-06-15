@@ -8628,6 +8628,8 @@ app.GetCurrentMapID = function()
 			end
 		end
 		-- print("Current UI Map ID: ", uiMapID);
+		-- if entering an instance, clear the search Cache so that proper difficulty tooltips are re-generated
+		if IsInInstance() then wipe(searchCache); end
 		app.CurrentMapID = uiMapID;
 	end
 	return uiMapID;
@@ -8711,8 +8713,12 @@ end
 app.events.ZONE_CHANGED_NEW_AREA = function()
 	app.GetCurrentMapID();
 end
+app.events.ZONE_CHANGED = function()
+	app.GetCurrentMapID();
+end
 app:RegisterEvent("ZONE_CHANGED_INDOORS");
 app:RegisterEvent("ZONE_CHANGED_NEW_AREA");
+app:RegisterEvent("ZONE_CHANGED")
 end)();
 
 -- Mount Lib
