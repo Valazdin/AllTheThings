@@ -1551,18 +1551,26 @@ local PrintQuestInfo = function(questID, new, info)
 end
 local DirtyQuests = {};
 local CompletedQuests = setmetatable({}, {__newindex = function (t, key, value)
+	local total = rawget(t, "_TOTAL") or 0;
 	if value then
+		if not rawget(t, key) then
+			total = total + 1;
+			rawset(t, "_TOTAL", total);
+		end
 		rawset(t, key, value);
 		rawset(DirtyQuests, key, true);
 		ATTAccountWideData.Quests[key] = 1;
 		app.CurrentCharacter.Quests[key] = 1;
 		PrintQuestInfo(key);
 	elseif value == false then
+		total = total - 1;
+		rawset(t, "_TOTAL", total);
 		-- no need to actually set the key in the table since it's been marked as incomplete
 		-- and this meta function only triggers on NEW key assignments
 		PrintQuestInfo(key, false);
 	end
 end});
+-- app.CompletedQuests = CompletedQuests;
 -- returns nil if nil provided, otherwise true/false based on the specific quest being completed by the current character
 local IsQuestFlaggedCompleted = function(questID)
 	return questID and CompletedQuests[questID];
@@ -2941,25 +2949,6 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 				end
 			end
 
-			-- Seems pretty pointless now since all results at the end will pass through a RecursiveGroupRequirementsFilter on every object
-			-- if not app.MODE_DEBUG then
-			-- 	print("Pre-Filtering NPC Search",group and #group)
-			-- 	local regroup = {};
-			-- 	if app.MODE_ACCOUNT then
-			-- 		for i,j in ipairs(group) do
-			-- 			if app.RecursiveUnobtainableFilter(j) then
-			-- 				tinsert(regroup, j);
-			-- 			end
-			-- 		end
-			-- 	else
-			-- 		for i,j in ipairs(group) do
-			-- 			if app.RecursiveClassAndRaceFilter(j) and app.RecursiveUnobtainableFilter(j) and app.RecursiveGroupRequirementsFilter(j) then
-			-- 				tinsert(regroup, j);
-			-- 			end
-			-- 		end
-			-- 	end
-			-- 	group = regroup;
-			-- end
 			if #group > 0 then
 				-- collect descriptions from all search groups and insert into the info for the search
 				if app.Settings:GetTooltipSetting("Descriptions") and paramA ~= "encounterID" and paramA ~= "currencyID" then
@@ -2980,26 +2969,6 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 				insertionSort(group, function(a, b)
 					return not (a.headerID and a.headerID == -1) and b.headerID and b.headerID == -1;
 				end);
-				-- don't think we want this logic anymmore either... it basically changes our search of actual NPC groups into a search for the items for that NPC
-				-- and messes up logic later down the line
-				-- for i,j in ipairs(group) do
-				-- 	print("regroup",j.key,j.key and j[j.key])
-				-- 	-- always include the root quest/item when it's contained
-				-- 	if j.questID or j.itemID then
-				-- 		print("quest or item")
-				-- 		tinsert(subgroup, j);
-				-- 	elseif j.g and not (j.achievementID and j.parent.difficultyID) and j.headerID ~= 0 then
-				-- 		print("special with sub groups")
-				-- 		for k,l in ipairs(j.g) do
-				-- 			print("moving into search group", l.key,l.key and l[l.key])
-				-- 			tinsert(subgroup, l);
-				-- 		end
-				-- 	else
-				-- 		print("other")
-				-- 		tinsert(subgroup, j);
-				-- 	end
-				-- end
-				-- group = subgroup;
 			end
 		end
 	elseif paramA == "achievementID" then
@@ -3160,6 +3129,11 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 
 			-- Show the unobtainable source text, if necessary.
 			if sourceGroup then
+				-- Description for Items
+				if sourceGroup.description and app.Settings:GetTooltipSetting("Descriptions") then
+					tinsert(info, 1, { left = sourceGroup.description, wrap = true, color = "ff66ccff" });
+				end
+
 				if sourceGroup.u and (not sourceGroup.crs or paramA == "itemID" or paramA == "sourceID") then
 					tinsert(info, { left = L["UNOBTAINABLE_ITEM_REASONS"][sourceGroup.u][2] });
 				end
@@ -3646,11 +3620,6 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 		end
 	end
 
-	-- Creature/Encounter Descriptions are handled already
-	if group.description and app.Settings:GetTooltipSetting("Descriptions") and not (group.speciesID or group.creatureID or group.encounterID or paramA == "achievementID" or paramA == "titleID") then
-		tinsert(info, 1, { left = group.description, wrap = true, color = "ff66ccff" });
-	end
-
 	if group.isLimited then
 		tinsert(info, 1, { left = L.LIMITED_QUANTITY, wrap = false, color = "ff66ccff" });
 	end
@@ -3667,15 +3636,6 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 	end
 
 	if topLevelSearch and group.g and #group.g > 0 then
-		--[[
-		if app.Settings:GetTooltipSetting("Descriptions") and not (paramA == "achievementID" or paramA == "titleID") then
-			for i,j in ipairs(group.g) do
-				if j.description and ((j[paramA] and j[paramA] == paramB) or (paramA == "itemID" and group.key == j.key)) then
-					tinsert(info, 1, { left = j.description, wrap = true, color = "ff66ccff" });
-				end
-			end
-		end
-		]]--
 		if app.Settings:GetTooltipSetting("SummarizeThings") then
 			local entries, left, right = {};
 			-- app.DEBUG_PRINT = "CONTAINS-" .. group.key .. group[group.key];
@@ -3778,19 +3738,6 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 
 	-- If there was any informational text generated, then attach that info.
 	if #info > 0 then
-		-- not sure it's necessary or useful in most situations to try cleaning unqiue entries by name
-		-- putting this back due to descriptions, ugh
-		-- descriptions are cleaned when found instead of cleaning all info at the end, so hopefully don't need this done here anymore
-		-- local uniques, dupes = {}, {};
-		-- for i,item in ipairs(info) do
-		-- 	if not item.left then
-		-- 		tinsert(uniques, item);
-		-- 	elseif not dupes[item.left] then
-		-- 		dupes[item.left] = true;
-		-- 		tinsert(uniques, item);
-		-- 	end
-		-- end
-
 		group.tooltipInfo = info;
 		for i,item in ipairs(info) do
 			if item.color then item.a, item.r, item.g, item.b = HexToARGB(item.color); end
@@ -3990,7 +3937,7 @@ app.BuildCost = function(group)
 				["description"] = L["COST_DESC"],
 				["icon"] = "Interface\\Icons\\INV_Misc_Coin_02",
 				["OnUpdate"] = app.AlwaysShowUpdate,
-				["g"] = { },
+				["g"] = {},
 			};
 		local costItem;
 		for i,c in ipairs(group.cost) do
@@ -4015,8 +3962,46 @@ app.BuildCost = function(group)
 				MergeObject(costGroup.g, costItem);
 			end
 		end
-		if not group.g then group.g = {}; end
-		tinsert(group.g, 1, costGroup);
+		if not group.g then group.g = { costGroup };
+		else tinsert(group.g, 1, costGroup); end
+	end
+end
+-- Builds a 'Source' group from the sourceParent or parent of the group and lists it under the group itself for
+-- visibility in popouts
+app.BuildSourceParent = function(group)
+	if group.sourceParent or group.parent then
+		local parent = group.sourceParent or group.parent;
+		-- only show certain types of parents as sources.. typically 'Game World Things'
+		if parent.key
+			and (parent.key == "npcID"
+				or parent.key == "creatureID"
+				or parent.key == "itemID"
+				or parent.key == "s"
+				or parent.key == "questID"
+				or parent.key == "encounterID"
+				or parent.key == "mapID")
+			and parent[parent.key] then
+			local sourceGroup = {
+				["text"] = L["SOURCES"],
+				["description"] = L["SOURCES_DESC"],
+				["icon"] = "Interface\\Icons\\inv_misc_spyglass_02",
+				["OnUpdate"] = app.AlwaysShowUpdate,
+				["g"] = {},
+			};
+			local sources = app.SearchForLink(parent.key .. ":" .. parent[parent.key]);
+			if sources then
+				local clonedSource;
+				for _,source in pairs(sources) do
+					clonedSource = CloneData(source);
+					clonedSource.g = nil;
+					clonedSource.collectible = false;
+					clonedSource.OnUpdate = app.AlwaysShowUpdate;
+					MergeObject(sourceGroup.g, clonedSource);
+				end
+				if not group.g then group.g = { sourceGroup };
+				else tinsert(group.g, 1, sourceGroup); end
+			end
+		end
 	end
 end
 -- check for orphaned currency groups and fill them with things purchased by that currency
@@ -9993,17 +9978,37 @@ app:RegisterEvent("QUEST_SESSION_JOINED");
 end)();
 
 local function QueryCompletedQuests()
-	local t, freshCompletes = CompletedQuests, {};
-	for _,v in pairs(C_QuestLog_GetAllCompletedQuestIDs()) do
+	local t = CompletedQuests;
+	local freshCompletes = C_QuestLog_GetAllCompletedQuestIDs();
+	-- print("total completed quests new/previous",#freshCompletes,rawget(t, "_TOTAL") or 0)
+	local oldReportSetting = app.Settings:GetTooltipSetting("Report:CompletedQuests");
+	-- check if Blizzard is being dumb / should we print a summary instead of individual lines
+	local questDiff = #freshCompletes - (rawget(t, "_TOTAL") or 0);
+	if app.IsReady then
+		if oldReportSetting and questDiff > 25 then
+			print(questDiff,"Quests Completed");
+		elseif oldReportSetting and questDiff < -25 then
+			print(questDiff,"Quests Unflagged");
+		end
+	end
+	if math.abs(questDiff) > 25 then
+		app.Settings:SetTooltipSetting("Report:CompletedQuests", false);
+	end
+	local completedKeys = {};
+	-- allow individual prints
+	for _,v in pairs(freshCompletes) do
 		t[v] = true;
-		freshCompletes[v] = true;
+		completedKeys[v] = true;
 	end
 	-- check for 'unflagged' questIDs (this seems to basically not impact lag at all... i hope)
 	for q,_ in pairs(t) do
-		if not freshCompletes[q] then
+		if not completedKeys[q] and q ~= "_TOTAL" then
 			t[q] = nil;		-- delete the key
 			t[q] = false;	-- trigger the metatable function
 		end
+	end
+	if math.abs(questDiff) > 25 then
+		app.Settings:SetTooltipSetting("Report:CompletedQuests", oldReportSetting);
 	end
 end
 local function RefreshQuestCompletionState(questID)
@@ -12374,8 +12379,11 @@ function app:CreateMiniListForGroup(group)
 		-- 		group = CloneData(group);
 		-- 	end
 		-- end
+		-- if popping out a thing with a sourced parent, generate a Source group to allow referencing the Source of the thing directly
+		app.BuildSourceParent(group);
 		-- if popping out a thing with a Cost, generate a Cost group to allow referencing the Cost things directly
-		if group.cost then app.BuildCost(group); end
+		app.BuildCost(group);
+
 		popout = app:GetWindow(suffix);
 		-- popout.shouldFullRefresh = true;
 		-- custom Update method for the popout so we don't have to force refresh
@@ -13999,7 +14007,7 @@ RowOnEnter = function (self)
 			local owner = self:GetParent():GetParent();
 			if owner and owner.isLocked then
 				GameTooltip:AddLine(L["TOP_ROW_TO_UNLOCK"], 1, 1, 1);
-			else
+			elseif app.Settings:GetTooltipSetting("Show:TooltipHelp") then
 				GameTooltip:AddLine(L["TOP_ROW_TO_LOCK"], 1, 1, 1);
 			end
 		end
@@ -15128,10 +15136,11 @@ app:GetWindow("Bounty", UIParent, function(self, force, got)
 		self:BaseUpdate(true, got);
 	end
 end);
-app:GetWindow("CosmicInfuser", UIParent, function(self)
+app:GetWindow("CosmicInfuser", UIParent, function(self, force)
 	if self:IsVisible() then
 		if not self.initialized then
 			self.initialized = true;
+			force = true;
 			self.data = {
 				['text'] = "Cosmic Infuser",
 				['icon'] = "Interface\\Icons\\INV_Misc_Celestial Map.blp",
@@ -15187,7 +15196,7 @@ app:GetWindow("CosmicInfuser", UIParent, function(self)
 					end
 				end
 
-				self:Update();
+				self:Update(true);
 			end
 		end
 
@@ -15197,7 +15206,7 @@ app:GetWindow("CosmicInfuser", UIParent, function(self)
 		self.data.indent = 0;
 		self.data.back = 1;
 		BuildGroups(self.data, self.data.g);
-		self:BaseUpdate(true);
+		self:BaseUpdate(force);
 	end
 end);
 app:GetWindow("CurrentInstance", UIParent, function(self, force, got)
@@ -15531,8 +15540,8 @@ app:GetWindow("CurrentInstance", UIParent, function(self, force, got)
 				end
 			end
 
-			-- If we don't have any map data on this area and it exists in game, report it to the chat window.
-			if not results or not results.g or #results.g < 1 then
+			-- If we don't have any data cached for this mapID and it exists in game, report it to the chat window.
+			if not results then
 				local mapID = self.mapID;
 				local mapInfo = C_Map_GetMapInfo(mapID);
 				if mapInfo then
@@ -15573,6 +15582,8 @@ app:GetWindow("CurrentInstance", UIParent, function(self, force, got)
 				});
 				BuildGroups(self.data, self.data.g);
 			end
+			-- Make sure to scroll to the top when being rebuilt
+			self.ScrollBar:SetValue(1);
 			return true;
 		end
 		local function OpenMiniList(id, show)
@@ -17302,10 +17313,11 @@ app:GetWindow("Tradeskills", UIParent, function(self, ...)
 		self:BaseUpdate(...);
 	end
 end);
-app:GetWindow("WorldQuests", UIParent, function(self)
+app:GetWindow("WorldQuests", UIParent, function(self, force, got)
 	if self:IsVisible() then
 		if not self.initialized then
 			self.initialized = true;
+			force = true;
 			self.data = {
 				['text'] = L["WORLD_QUESTS"],
 				['icon'] = "Interface\\Icons\\INV_Misc_Map08.blp",
@@ -17882,7 +17894,7 @@ app:GetWindow("WorldQuests", UIParent, function(self)
 			end;
 		end
 
-		self:BaseUpdate(true);
+		self:BaseUpdate(force or got);
 	end
 end);
 
