@@ -212,6 +212,16 @@ local function AfterCombatCallback(method, ...)
 		app:RegisterEvent("PLAYER_REGEN_ENABLED");
 	end
 end
+-- Triggers a timer callback method to run either when current combat ends, or after the provided delay; the method can only be set to run once until it has been run
+local function AfterCombatOrDelayedCallback(method, delaySec, ...)
+	if InCombatLockdown() then
+		-- print("chose AfterCombatCallback")
+		AfterCombatCallback(method, ...);
+	else
+		-- print("chose DelayedCallback",delaySec)
+		DelayedCallback(method, delaySec, ...);
+	end
+end
 local constructor = function(id, t, typeID)
 	if t then
 		if not rawget(t, "g") and rawget(t, 1) then
@@ -1301,7 +1311,8 @@ local function GetUnobtainableTexture(group)
 		-- not NYI
 		if obtainType > 1 and
 			-- is BoE
-			(not group.b or group.b == 2 or group.b == 3) then
+			not app.IsBoP(group)
+			then
 			-- green dot for 'possible'
 			index = 3;
 		end
@@ -3066,7 +3077,7 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 				if #group > 0 then
 					for i,j in ipairs(group) do
 						if j.modItemID == paramB then
-							if j.u and j.u == 2 and (not j.b or j.b == 2 or j.b == 3) and numBonusIds and numBonusIds ~= "" and tonumber(numBonusIds) > 0 then
+							if j.u and j.u == 2 and (not app.IsBoP(j)) and numBonusIds and numBonusIds ~= "" and tonumber(numBonusIds) > 0 then
 								tinsert(info, { left = L["RECENTLY_MADE_OBTAINABLE"] });
 							end
 						end
@@ -3774,7 +3785,7 @@ app.BuildCrafted = function(item)
 	if reagentCache then
 		-- print("BuildCrafted Reagent",itemID)
 		-- check if the item is BoP and needs skill filtering for current character, or debug mode
-		local filterSkill = not app.MODE_DEBUG and item.b and item.b == 1 or select(14, GetItemInfo(itemID)) == 1;
+		local filterSkill = not app.MODE_DEBUG and (app.IsBoP(item) or select(14, GetItemInfo(itemID)) == 1);
 
 		local craftableItemIDs = {};
 		-- item is BoP
@@ -3969,38 +3980,39 @@ end
 -- Builds a 'Source' group from the sourceParent or parent of the group and lists it under the group itself for
 -- visibility in popouts
 app.BuildSourceParent = function(group)
-	if group.sourceParent or group.parent then
-		local parent = group.sourceParent or group.parent;
-		-- only show certain types of parents as sources.. typically 'Game World Things'
-		if parent.key
-			and (parent.key == "npcID"
-				or parent.key == "creatureID"
-				or parent.key == "itemID"
-				or parent.key == "s"
-				or parent.key == "questID"
-				or parent.key == "encounterID"
-				or parent.key == "mapID")
-			and parent[parent.key] then
-			local sourceGroup = {
-				["text"] = L["SOURCES"],
-				["description"] = L["SOURCES_DESC"],
-				["icon"] = "Interface\\Icons\\inv_misc_spyglass_02",
-				["OnUpdate"] = app.AlwaysShowUpdate,
-				["g"] = {},
-			};
-			local sources = app.SearchForLink(parent.key .. ":" .. parent[parent.key]);
-			if sources then
-				local clonedSource;
-				for _,source in pairs(sources) do
-					clonedSource = CloneData(source);
-					clonedSource.g = nil;
-					clonedSource.collectible = false;
-					clonedSource.OnUpdate = app.AlwaysShowUpdate;
-					MergeObject(sourceGroup.g, clonedSource);
-				end
-				if not group.g then group.g = { sourceGroup };
-				else tinsert(group.g, 1, sourceGroup); end
+	if not group.sourceParent and not group.parent then return; end
+	-- only show sources for Things and not 'headers'
+	if group.key == "headerID" then return; end
+	local parent = group.sourceParent or group.parent;
+	-- only show certain types of parents as sources.. typically 'Game World Things'
+	if parent.key
+		and (parent.key == "npcID"
+			or parent.key == "creatureID"
+			or parent.key == "itemID"
+			or parent.key == "s"
+			or parent.key == "questID"
+			or parent.key == "encounterID")
+			-- TODO: maybe handle mapID in a different way as a fallback for things nested under headers within a zone....?
+		and parent[parent.key] then
+		local sourceGroup = {
+			["text"] = L["SOURCES"],
+			["description"] = L["SOURCES_DESC"],
+			["icon"] = "Interface\\Icons\\inv_misc_spyglass_02",
+			["OnUpdate"] = app.AlwaysShowUpdate,
+			["g"] = {},
+		};
+		local sources = app.SearchForLink(parent.key .. ":" .. parent[parent.key]);
+		if sources then
+			local clonedSource;
+			for _,source in pairs(sources) do
+				clonedSource = CloneData(source);
+				clonedSource.g = nil;
+				clonedSource.collectible = false;
+				clonedSource.OnUpdate = app.AlwaysShowUpdate;
+				MergeObject(sourceGroup.g, clonedSource);
 			end
+			if not group.g then group.g = { sourceGroup };
+			else tinsert(group.g, 1, sourceGroup); end
 		end
 	end
 end
@@ -4517,7 +4529,7 @@ local function SearchForLink(link)
 end
 local function SearchForMissingItemsRecursively(group, listing)
 	if group.visible then
-		if (group.collectible or (group.itemID and group.total and group.total > 0)) and (not group.b or group.b == 2 or group.b == 3) then
+		if (group.collectible or (group.itemID and group.total and group.total > 0)) and (not app.IsBoP(group)) then
 			table.insert(listing, group);
 		end
 		if group.g and group.expanded then
@@ -4838,14 +4850,14 @@ end
 local function RefreshSavesCallback()
 	-- This can be attempted a few times incase data is slow, but not too many times since it's possible to not be saved to any instance
 	app.refreshingSaves = app.refreshingSaves or 30;
-	-- Make sure there's info available to check save data
-	local saves = GetNumSavedInstances();
 	-- While the player is still logging in, wait.
 	if not app.GUID then
 		AfterCombatCallback(RefreshSavesCallback);
 		return;
 	end
 
+	-- Make sure there's info available to check save data
+	local saves = GetNumSavedInstances();
 	-- While the player is still waiting for information, wait.
 	if saves and saves < 1 and app.refreshingSaves > 0 then
 		app.refreshingSaves = app.refreshingSaves - 1;
@@ -5040,9 +5052,8 @@ end
 app.RefreshAppearanceSources = RefreshAppearanceSources;
 local function RefreshCollections()
 	StartCoroutine("RefreshingCollections", function()
-		while InCombatLockdown() do coroutine.yield(); end
 		app.print(L["REFRESHING_COLLECTION"]);
-		app.RefreshQuestInfo();
+		while InCombatLockdown() do coroutine.yield(); end
 
 		-- Harvest Illusion Collections
 		local collectedIllusions = ATTAccountWideData.Illusions;
@@ -5102,7 +5113,7 @@ local function RefreshCollections()
 		end
 
 		-- Wait for refresh to actually finish
-		while app.refreshing["RefreshData"] do coroutine.yield(); end
+		while app.refreshDataQueued do coroutine.yield(); end
 
 		-- Report success.
 		app.print(L["DONE_REFRESHING"]);
@@ -8016,13 +8027,15 @@ local itemFields = {
 			else
 				itemLink = string.format("item:%d:::::::::::::", itemLink);
 			end
-			local _, link, quality, _, _, _, _, _, _, icon = GetItemInfo(itemLink);
+			local _, link, quality, _, _, _, _, _, _, icon, _, _, _, b = GetItemInfo(itemLink);
 			-- print("Retry", rawget(t, "retries"), itemLink, link)
 			if link then
 				rawset(t, "retries", nil);
 				rawset(t, "link", link);
 				rawset(t, "icon", icon);
 				rawset(t, "q", quality);
+				-- TODO: can't rawset 'b' until determine if it's heirloom or not since that shows as 1
+				-- rawset(t, "b", b);
 				return link;
 			else
 				if rawget(t, "retries") then
@@ -8050,6 +8063,11 @@ local itemFields = {
 		return GetFixedItemSpecInfo(t.itemID);
 	end,
 	["b"] = function(t)
+		local link = t.link;
+		if link then
+			return select(14, GetItemInfo(link));
+		end
+		-- assume BoE item since it is unsourced
 		return 2;
 	end,
 	["f"] = function(t)
@@ -8440,7 +8458,7 @@ itemHarvesterFields.text = function(t)
 			if info.inventoryType == 0 then
 				info.inventoryType = nil;
 			end
-			if info.b and info.b ~= 1 then
+			if not app.IsBoP(info) then
 				info.b = nil;
 			end
 			if info.q and info.q < 1 then
@@ -9673,16 +9691,22 @@ app.CollectibleAsQuest = function(t)
 			(
 			-- must not be repeatable, unless considering repeatable quests as collectible
 			(not t.repeatable or app.Settings:GetTooltipSetting("Repeatable"))
-			-- must not be a breadcrumb unless collecting breadcrumbs and is available OR collecting breadcrumbs and in Account-mode OR in Party Sync
+			-- debug mode
 			and (app.MODE_DEBUG
-				or (not t.isBreadcrumb and not t.DisablePartySync)
+				-- must not be a breadcrumb
+				or (not t.isBreadcrumb)
+				-- unless collecting breadcrumbs
 				or (app.CollectibleBreadcrumbs and
+					-- in account mode
 					(app.MODE_ACCOUNT
+					-- or party sync without the quest being disabled for it
 					or (app.IsInPartySync and not t.DisablePartySync)
+					-- or simply being able to access the breadcrumb
 					or not t.breadcrumbLockedBy)))
-			-- tracking account-wide quests or must not be a once-per-account quest which has already been flagged as completed on a different character
-			and (app.AccountWideQuests or (not ATTAccountWideData.OneTimeQuests[t.questID] or ATTAccountWideData.OneTimeQuests[t.questID] == app.GUID))
-			)
+			-- account-wide quests (special case since quests are only available once per account, so can only consider them collectible if they've never been completed otherwise)
+			and (app.AccountWideQuests
+				-- otherwise must not be a once-per-account quest which has already been flagged as completed on a different character
+				or (not ATTAccountWideData.OneTimeQuests[t.questID] or ATTAccountWideData.OneTimeQuests[t.questID] == app.GUID)))
 
 			-- If it is an item and associated to an active quest.
 			-- TODO: add t.requiredForQuestID
@@ -10023,10 +10047,17 @@ local function RefreshQuestCompletionState(questID)
 		app.QuestCompletionHelper(tonumber(questID));
 	end
 	wipe(DirtyQuests);
-	wipe(npcQuestsCache)
+	wipe(npcQuestsCache);
+	-- soft update to ensure visible changes occur
+	app:UpdateWindows();
 end
 app.RefreshQuestInfo = function(questID)
-	AfterCombatCallback(RefreshQuestCompletionState, questID);
+	-- print("RefreshQuestInfo",questID)
+	if questID then
+		Callback(RefreshQuestCompletionState, questID);
+	else
+		AfterCombatOrDelayedCallback(RefreshQuestCompletionState, 1);
+	end
 end
 
 -- Recipe Lib
@@ -10629,6 +10660,11 @@ end)();
 app.Filter = app.ReturnFalse;
 -- Meaning "Display as expected" - Returns true
 app.NoFilter = app.ReturnTrue;
+-- Whether the group has a binding designation, which means it basically cannot be moved to another Character
+function app.IsBoP(group)
+	-- 1 = BoP, 4 = Quest Item... probably don't need that?
+	return group.b == 1;-- or group.b == 4;
+end
 function app.FilterGroupsByLevel(group)
 	-- after 9.0, transition to a req lvl range, either min, or min + max
 	if group.lvl then
@@ -10655,10 +10691,11 @@ end
 function app.FilterGroupsByCompletion(group)
 	return group.total and (group.progress or 0) < group.total;
 end
+-- returns whether this is a Character-transferable Thing/Item
 function app.FilterItemBind(item)
-	return item.b == 2 or item.b == 3; -- BoE
+	return item.itemID and not app.IsBoP(item);
 end
--- Represents filters which should be applied at the Character level
+-- Represents filters which should be applied during Updates to groups
 function app.FilterItemClass(item)
 	-- check Account trait filters
 	if app.UnobtainableItemFilter(item)
@@ -10726,11 +10763,7 @@ function app.FilterItemClass_UnobtainableItem(item)
 	end
 end
 function app.FilterItemClass_RequireBinding(item)
-	if item.b and (item.b == 2 or item.b == 3) then
-		return false;
-	else
-		return true;
-	end
+	return not item.itemID or app.IsBoP(item);
 end
 function app.FilterItemClass_PvP(item)
 	if item.pvp then
@@ -10741,7 +10774,7 @@ function app.FilterItemClass_PvP(item)
 end
 function app.FilterItemClass_RequiredSkill(item)
 	local requireSkill = item.requireSkill;
-	if requireSkill and (not item.professionID or not GetRelativeValue(item, "DontEnforceSkillRequirements") or item.b == 1) then
+	if requireSkill and (not item.professionID or not GetRelativeValue(item, "DontEnforceSkillRequirements") or app.IsBoP(item)) then
 		return app.GetTradeSkillCache()[requireSkill];
 	else
 		return true;
@@ -12293,8 +12326,8 @@ local function NestSourceQuests(root, addedQuests, depth)
 					if sq then
 						-- track how many quests levels are nested so it can be sorted in a decent-ish looking way
 						root.depth = math.max((root.depth or 0),(sq.depth or 1));
-						if not prereqs then prereqs = {}; end
-						tinsert(prereqs, sq);
+						if not prereqs then prereqs = { sq };
+						else tinsert(prereqs, sq); end
 					else
 						addedQuests[sourceQuestID] = nil;
 					end
@@ -12325,16 +12358,17 @@ local function NestSourceQuests(root, addedQuests, depth)
 	return root;
 end
 
--- OPTIMIZE THESE FOR THE LOVE OF GOD
 app.Windows = {};
-function app:UpdateWindows(force, got)
-	local anyUpdated = false;
-	for name, window in pairs(app.Windows) do
-		if window:Update(force, got) then
-			anyUpdated = true;
-		end
+app._UpdateWindows = function(force, got)
+	-- print("_UpdateWindows",force,got)
+	for _, window in pairs(app.Windows) do
+		window:Update(force, got);
 	end
-	return anyUpdated;
+end
+function app:UpdateWindows(force, got)
+	-- no need to update windows when a refresh is pending
+	if app.refreshDataQueued then return; end
+	AfterCombatOrDelayedCallback(app._UpdateWindows, 0.1, force, got);
 end
 local CreateRow;
 function app:CreateMiniListForGroup(group)
@@ -13092,15 +13126,6 @@ local function StartMovingOrSizing(self, fromChild)
 			end);
 		elseif self:IsMovable() then
 			self:StartMoving();
-			-- never encountered this bug without this added logic...is there some specific way to trigger it?
-			-- Push(app, "StartMovingOrSizing (Moving)", function()
-			-- 	-- This fixes a bug where the window will get stuck on the mouse until you reload.
-			-- 	if IsSelfOrChild(self, GetMouseFocus()) then
-			-- 		return true;
-			-- 	else
-			-- 		StopMovingOrSizing(self);
-			-- 	end
-			-- end);
 		end
 	end
 end
@@ -14284,7 +14309,7 @@ function app:GetWindow(suffix, parent, onUpdate)
 		container.rows = {};
 		scrollbar:SetValue(1);
 		container:Show();
-		window:Update(true);
+		window:Update();
 	end
 	return window;
 end
@@ -14990,45 +15015,53 @@ function app:GetDataCache()
 end
 
 -- Collection Window Creation
+app._RefreshData = function()
+	-- print("_RefreshData",app.refreshDataForce and "FORCE", app.refreshDataGot and "COLLECTED")
+	-- Send an Update to the Windows to Rebuild their Row Data
+	if app.refreshDataForce then
+		app.refreshDataForce = nil;
+		app:GetDataCache();
+
+		-- Refresh all Quests without callback
+		RefreshQuestCompletionState();
+
+		-- Reapply custom collects
+		app.RefreshCustomCollectibility();
+
+		-- Forcibly update the windows.
+		app._UpdateWindows(true, app.refreshDataGot);
+	else
+		app._UpdateWindows(nil, app.refreshDataGot);
+	end
+	app.refreshDataQueued = nil;
+	app.refreshDataGot = nil;
+
+	-- Send a message to your party members.
+	local data = app:GetWindow("Prime").data;
+	local msg = "A\t" .. app.Version .. "\t" .. (data.progress or 0) .. "\t" .. (data.total or 0);
+	if app.lastMsg ~= msg then
+		SendSocialMessage(msg);
+		app.lastMsg = msg;
+	end
+	wipe(searchCache);
+end
 function app:RefreshData(lazy, got, manual)
 	-- print("RefreshData",lazy and "LAZY", got and "COLLECTED", manual and "MANUAL")
 	app.refreshDataForce = app.refreshDataForce or not lazy;
-	app.countdown = manual and 0 or 30;
-	StartCoroutine("RefreshData", function()
-		-- While the player is in combat, wait for combat to end.
-		-- print("Wait Combat/Ready")
-		while InCombatLockdown() or not app.IsReady do coroutine.yield(); end
+	app.refreshDataGot = app.refreshDataGot or got;
+	app.refreshDataQueued = true;
 
-		-- Wait 1/2 second. For multiple simultaneous requests, each one will reapply the delay. [This should fix a lot of lag with ensembles.]
-		-- print("Wait Countdown")
-		while app.countdown > 0 do
-			app.countdown = app.countdown - 1;
-			coroutine.yield();
-		end
-
-		-- Send an Update to the Windows to Rebuild their Row Data
-		if app.refreshDataForce then
-			app.refreshDataForce = nil;
-			app:GetDataCache();
-
-			-- Reapply custom collects
-			app.RefreshCustomCollectibility();
-
-			-- Forcibly update the windows.
-			app:UpdateWindows(true, got);
-		else
-			app:UpdateWindows(nil, got);
-		end
-
-		-- Send a message to your party members.
-		local data = app:GetWindow("Prime").data;
-		local msg = "A\t" .. app.Version .. "\t" .. (data.progress or 0) .. "\t" .. (data.total or 0);
-		if app.lastMsg ~= msg then
-			SendSocialMessage(msg);
-			app.lastMsg = msg;
-		end
-		wipe(searchCache);
-	end);
+	-- Don't refresh if not ready
+	if not app.IsReady then
+		-- print("Not ready, .1sec self callback")
+		DelayedCallback(app.RefreshData, 0.1, self, lazy);
+	elseif manual then
+		-- print("manual refresh after combat")
+		AfterCombatCallback(app._RefreshData);
+	else
+		-- print(".5sec delay callback")
+		AfterCombatOrDelayedCallback(app._RefreshData, 0.5);
+	end
 end
 function app:ApplyLockedWindows()
 	local lockedWindows = GetDataMember("LockedWindows", nil);
@@ -15044,17 +15077,24 @@ function app:ApplyLockedWindows()
 end
 function app:BuildSearchResponse(groups, field, value)
 	if groups then
-		local t;
+		local t, response, v;
 		for i,group in ipairs(groups) do
-			local v = group[field];
+			v = group[field];
+			response = nil;
 			if v and (v == value or (field == "requireSkill" and app.SpellIDToSkillID[app.SpecializationSpellIDs[v] or 0] == value)) then
-				if not t then t = {}; end
-				tinsert(t, CloneData(group));
+				if not t then t = { CloneData(group) };
+				else tinsert(t, CloneData(group)); end
 			elseif group.g then
-				local response = app:BuildSearchResponse(group.g, field, value);
+				response = app:BuildSearchResponse(group.g, field, value);
 				if response then
-					if not t then t = {}; end
-					tinsert(t, setmetatable({g=response}, { __index = group }));
+					local groupCopy = {};
+					-- set the same metatable
+					setmetatable(groupCopy, getmetatable(group));
+					-- copy direct group values only
+					MergeProperties(groupCopy, group);
+					groupCopy.g = response;
+					if not t then t = { groupCopy };
+					else tinsert(t, groupCopy); end
 				end
 			end
 		end
@@ -16956,9 +16996,10 @@ app:GetWindow("Random", UIParent, function(self)
 		self:BaseUpdate(true);
 	end
 end);
-app:GetWindow("Tradeskills", UIParent, function(self, ...)
+app:GetWindow("Tradeskills", UIParent, function(self, force, got)
 	if not self.initialized then
 		self.initialized = true;
+		force = true;
 		self:SetMovable(false);
 		self:SetUserPlaced(false);
 		self:SetClampedToScreen(false);
@@ -17086,15 +17127,6 @@ app:GetWindow("Tradeskills", UIParent, function(self, ...)
 							if response then tinsert(self.data.g, app.CreateDifficulty(18, {icon = app.asset("Category_Event"),g=response}));  end
 							response = app:BuildSearchResponse(app.Categories.Craftables, "requireSkill", requireSkill);
 							if response then tinsert(self.data.g, {text=LOOT_JOURNAL_LEGENDARIES_SOURCE_CRAFTED_ITEM,icon = app.asset("Category_Crafting"),g=response});  end
-
-							self.data.indent = 0;
-							self.data.visible = true;
-							BuildGroups(self.data, self.data.g);
-							app.UpdateGroups(self.data, self.data.g);
-							if not self.data.expanded then
-								self.data.expanded = true;
-								ExpandGroupsRecursively(self.data, true);
-							end
 						end
 					end
 				end
@@ -17109,16 +17141,12 @@ app:GetWindow("Tradeskills", UIParent, function(self, ...)
 		end
 		self.RefreshRecipes = function(self)
 			if app.CollectibleRecipes then
-				StartCoroutine("RefreshingRecipes", function()
-					local wait = 5;
-					while wait > 0 do
-						wait = wait - 1;
-						coroutine.yield();
-					end
-					self:CacheRecipes();
-					self:Update();
-				end);
+				DelayedCallback(self.CacheAndUpdate, 1, self);
 			end
+		end
+		self.CacheAndUpdate = function(self)
+			self:CacheRecipes();
+			self:Update(true);
 		end
 
 		-- TSM Shenanigans
@@ -17170,6 +17198,7 @@ app:GetWindow("Tradeskills", UIParent, function(self, ...)
 		end
 		-- Setup Event Handlers and register for events
 		self:SetScript("OnEvent", function(self, e, ...)
+			-- print("Tradeskills.event",e,...)
 			if e == "TRADE_SKILL_LIST_UPDATE" then
 				if self:IsVisible() then
 					-- If it's not yours, don't take credit for it.
@@ -17184,7 +17213,6 @@ app:GetWindow("Tradeskills", UIParent, function(self, ...)
 						self:SetVisible(false);
 						return false;
 					end
-					self:Update();
 				end
 				self:RefreshRecipes();
 			elseif e == "TRADE_SKILL_SHOW" then
@@ -17307,10 +17335,16 @@ app:GetWindow("Tradeskills", UIParent, function(self, ...)
 		end
 
 		-- Update the window and all of its row data
-		self.data.progress = 0;
-		self.data.total = 0;
-		UpdateGroups(self.data, self.data.g);
-		self:BaseUpdate(...);
+		if force then
+			self.data.indent = 0;
+			self.data.visible = true;
+			BuildGroups(self.data, self.data.g);
+			if not self.data.expanded then
+				self.data.expanded = true;
+				ExpandGroupsRecursively(self.data, true);
+			end
+		end
+		self:BaseUpdate(force or got, got);
 	end
 end);
 app:GetWindow("WorldQuests", UIParent, function(self, force, got)
@@ -19735,7 +19769,6 @@ app.events.PLAYER_LEVEL_UP = function(newLevel)
 	-- print("PLAYER_LEVEL_UP")
 	app.RefreshQuestInfo();
 	app.Level = newLevel;
-	app:UpdateWindows();
 	app.Settings:Refresh();
 end
 app.events.BOSS_KILL = function(id, name, ...)
@@ -19763,8 +19796,8 @@ app.events.UPDATE_INSTANCE_INFO = function()
 end
 app.events.HEIRLOOMS_UPDATED = function(itemID, kind, ...)
 	-- print("HEIRLOOMS_UPDATED",itemID,kind)
-	app.RefreshQuestInfo();
 	if itemID then
+		app.RefreshQuestInfo();
 		UpdateSearchResults(SearchForField("itemID", itemID));
 		app:PlayFanfare();
 		app:TakeScreenShot();
@@ -19791,7 +19824,7 @@ end
 app.events.QUEST_REMOVED = function()
 	-- print("QUEST_REMOVED")
 	-- simply soft update windows to remove any visible star markers
-	AfterCombatCallback(app.UpdateWindows);
+	app:UpdateWindows();
 end
 app.events.QUEST_ACCEPTED = function(questID)
 	-- print("QUEST_ACCEPTED",questID)
