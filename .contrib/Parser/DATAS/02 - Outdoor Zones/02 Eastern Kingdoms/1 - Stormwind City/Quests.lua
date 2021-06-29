@@ -442,7 +442,7 @@ _.Zones =
 						{ "n", 13283 },	-- Lord Tony Romano
 					},
 					["classes"] = { ROGUE },
-					["coords"] =  {
+					["coords"] = {
 						{ 79.6, 61.2, STORMWIND_CITY },	-- Arthur Huwe
 						{ 79.6, 60.8, STORMWIND_CITY },	-- Lord Tony Romano
 					},
@@ -578,7 +578,7 @@ _.Zones =
 					["coord"] = { 58.8, 52.8, STORMWIND_CITY },
 					["races"] = ALLIANCE_ONLY,
 					["g"] = {
-						i(72042), 	-- Alliance Balloon
+						i(72042),	-- Alliance Balloon
 					},
 				}),
 				q(1705,  {	-- Burning Blood
@@ -591,7 +591,6 @@ _.Zones =
 				}),
 				q(60959, {	-- Burning Crusade: Onward to Adventure in Outland
 					["sourceQuests"] = { 60120 },	-- Burning Crusade: To Outland!
-					["description"] = "Complete the prerequisite quest, switch to another timeline, then switch back to Burning Crusade and you will get this quest.",
 					["repeatable"] = true,
 					["provider"] = { "n", 167032 },	-- Chromie <Emissary of the Bronze Dragonflight>
 					["coord"] = { 56.2, 17.3, STORMWIND_CITY },
@@ -975,6 +974,12 @@ _.Zones =
 						un(REMOVED_FROM_GAME, i(10748)),	-- Wanderlust Boots
 					},
 				}),
+				q(60965, {	-- Mists of Pandaria: Onward to Adventure in Pandaria
+					["repeatable"] = true,
+					["provider"] = { "n", 167032 },	-- Chromie <Emissary of the Bronze Dragonflight>
+					["coord"] = { 56.2, 17.3, STORMWIND_CITY },
+					["races"] = ALLIANCE_ONLY,
+				}),
 				-- MORE BREADCRUMBS, PLEASE DONT PUT THEM EVERWHERE THEY CAN BE PICKED UP. USE MAPS.
 				q(27271, {	-- Journey to the Wizard's Sanctum
 					["provider"] = { "n", 16749 },	-- Edirah (The Exodar)
@@ -1314,11 +1319,11 @@ _.Zones =
 					["coord"] = { 64.6, 33.0, STORMWIND_CITY },
 					["races"] = ALLIANCE_ONLY,
 					["g"] = {
-						i(65640), 		-- Mask of the Farseer
-						i(65622), 		-- Headcover of the Farseer
+						i(65640),	-- Mask of the Farseer
+						i(65622),	-- Headcover of the Farseer
 					},
 				}),
-				q(2206,  { 	-- Snatch and Grab
+				q(2206,  {	-- Snatch and Grab
 					["provider"] = { "n", 332 },	-- Master Mathias Shaw
 					["classes"] = { ROGUE },
 					["coord"] = { 81.2, 63.2, STORMWIND_CITY },
@@ -1761,7 +1766,6 @@ _.Zones =
 				}),
 				q(60962, {	-- Wrath of the Lich King: Onward to Adventure in Northrend
 					["sourceQuests"] = { 60096 },	-- Wrath of the Lich King: To Northrend!
-					["description"] = "Complete the prerequisite quest, switch to another timeline, then switch back to Wrath of the Lich King and you will get this quest.",
 					["repeatable"] = true,
 					["provider"] = { "n", 167032 },	-- Chromie <Emissary of the Bronze Dragonflight>
 					["coord"] = { 56.2, 17.3, STORMWIND_CITY },
@@ -1820,3 +1824,9 @@ _.Zones =
 		}),
 	}),
 };
+_.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
+	n(QUESTS, {
+		q(60362),	-- Blank
+		q(57766),	-- War with the Horde
+	}),
+});

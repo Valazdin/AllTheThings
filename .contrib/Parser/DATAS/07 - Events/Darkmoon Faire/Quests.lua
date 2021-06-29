@@ -274,6 +274,15 @@ _.WorldEvents =
 					i(19296),	-- Greater Darkmoon Prize
 				},
 			}),
+			q(9249, {	-- 40 Tickets - Schematic: Steam Tonk Controller
+				["u"] = REMOVED_FROM_GAME,
+				["repeatable"] = true,
+				["provider"] = { "n", 14828 },	-- Gelvas Grimegate
+				["coord"] = { 48.0, 64.8, 407 },
+				["g"] = {
+					i(22729),	-- Schematic: Steam Tonk Controller
+				},
+			}),
 			q(7934, {	-- 50 Tickets - Darkmoon Storage Box
 				["u"] = REMOVED_FROM_GAME,
 				["repeatable"] = true,
@@ -515,7 +524,7 @@ _.WorldEvents =
 				["g"] = {
 					i(19182),	-- Tattered Darkmoon Faire Prize Ticket
 				},
-			}),	
+			}),
 			q(29517, {	-- Eyes on the Prizes
 				["requireSkill"] = TAILORING,
 				["description"] = "Requires |CFFFFD7001 Coarse Thread|r, |CFFFFD7001 Red Dye|r, |CFFFFD7001 Blue Dye|r, to complete.",
@@ -556,6 +565,15 @@ _.WorldEvents =
 					crit(2, {	-- Archaeology
 						["achievementID"] = 6032,	-- Faire Favors
 					}),
+				},
+			}),
+			q(8222, {	-- Glowing Scorpid Blood
+				["u"] = REMOVED_FROM_GAME,
+				["repeatable"] = true,
+				["provider"] = { "n", 14829 },	-- Yebb Neblegear
+				["coord"] = { 51.6, 81.8, 407 },
+				["g"] = {
+					i(19182),	-- Tattered Darkmoon Faire Prize Ticket
 				},
 			}),
 			q(7896, {	-- Green Fireworks
@@ -1091,7 +1109,7 @@ _.WorldEvents =
 					i(93724),	-- Darkmoon Game Prize
 				},
 			}),
-			q(29464, { 	-- Tools of Divination
+			q(29464, {	-- Tools of Divination
 				["isMonthly"] = true,
 				["provider"] = { "i", 71716 },	-- Soothsayer's Runes
 				["coord"] = { 51.9, 60.9, 407 },

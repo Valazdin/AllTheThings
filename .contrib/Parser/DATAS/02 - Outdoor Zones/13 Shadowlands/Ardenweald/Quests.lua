@@ -829,7 +829,51 @@ _.Zones =
 					["customCollect"] = "SL_SKIP",	-- SL Skip Character
 					["sourceQuests"] = { 62159 },	-- Aiding the Shadowlands
 				}),
+
+				-- PTR - TODO: merge with regular quests
+				q(63638, {	-- Can't Turn Our Backs
+					["sourceQuests"] = { 63578 },	-- The Battle of Ardenweald
+					["provider"] = { "n", 177148 },	-- Lady Moonberry
+					["coord"] = { 48.7, 43.3, ARDENWEALD },
+				}),
+				q(63639, {	-- Report to Oribos
+					["sourceQuests"] = { 63904 },	-- The Heart of Ardenweald
+					["provider"] = { "n", 177460 },	-- Winter Queen
+					["coord"] = { 47.1, 48.5, ARDENWEALD },
+				}),
+				q(63904, {	-- The Heart of Ardenweald
+					["sourceQuests"] = { 63638 },	-- Can't Turn Our Backs
+					["provider"] = { "n", 177460 },	-- Winter Queen
+					["coord"] = { 47.1, 48.5, ARDENWEALD },
+				}),
 			}),
 		}),
 	}),
 };
+_.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
+	n(QUESTS, {
+		q(58772),	-- [DNT] Bonds of Depletion
+		q(61167),	-- [DNT] Delivering Hope
+		q(61149),	-- [DNT] Kivarr's Remedy
+		q(58734),	-- [PH] Get Memories from Archives
+		q(58774),	-- [REUSE AS WQ]
+		q(57466),	-- [REUSE]
+		q(58814),	-- [UNUSED]
+		q(58728),	-- A Promising Lead
+		q(58731),	-- A Shattered Vessel
+		q(58733),	-- Animamnesis
+		q(57663),	-- Blackthorn Blackout
+		q(57872),	-- Bring More Friends!
+		q(57659),	-- Bring More Friends!
+		q(58730),	-- Deep Thoughts
+		q(58729),	-- Night and Day
+		q(58735),	-- Path of Totality
+		q(57733),	-- Pocktfuls of Silk
+		q(58769),	-- REUSE ME
+		q(58736),	-- Selenis, Night Warrior
+		q(57457),	-- Shaking 'Shrooms
+		q(57658),	-- The Final Leg
+		q(58732),	-- The Stuff of Memories
+		q(58173),	-- What Are They Hiding?
+	}),
+});

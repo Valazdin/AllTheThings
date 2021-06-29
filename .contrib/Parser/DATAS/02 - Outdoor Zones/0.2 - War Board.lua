@@ -21,7 +21,7 @@ _.Zones =
 				["isBreadcrumb"] = true,
 				["races"] = HORDE_ONLY,
 				["u"] = REMOVED_FROM_GAME,
-			}),			
+			}),
 			q(29390, {	-- Guardians of Hyjal: Call of the Ancients
 				["isBreadcrumb"] = true,
 				["lvl"] = 85,
@@ -479,7 +479,7 @@ _.Zones =
 				["isBreadcrumb"] = true,
 				["lvl"] = 96,
 			}),
-			q(28539, { 	-- Hero's Call: Stonetalon Mountains!  (max level 28)
+			q(28539, {	-- Hero's Call: Stonetalon Mountains!  (max level 28)
 				["isBreadcrumb"] = true,
 				["lvl"] = 20,
 			}),
@@ -647,3 +647,9 @@ _.Zones =
 		},
 	}),
 };
+_.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
+	n(QUESTS, {
+		q(62250),	-- A New Adventure Awaits
+		q(62265),	-- A New Adventure Awaits
+	}),
+});

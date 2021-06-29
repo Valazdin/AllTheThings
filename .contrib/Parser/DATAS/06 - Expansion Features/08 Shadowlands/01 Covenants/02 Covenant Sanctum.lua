@@ -238,7 +238,60 @@ _.ExpansionFeatures =
 						}),
 					},
 				}),
+				n(QUESTS, {
+					q(63592, {	-- A New Path
+					--	currently takes place on a 'nil' map, may need another mapID added via ["maps"] later
+					--	TODO: grants "a new path" criteria of "chains of domination" achievement, add to whichever zone these quests wind up being in
+						["sourceQuests"] = { 63584 },	-- A Triumphant Return
+						["provider"] = { "n", 168517 },	-- Polemarch Kalisthene
+						["coord"] = { 64.0, 19.1, 1707 },	-- Elysian Hold, Archon's Rise
+					}),
+					q(63586, {	-- Compassion in Devotion
+						["sourceQuests"] = { 63585 },	-- Blind Loyalty
+						["provider"] = { "n", 160037 },	-- Polemarch Adrestes
+						["coord"] = { 66.5, 16.5, 1707 },	-- Elysian Hold, Archon's Rise
+					}),
+					q(63728, {	-- Hunting Amid Houses
+					--	TODO - not sure if this is non-NF or Venthyr-only.  will verify on Kyrian/Necrolord
+						["sourceQuests"] = { 63672 },	-- A Cry From the Heart
+						["provider"] = { "n", 177434 },	-- Ysera
+						["coord"] = { 47.8, 53.5, ARDENWEALD },
+					}),
+					q(63593, {	-- New Sigil of the Kyrian
+					--	currently picked up on the same 'nil' map from A New Path
+						["sourceQuests"] = { 63592 },	-- A New Path
+						["provider"] = { "n", 177116 },	-- Polemarch Adrestes
+					}),
+				}),
 			},
 		}),
 	}),
 };
+_.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
+	n(QUESTS, {
+		q(61326),	-- [[Deprecated]]
+		q(61327),	-- [[Deprecated]]
+		q(61328),	-- [[Deprecated]]
+		q(61329),	-- [[Deprecated]]
+		q(59816),	-- [DNT] Bwonsamdi's Plan
+		q(59820),	-- [DNT] Da Treacherous Loa
+		q(61138),	-- [DNT] Purge the Grove
+		q(59814),	-- [DNT] Words of Mueh'zala
+		q(59810),	-- [DNT]Just A Small Request
+		q(57820),	-- Diplomatic Relations
+		q(59608),	-- Don't Cross The Streams
+		q(60885),	-- Grove of Awekening
+		q(57821),	-- Keeping the Peace
+		q(61056),	-- Niya of Ardenweald
+		q(61881),	-- Pauldrons
+		q(61324),	-- Replenish the Reservoir
+		q(61325),	-- Return Lost Souls
+		q(63024),	-- Return Lost Souls
+		q(63025),	-- Return Lost Souls
+		q(63026),	-- Return Lost Souls
+		q(63027),	-- Return Lost Souls
+		q(59606),	-- The Anima Expert
+		q(57896),	-- The Archon's Will
+		q(59318),	-- Work Not Wasted
+	}),
+});

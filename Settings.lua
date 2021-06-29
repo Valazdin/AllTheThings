@@ -638,6 +638,7 @@ settings.UpdateMode = function(self, doRefresh)
 		app.RequiredSkillFilter = app.NoFilter;
 		app.RequireFactionFilter = app.NoFilter;
 		app.RequireCustomCollectFilter = app.NoFilter;
+		app.DefaultFilter = app.NoFilter;
 
 		app.AccountWideAchievements = true;
 		app.AccountWideAzeriteEssences = true;
@@ -678,6 +679,7 @@ settings.UpdateMode = function(self, doRefresh)
 	else
 		app.VisibilityFilter = app.ObjectVisibilityFilter;
 		app.GroupFilter = app.FilterItemClass;
+		app.DefaultFilter = app.Filter;
 		if app.GetDataMember("FilterSeasonal") then
 			app.SeasonalItemFilter = app.FilterItemClass_SeasonalItem;
 		else
@@ -2384,7 +2386,7 @@ local x = 5;
 local y = 5;
 local count = 0;
 for k,v in ipairs(L["UNOBTAINABLE_ITEM_REASONS"]) do
-	if v[1]  == 1 then
+	if v[1] == 1 then
 		local filter = child:CreateCheckBox(v[3],
 		function(self)
 			self:SetChecked(not app.GetDataMember("UnobtainableItemFilters")[k]);
