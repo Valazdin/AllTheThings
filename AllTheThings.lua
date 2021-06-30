@@ -1266,6 +1266,9 @@ local function VerifySourceID(item)
 	return true;
 end
 local function GetSourceID(itemLink)
+	--[[ 9.1 TEST ]
+	IsDressableItem = C_Item.IsDressableItemByID;
+	--]]
 	if IsDressableItem(itemLink) then
 		-- Updated function courtesy of CanIMogIt, Thanks AmiYuy and Team! :D
 		local sourceID = select(2, C_TransmogCollection.GetItemInfo(itemLink));
@@ -7329,6 +7332,19 @@ end)();
 -- Gear Set Lib
 (function()
 local C_TransmogSets_GetSetInfo = C_TransmogSets.GetSetInfo;
+--[[ 9.1 TEST ]
+C_TransmogSets.GetSetSources = function(setID)
+	local setAppearances = C_TransmogSets.GetSetPrimaryAppearances(setID);
+	if not setAppearances then
+		return nil;
+	end
+	local lookupTable = { };
+	for i, appearanceInfo in ipairs(setAppearances) do
+		lookupTable[appearanceInfo.appearanceID] = appearanceInfo.collected;
+	end
+	return lookupTable;
+end
+--]]
 local C_TransmogSets_GetSetSources = C_TransmogSets.GetSetSources;
 local fields = {
 	["key"] = function(t)
@@ -7905,6 +7921,10 @@ local fields = {
 		return ATTAccountWideData.Illusions[t.illusionID];
 	end,
 	["silentLink"] = function(t)
+		--[[ 9.1 TEST ]
+		local _, hyperlink = C_TransmogCollection.GetIllusionStrings(t.illusionID);
+		return hyperlink;
+		--]]
 		return select(3, C_TransmogCollection_GetIllusionSourceInfo(t.illusionID));
 	end,
 };
@@ -8723,7 +8743,7 @@ local mapFields = {
 		return select(1, C_Map_GetMapLevels(t.mapID));
 	end,
 	["iconForAchievement"] = function(t)
-		return select(10, GetAchievementInfo(t.achievementID)) or app.asset("Category_Zones");
+		return t.achievementID and select(10, GetAchievementInfo(t.achievementID)) or app.asset("Category_Zones");
 	end,
 	["linkForAchievement"] = function(t)
 		return GetAchievementLink(t.achievementID);
@@ -10024,10 +10044,10 @@ local function QueryCompletedQuests()
 end
 local function RefreshQuestCompletionState(questID)
 	-- print("QuestRefresh",questID)
-	if not questID then
-		QueryCompletedQuests();
-	else
+	if questID then
 		CompletedQuests[questID] = true;
+	else
+		QueryCompletedQuests();
 	end
 
 	for questID,completed in pairs(DirtyQuests) do
@@ -11260,7 +11280,7 @@ local function SetGroupVisibility(parent, group)
 	-- If this group is trackable, then we should show it.
 	elseif app.ShowIncompleteThings(group) then
 		-- if app.DEBUG_LOG then print("UpdateGroup.g.trackable",group.progress,group.total) end
-		group.visible = not group.saved or app.DefaultFilter();
+		group.visible = not group.saved or app.GroupVisibilityFilter(group) or app.DefaultFilter();
 		parent.forceShow = group.visible or parent.forceShow;
 	else
 		group.visible = app.DefaultFilter();
@@ -11282,7 +11302,7 @@ local function SetThingVisibility(parent, group)
 	elseif app.ShowIncompleteThings(group) then
 		-- if app.DEBUG_LOG then print("UpdateGroup.trackable",group.progress,group.total) end
 		-- If this group is trackable, then we should show it.
-		group.visible = not group.saved or app.DefaultFilter();
+		group.visible = not group.saved or app.CollectedItemVisibilityFilter(group) or app.DefaultFilter();
 		parent.forceShow = group.visible or parent.forceShow;
 	else
 		group.visible = app.DefaultFilter();
@@ -14446,6 +14466,13 @@ function app:GetDataCache()
 		--]]
 
 		-- Illusions (Dynamic)
+		--[[ 9.1 TEST ]
+		local illusionInfo = C_TransmogCollection.GetIllusionInfo(illusionID);
+		local name, hyperlink = C_TransmogCollection.GetIllusionStrings(illusionID);
+		if illusionInfo then
+			return illusionInfo.visualID, name, hyperlink, illusionInfo.icon;
+		end
+		--]]
 		--[[
 		db = {};
 		db.g = (function()
@@ -14485,7 +14512,7 @@ function app:GetDataCache()
 		table.insert(g, db);
 		]]--
 
-		
+		--[[
 		-- SUPER SECRETTTT!
 		-- Artifacts (Dynamic)
 		db = app.CreateAchievement(11171, (function()
@@ -19730,13 +19757,9 @@ end
 app.events.TOYS_UPDATED = function(itemID, new)
 	if itemID and not ATTAccountWideData.Toys[itemID] and PlayerHasToy(itemID) then
 		ATTAccountWideData.Toys[itemID] = 1;
-		-- TODO: remember to test this logic with a toy collect...
-		-- UpdateSearchResults(SearchForField("itemID", itemID));
-		--[[]]-- uncomment to test
-		app:RefreshData(false, true);
+		UpdateSearchResults(SearchForField("itemID", itemID));
 		app:PlayFanfare();
 		app:TakeScreenShot();
-		--]]
 		wipe(searchCache);
 
 		if app.Settings:GetTooltipSetting("Report:Collected") then

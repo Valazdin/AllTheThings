@@ -387,7 +387,8 @@ _.Zones =
 							o(368665, {	-- Lil'Abom's Spare Arm
 								["questID"] = 64009,
 								["isDaily"] = true,
-								["coord"] = { 39.2, 66.5, THE_MAW },
+							--	["coord"] = { 39.2, 66.5, THE_MAW },
+								["coord"] = { 33.3, 65.8, THE_MAW },
 								["g"] = {
 									i(186187),	-- Lil'Abom Spare Arm
 								},
@@ -395,7 +396,8 @@ _.Zones =
 							o(368667, {	-- Lil'Abom's Torso
 								["questID"] = 64011,
 								["isDaily"] = true,
-								["coord"] = { 39.9, 62.6, THE_MAW },
+							--	["coord"] = { 39.9, 62.6, THE_MAW }, old coord?  possibly multiple spawnpoints
+								["coord"] = { 36.9, 67.4, THE_MAW },
 								["g"] = {
 									i(186184),	-- Lil'Abom Torso
 								},
@@ -586,33 +588,51 @@ _.Zones =
 										["questID"] = 63993,
 										["isDaily"] = true,
 										["coord"] = { 20.5, 47.4, THE_MAW },
+										["g"] = {
+											i(187251),	-- Shaded Skull Shoulderguards
+										},
 									}),
 									o(368646, {	-- Rift Hidden Cache
 										["questID"] = 63995,
 										["isDaily"] = true,
 										["coord"] = { 25.3, 49.1, THE_MAW },
+										["g"] = {
+											i(187251),	-- Shaded Skull Shoulderguards
+										},
 									}),
 									o(368347, {	-- Rift Hidden Cache
 										["description"] = "In a small cave.",
 										["questID"] = 63996,
 										["isDaily"] = true,
 										["coord"] = { 20.7, 29.8, THE_MAW },
+										["g"] = {
+											i(187251),	-- Shaded Skull Shoulderguards
+										},
 									}),
 									o(368648, {	-- Rift Hidden Cache
 										["description"] = "At the back of the cave.",
 										["questID"] = 63997,
 										["isDaily"] = true,
 										["coord"] = { 25.6, 32.6, THE_MAW },
+										["g"] = {
+											i(187251),	-- Shaded Skull Shoulderguards
+										},
 									}),
 									o(368649, {	-- Rift Hidden Cache
 										["questID"] = 63998,
 										["isDaily"] = true,
 										["coord"] = { 19.0, 43.9, THE_MAW },
+										["g"] = {
+											i(187251),	-- Shaded Skull Shoulderguards
+										},
 									}),
 									o(368650, {	-- Rift Hidden Cache
 										["questID"] = 63999,
 										["isDaily"] = true,
 										["coord"] = { 29.7, 42.8, THE_MAW },
+										["g"] = {
+											i(187251),	-- Shaded Skull Shoulderguards
+										},
 									}),
 								}),
 							},

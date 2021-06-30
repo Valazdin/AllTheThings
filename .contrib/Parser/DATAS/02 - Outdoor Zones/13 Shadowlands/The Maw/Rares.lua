@@ -35,6 +35,9 @@ _.Zones =
 							170302,	-- Talaporas, Herald of Pain
 							172862,	-- Yero the Skittish
 						--	Korthia
+							179769,	-- Consumption
+							179755,	-- Consumption (Rare, non-Elite version)
+							179768,	-- Consumption (Rare Elite version)
 							179931,	-- Relic Breaker Krelva
 							179985,	-- Stygian Stonecrusher
 							179760,	-- Towering Exterminator
@@ -182,9 +185,7 @@ _.Zones =
 						crit(2, {	-- Dartanos
 							["achievementID"] = 14660,	-- It's About Sending a Message
 						}),
-						q(59230, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
+						i(186619),	-- Bloodspattered Shoulders of the Flayer
 					},
 				}),
 				n(162844, {	-- Dath Rezara
@@ -244,6 +245,7 @@ _.Zones =
 						crit(7, {	-- Dolos
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
 						}),
+						i(186209),	-- Blood-Spattered Gloves of Death
 					},
 				}),
 				n(158314, {	-- Drifting Sorrow
@@ -394,9 +396,7 @@ _.Zones =
 						crit(9, {	-- Krala
 							["achievementID"] = 14660,	-- It's About Sending a Message
 						}),
-						q(60903, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
+						i(186624),	-- Death Wing Drape
 					},
 				}),
 				n(171316, {	-- Malevolent Stygia
@@ -414,7 +414,8 @@ _.Zones =
 					},
 				}),
 				n(162849, {	-- Morguliax <Lord of Decapitation>
-					["coord"] = { 16.6, 50.6, THE_MAW },
+				--	["coord"] = { 16.6, 50.6, THE_MAW },	-- TODO; verify that this is a perm move and not just during NF assault
+					["coord"] = { 19.0, 43.8, THE_MAW },
 					["questID"] = 60987,
 					["isDaily"] = true,
 					["g"] = {
@@ -619,9 +620,7 @@ _.Zones =
 						crit(6, {	-- Soulsmith Yol-Mattar
 							["achievementID"] = 14660,	-- It's About Sending a Message
 						}),
-						q(59441, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
+						i(186630),	-- Spark-Deflecting Girdle
 					},
 				}),
 				n(156203, {	-- Stygian Incinerator
@@ -753,8 +752,11 @@ _.Zones =
 
 _.HiddenQuestTriggers = {
 	q(61136),	-- Agonix bonus objective
+	q(59230),	-- Dartanos bonus objective
+	q(60903),	-- Krala bonus objective
 	q(61125),	-- Malevolent Stygia bonus objective
 	q(60991),	-- Orrholyn bonus objective
 	q(62211),	-- Skittering Broodmother bonus objective
+	q(59441),	-- Soulsmith Yol-Mattar bonus objective
 	q(61728),	-- Valis bonus objective
 };

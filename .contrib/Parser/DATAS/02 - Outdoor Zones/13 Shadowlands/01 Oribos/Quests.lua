@@ -58,6 +58,11 @@ _.Zones =
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 40.0, 65.3, ORIBOS },
 				}),
+				q(63856, {	-- A Gathering of Covenants
+					["sourceQuests"] = { 63576 },	-- The First Move
+					["provider"] = { "n", 159478 },	-- Tal-Inara
+					["coord"] = { 39.2, 69.4, ORIBOS },	-- Ring of Fates
+				}),
 				q(61716, {	-- A Glimpse into Darkness
 					["sourceQuests"] = { 61715 },	-- Request of the Highlord
 					["provider"] = { "n", 173384 },	-- Highlord Bolvar Fordragon
@@ -163,6 +168,11 @@ _.Zones =
 					["provider"] = { "n", 167486 },	-- Tal-Inara
 					["coord"] = { 40.5, 65.9, ORIBOS },
 				}),
+				q(64007, {	-- Charge of the Covenants
+					["sourceQuests"] = { 63665 },	-- Opening to Oribos
+					["provider"] = { "n", 177230 },	-- Highlord Bolvar Fordragon
+					["coord"] = { 39.5, 36.5, 1671 },	-- Ring of Transference
+				}),
 				q(57878, {	-- Choosing Your Purpose
 					["sourceQuests"] = { 57877 },	-- The Looming Dark
 					["altQuests"] = { 62704 },	-- The Threads of Fate (can't do this version on a Skip character)
@@ -193,9 +203,6 @@ _.Zones =
 					},
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 39.9, 68.5, ORIBOS },
-					["g"] = {
-						spell(334746),	-- Access to Torghast
-					},
 				}),
 				q(60338, {	-- Journey to Ardenweald
 					["sourceQuests"] = { 61715 },	-- Request of the Highlord
@@ -207,10 +214,20 @@ _.Zones =
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 39.9, 68.5, ORIBOS },
 				}),
+				q(63661, {	-- Link to the Maw
+					["sourceQuests"] = { 63660 },	-- Opening the Maw
+					["provider"] = { "n", 159478 },	-- Tal-Inara
+					["coord"] = { 39.2, 69.4, ORIBOS },	-- Ring of Fates
+				}),
 				q(60148, {	-- No Place for the Living
 					["sourceQuests"] = { 60129 },	-- Stranger in an Even Stranger Land
 					["provider"] = { "n", 167425 },	-- Overseer Kah-Delen
 					["coord"] = { 39.7, 66.1, ORIBOS },
+				}),
+				q(63660, {	-- Opening the Maw
+					["sourceQuests"] = { 63639 },	-- Report to Oribos
+					["provider"] = { "n", 159478 },	-- Tal-Inara
+					["coord"] = { 39.2, 69.4, ORIBOS },	-- Ring of Fates
 				}),
 				q(62043, {	-- Prove Your Worth
 					["description"] = "Available while switching back to Kyrian Covenant",
@@ -308,6 +325,24 @@ _.Zones =
 					["provider"] = { "n", 159478 },	-- Tal-Inara
 					["coord"] = { 38.9, 69.9, ORIBOS },
 				}),
+				q(63578, {	-- The Battle of Ardenweald
+					["sourceQuests"] = { 63857 },	-- Voices of the Eternal
+					["provider"] = { "n", 177141 },	-- Lady Moonberry
+					["coord"] = { 40.9, 66.2, ORIBOS },	-- Ring of Fates
+					["maps"] = { 2005 },	-- Ardenweald (scenario)
+					["g"] = {
+						i(179498),	-- Faesworn Barb
+						i(179564),	-- Faesworn Channeling Root
+						i(179515),	-- Faesworn Falchion
+						i(182322),	-- Faesworn Gavel
+						i(179511),	-- Faesworn Glaive
+						i(179531),	-- Faesworn Reaper
+						i(182323),	-- Faesworn Spellblade
+						i(179583),	-- Faesworn Warbow
+						i(179546),	-- Faesworn Warclub
+						i(179536),	-- Faesworn Warmaul
+					},
+				}),
 				q(61730, {	-- The Captive King
 					["sourceQuests"] = { 62836 },	-- Signs of the Lion
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
@@ -317,6 +352,9 @@ _.Zones =
 					["sourceQuests"] = { 60151 },	-- A Doorway Through the Veil
 					["provider"] = { "n", 167424 },	-- Overseer Kah-Sher
 					["coord"] = { 39.7, 66.1, ORIBOS },
+				}),
+				q(63576, {	-- The First Move
+					["sourceQuests"] = { 62569 },	-- The Jailer's Grasp
 				}),
 				q(62457, {	-- The Great Vault
 					["provider"] = { "n", 173350 },	-- Ba'vol
@@ -431,6 +469,11 @@ _.Zones =
 					["sourceQuests"] = { 60152 },	-- The Eternal City
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 40.0, 64.8, ORIBOS },
+				}),
+				q(63857, {	-- Voices of the Eternal
+					["sourceQuests"] = { 63856 },	-- A Gathering of Covenants
+					["provider"] = { "n", 159475 },	-- Highlord Bolvar Fordragon
+					["coord"] = { 50.5, 45.1, 1673 },	-- The Crucible
 				}),
 
 				-- Skip Quests
@@ -817,16 +860,6 @@ _.Zones =
 					["coord"] = { 34.7, 55.7, ORIBOS },	-- Ring of Fates
 				}),
 				-- regular ol' quests
-				q(63856, {	-- A Gathering of Covenants
-					["sourceQuests"] = { 63576 },	-- The First Move
-					["provider"] = { "n", 159478 },	-- Tal-Inara
-					["coord"] = { 39.1, 69.5, ORIBOS },	-- Ring of Fates
-				}),
-				q(64007, {	-- Charge of the Covenants
-					["sourceQuests"] = { 63665 },	-- Opening to Oribos
-					["provider"] = { "n", 177230 },	-- Highlord Bolvar Fordragon
-					["coord"] = { 39.5, 36.5, 1671 },	-- Ring of Transference
-				}),
 				q(63977, {	-- Insider Trading
 					["sourceQuests"] = { 63976 },	-- The Al'ley Cat of Oribos
 					["provider"] = { "n", 178908 },	-- Al'dalil
@@ -837,16 +870,6 @@ _.Zones =
 					["isBreadcrumb"] = true,
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 40.3, 67.9, ORIBOS },	-- Ring of Fates
-				}),
-				q(63661, {	-- Link to the Maw
-					["sourceQuests"] = { 63660 },	-- Opening the Maw
-					["provider"] = { "n", 159478 },	-- Tal-Inara
-					["coord"] = { 39.1, 69.5, ORIBOS },	-- Ring of Fates
-				}),
-				q(63660, {	-- Opening the Maw
-					["sourceQuests"] = { 63639 },	-- Report to Oribos
-					["provider"] = { "n", 159478 },	-- Tal-Inara
-					["coord"] = { 39.1, 69.5, ORIBOS },	-- Ring of Fates
 				}),
 				q(63980, {	-- Seeking Smugglers
 					["sourceQuests"] = {
@@ -860,27 +883,6 @@ _.Zones =
 					["provider"] = { "n", 156688 },	-- Host Ta'rela
 					["coord"] = { 67.0, 50.3, ORIBOS },	-- Ring of Fates
 				}),
-				q(63578, {	-- The Battle of Ardenweald
-					["sourceQuests"] = { 63857 },	-- Voices of the Eternal
-					["provider"] = { "n", 177141 },	-- Lady Moonberry
-					["coord"] = { 40.9, 66.2, ORIBOS },	-- Ring of Fates
-					["maps"] = { 2005 },	-- Ardenweald (scenario)
-					["g"] = {
-						i(179498),	-- Faesworn Barb
-						i(179564),	-- Faesworn Channeling Root
-						i(179515),	-- Faesworn Falchion
-						i(182322),	-- Faesworn Gavel
-						i(179511),	-- Faesworn Glaive
-						i(179531),	-- Faesworn Reaper
-						i(182323),	-- Faesworn Spellblade
-						i(179583),	-- Faesworn Warbow
-						i(179546),	-- Faesworn Warclub
-						i(179536),	-- Faesworn Warmaul
-					},
-				}),
-				q(63576, {	-- The First Move
-					["sourceQuests"] = { 62569 },	-- The Jailer's Grasp
-				}),
 				q(63985, {	-- The Veiled Market
 					["sourceQuests"] = { 63984 },	-- Coins for the Ferryman
 					["provider"] = { "n", 178792 },	-- Ta'meri
@@ -891,13 +893,6 @@ _.Zones =
 					["provider"] = { "n", 178908 },	-- Al'dalil
 					["coord"] = { 57.1, 31.1, ORIBOS },	-- Ring of Fates
 				}),
-				q(63857, {	-- Voices of the Eternal
-					["sourceQuests"] = { 63856 },	-- A Gathering of Covenants
-					["provider"] = { "n", 159475 },	-- Highlord Bolvar Fordragon
-					["coord"] = { 50.5, 45.1, 1673 },	-- The Crucible
-				}),
-				-- Revendreth
-
 			}),
 		}),
 	}),

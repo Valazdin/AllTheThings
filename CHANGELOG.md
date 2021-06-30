@@ -1,7 +1,17 @@
 # AllTheThings
 
-## [SL-2.3.5](https://github.com/DFortun81/AllTheThings/tree/SL-2.3.5) (2021-06-29)
-[Full Changelog](https://github.com/DFortun81/AllTheThings/compare/SL-2.3.4a...SL-2.3.5) [Previous Releases](https://github.com/DFortun81/AllTheThings/releases)
+## [SL-2.3.5a](https://github.com/DFortun81/AllTheThings/tree/SL-2.3.5a) (2021-06-30)
+[Full Changelog](https://github.com/DFortun81/AllTheThings/compare/SL-2.3.5...SL-2.3.5a) [Previous Releases](https://github.com/DFortun81/AllTheThings/releases)
+
+### Hotfix to the 2.3.5 update
+
+- Disabled some developer functionality that we forgot about after PTR cycle
+- Fixed Settings page
+- Harvested quests/items, we won't ask to report stuff as often
+- Various fixes to new content (quests, drops, etc)
+- You still have time until next reset to get your Shadowlands Keystone: Season One achievements
+- Fixed bug where a map without an attached achievement would have an error showing an icon
+
 
 ### Highlight of this update
 
