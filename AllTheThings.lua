@@ -1253,7 +1253,7 @@ local function VerifySourceID(item)
 		-- quality below UNCOMMON means no source
 		if item.q and item.q < 2 then return true; end
 
-		local linkInfoSourceID = app.GetSourceID(item.link, item.itemID);
+		local linkInfoSourceID = app.GetSourceID(item.link);
 		if linkInfoSourceID and linkInfoSourceID ~= item.s then
 			print("Mismatched SourceID",item.link,item.s,"=>",linkInfoSourceID);
 			return;
@@ -1266,10 +1266,7 @@ local function VerifySourceID(item)
 	return true;
 end
 local function GetSourceID(itemLink)
-	--[[ 9.1 TEST ]
-	IsDressableItem = C_Item.IsDressableItemByID;
-	--]]
-	if IsDressableItem(itemLink) then
+	if C_Item.IsDressableItemByID(itemLink) then
 		-- Updated function courtesy of CanIMogIt, Thanks AmiYuy and Team! :D
 		local sourceID = select(2, C_TransmogCollection.GetItemInfo(itemLink));
 		if sourceID then return sourceID, true; end
@@ -3999,6 +3996,7 @@ app.BuildSourceParent = function(group)
 			or parent.key == "itemID"
 			or parent.key == "s"
 			or parent.key == "questID"
+			or parent.key == "objectID"
 			or parent.key == "encounterID")
 			-- TODO: maybe handle mapID in a different way as a fallback for things nested under headers within a zone....?
 		and parent[parent.key] then
@@ -4609,7 +4607,12 @@ app.SearchForLink = SearchForLink;
 
 -- Map Information Lib
 local function AddTomTomWaypoint(group, auto, recur)
-	if TomTom and (group.visible or (group.objectiveID and not group.saved) or app.MODE_DEBUG) then
+	if TomTom
+		-- only plot visible things
+		and group.visible
+		-- which aren't saved, unless this is the Thing that was directly clicked
+		and (not recur or not group.saved)
+		then
 		if group.coords or group.coord then
 			local opt = {
 				title = group.text or group.name or group.link,
@@ -11280,7 +11283,7 @@ local function SetGroupVisibility(parent, group)
 	-- If this group is trackable, then we should show it.
 	elseif app.ShowIncompleteThings(group) then
 		-- if app.DEBUG_LOG then print("UpdateGroup.g.trackable",group.progress,group.total) end
-		group.visible = not group.saved or app.GroupVisibilityFilter(group) or app.DefaultFilter();
+		group.visible = not group.saved or app.GroupVisibilityFilter(group);
 		parent.forceShow = group.visible or parent.forceShow;
 	else
 		group.visible = app.DefaultFilter();
@@ -11302,7 +11305,7 @@ local function SetThingVisibility(parent, group)
 	elseif app.ShowIncompleteThings(group) then
 		-- if app.DEBUG_LOG then print("UpdateGroup.trackable",group.progress,group.total) end
 		-- If this group is trackable, then we should show it.
-		group.visible = not group.saved or app.CollectedItemVisibilityFilter(group) or app.DefaultFilter();
+		group.visible = not group.saved or app.CollectedItemVisibilityFilter(group);
 		parent.forceShow = group.visible or parent.forceShow;
 	else
 		group.visible = app.DefaultFilter();
@@ -11831,7 +11834,7 @@ app.RefreshCustomCollectibility = function()
 		-- settings override
 		if app.Settings:GetFilter("CC:NPE") then return true; end
 		-- needs mapID to check this
-		if not app.CurrentMapID then return; end
+		if not app.GetCurrentMapID() then return; end
 		-- print("first check");
 		-- check if the current MapID is in Exile's Reach
 		local maps = { [1409] = 1, [1609] = 1, [1610] = 1, [1611] = 1, [1726] = 1, [1727] = 1 };
@@ -15535,6 +15538,7 @@ app:GetWindow("Harvester", UIParent, function(self)
 	if self:IsVisible() then
 		if not self.initialized then
 			self.initialized = true;
+			self.doesOwnUpdate = true;
 			-- ensure Debug is enabled to fully capture all information
 			if not app.MODE_DEBUG then
 				app.print("Enabled Debug Mode");
@@ -15553,7 +15557,6 @@ app:GetWindow("Harvester", UIParent, function(self)
 			db.total = 0;
 			db.back = 1;
 
-			local _;
 			local harvested = {};
 			local minID,maxID,oldRetries = app.customHarvestMin or self.min,app.customHarvestMax or self.max,app.MaximumItemInfoRetries;
 			self.min = minID;
@@ -15572,26 +15575,24 @@ app:GetWindow("Harvester", UIParent, function(self)
 							harvested[group.modItemID or itemID] = true;
 							if group.bonusID then
 								-- Harvest using a BonusID?
-								_ = group.bonusID;
 								-- print("Check w/ Bonus",itemID,_)
 								if (not VerifySourceID(group)) then
 									-- print("Harvest w/ Bonus",itemID,_)
-									tinsert(db.g, setmetatable({visible = true, reSource = true, s = group.s, itemID = tonumber(itemID), bonusID = _}, app.BaseItem));
+									tinsert(db.g, app.CreateItem(tonumber(itemID), {visible = true, reSource = true, s = group.s, itemID = tonumber(itemID), bonusID = group.bonusID}));
 								end
 							elseif group.modID then
 								-- Harvest using a ModID?
-								_ = group.modID;
 								-- print("Check w/ Mod",itemID,_)
 								if (not VerifySourceID(group)) then
 									-- print("Harvest w/ Mod",itemID,_)
-									tinsert(db.g, setmetatable({visible = true, reSource = true, s = group.s, itemID = tonumber(itemID), modID = _}, app.BaseItem));
+									tinsert(db.g, app.CreateItem(tonumber(itemID), {visible = true, reSource = true, s = group.s, itemID = tonumber(itemID), modID = group.modID}));
 								end
 							else
 								-- Harvest with no special ID?
 								-- print("Check",itemID)
 								if (not VerifySourceID(group)) then
 									-- print("Harvest",itemID)
-									tinsert(db.g, setmetatable({visible = true, reSource = true, s = group.s, itemID = tonumber(itemID)}, app.BaseItem));
+									tinsert(db.g, app.CreateItem(tonumber(itemID), {visible = true, reSource = true, s = group.s, itemID = tonumber(itemID)}));
 								end
 							end
 						-- else print("Cached skip",group.key,group[group.key]);
@@ -19469,6 +19470,7 @@ app.events.VARIABLES_LOADED = function()
 		app:RegisterEvent("HEIRLOOMS_UPDATED");
 		app:RegisterEvent("ARTIFACT_UPDATE");
 		app:RegisterEvent("TOYS_UPDATED");
+		app:RegisterEvent("LOOT_OPENED");
 
 		local needRefresh;
 
@@ -19619,6 +19621,12 @@ app.events.LOOT_CLOSED = function()
 	app:UnregisterEvent("UPDATE_INSTANCE_INFO");
 	app:RegisterEvent("UPDATE_INSTANCE_INFO");
 	RequestRaidInfo();
+end
+app.events.LOOT_OPENED = function()
+	-- print("LOOT_OPENED")
+	-- When the player loots something, trigger a refresh of quest info (for treasures/rares/etc.)
+	-- Since quest refresh is 1/sec max and not during combat, it should be fine
+	app.RefreshQuestInfo();
 end
 app.events.UPDATE_INSTANCE_INFO = function()
 	-- We got new information, now refresh the saves. :D

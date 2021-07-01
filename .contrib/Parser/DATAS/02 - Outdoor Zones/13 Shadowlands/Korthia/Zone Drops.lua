@@ -40,6 +40,68 @@ _.Zones =
 						179565,	-- Relic Gorger
 					},
 				}),
+				-- probably clean these up too, maybe not worth tracking? idk
+				-- first 11 mobs per day which will drop additional relic fragments (they show purple with the archivist upgrade, but still trigger beforehand if a matching mob is looted)
+				q(64341, {	-- Bonus Relic Loot #1
+					["name"] = "Bonus Relic Loot #1",
+					["isDaily"] = true,
+				}),
+				q(64342, {	-- Bonus Relic Loot #2
+					["name"] = "Bonus Relic Loot #2",
+					["isDaily"] = true,
+				}),
+				q(64343, {	-- Bonus Relic Loot #3
+					["name"] = "Bonus Relic Loot #3",
+					["isDaily"] = true,
+				}),
+				q(64344, {	-- Bonus Relic Loot #4
+					["name"] = "Bonus Relic Loot #4",
+					["isDaily"] = true,
+				}),
+				q(64747, {	-- Bonus Relic Loot #5
+					["name"] = "Bonus Relic Loot #5",
+					["isDaily"] = true,
+				}),
+				q(64748, {	-- Bonus Relic Loot #6
+					["name"] = "Bonus Relic Loot #6",
+					["isDaily"] = true,
+				}),
+				q(64749, {	-- Bonus Relic Loot #7
+					["name"] = "Bonus Relic Loot #7",
+					["isDaily"] = true,
+				}),
+				q(64750, {	-- Bonus Relic Loot #8
+					["name"] = "Bonus Relic Loot #8",
+					["isDaily"] = true,
+				}),
+				q(64751, {	-- Bonus Relic Loot #9
+					["name"] = "Bonus Relic Loot #9",
+					["isDaily"] = true,
+				}),
+				q(64752, {	-- Bonus Relic Loot #10
+					["name"] = "Bonus Relic Loot #10",
+					["isDaily"] = true,
+				}),
+				q(64753, {	-- Bonus Relic Loot #11
+					["name"] = "Bonus Relic Loot #11",
+					["isDaily"] = true,
+				}),
+				q(64754, {	-- Bonus Relic Loot #12
+					["name"] = "Bonus Relic Loot #12",
+					["isDaily"] = true,
+				}),
+				q(64755, {	-- Bonus Relic Loot #13
+					["name"] = "Bonus Relic Loot #13",
+					["isDaily"] = true,
+				}),
+				q(64756, {	-- Bonus Relic Loot #14
+					["name"] = "Bonus Relic Loot #14",
+					["isDaily"] = true,
+				}),
+				q(64757, {	-- Bonus Relic Loot #15
+					["name"] = "Bonus Relic Loot #15",
+					["isDaily"] = true,
+				}),
 			--	Korthian Relics (putting here barring a better place for them)
 				i(187311),	-- Azgoth's Tattered Maps
 				i(187465),	-- Complicated Organism Harvester
@@ -58,6 +120,7 @@ _.Zones =
 				i(187329),	-- Old God Specimen Jar
 				i(187467),	-- Perplexing Rune-Cube
 				i(187332),	-- Recovered Page of Voices
+				i(186685),	-- Relic Fragment
 				i(187328),	-- Ripped Cosmology Chart
 				i(187323),	-- Runic Diagram
 				i(187462),	-- Scroll of Shadowlands Fables
@@ -73,8 +136,6 @@ _.Zones =
 				}),
 			--	Blues
 				i(186969),	-- Collapsing Riftstone
-			--	Greens
-				i(186153),	-- Foresworn Seal
 				i(186559, {	-- Grappling Gauntlet (PET!)
 					["crs"] = {	-- probably from other Mawsworn mobs
 						177292,	-- Mawsworn Mutilator
@@ -82,6 +143,8 @@ _.Zones =
 						177293,	-- Mawsworn Torturer
 					},
 				}),
+			--	Greens
+				i(186153),	-- Foresworn Seal
 				i(186151),	-- Mawsworn Assasin's Twinblade
 				i(186143),	-- Mawsworn Assassin's Backstabber*
 				i(186118),	-- Mawsworn Assassin's Belt
@@ -123,6 +186,7 @@ _.Zones =
 				i(186123),	-- Mawsworn Scout's Coif
 				i(186124),	-- Mawsworn Scout's Greaves*
 				i(186122),	-- Mawsworn Scout's Grips
+				i(186141),	-- Mawsworn Scout's Quickshot Bow*
 				i(186125),	-- Mawsworn Scout's Shoulderguards
 				i(186121),	-- Mawsworn Scout's Striders
 				i(186148),	-- Mawsworn Vanquisher's Spire*
@@ -154,8 +218,4 @@ _.Zones =
 
 _.HiddenQuestTriggers = {
 	q(64534),	-- triggered when looting Korthian Relic - i(187311), "Azgoth's Tattered Maps"
-	q(64341),	-- looted 20 Relic Fragments from some shardhides (177354 - Shardhide Dominator x2, 177352 - Shardhide Mauler x1, looted all 3 at once)
-	q(64342),	-- looted 14 Relic Fragments from some shardhide around 48.7, 29.3
-	q(64343),	-- looted 9 Relic Fragments from a mob around 51.6, 52.6
-	q(64344),	-- looted 7 Relic Fragments from a Ravenous Gorger, npcID 177245
 };

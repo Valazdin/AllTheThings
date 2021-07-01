@@ -50,6 +50,7 @@ _.Zones =
 								crit(14, {	-- Observer Yorik
 									["achievementID"] = 15107,	-- Conquering Korthia
 								}),
+								i(187405),	-- Choker of the Hidden Observer
 							},
 						}),
 					}),
@@ -58,11 +59,13 @@ _.Zones =
 							["questID"] = 64456,
 							["isDaily"] = true,
 							["coords"] = {
+								{ 33.4, 39.3, KORTHIA },
 								{ 37.9, 35.8, KORTHIA },
 								{ 39.8, 42.9, KORTHIA },
 							},
 							["g"] = {
 								i(187251),	-- Shaded Skull Shoulderguards
+								i(187243),	-- Shadehunter's Crescent
 								i(185050),	-- Spider Soul
 								i(187421),	-- Ashen Linament
 							},
@@ -77,6 +80,7 @@ _.Zones =
 							},
 							["g"] = {
 								i(187251),	-- Shaded Skull Shoulderguards
+								i(187243),	-- Shadehunter's Crescent
 								i(185050),	-- Spider Soul
 								i(187421),	-- Ashen Linament
 							},
@@ -85,11 +89,13 @@ _.Zones =
 							["questID"] = 64472,
 							["isDaily"] = true,
 							["coords"] = {
+								{ 46.1, 31.9, KORTHIA },
 								{ 56.3, 18.4, KORTHIA },
 								{ 64.3, 30.3, KORTHIA },
 							},
 							["g"] = {
 								i(187251),	-- Shaded Skull Shoulderguards
+								i(187243),	-- Shadehunter's Crescent
 								i(185050),	-- Spider Soul
 								i(187421),	-- Ashen Linament
 							},
@@ -103,6 +109,7 @@ _.Zones =
 							},
 							["g"] = {
 								i(187251),	-- Shaded Skull Shoulderguards
+								i(187243),	-- Shadehunter's Crescent
 								i(185050),	-- Spider Soul
 								i(187421),	-- Ashen Linament
 							},

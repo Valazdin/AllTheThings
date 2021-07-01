@@ -11,6 +11,7 @@ i(186472);	-- Wisps of Memory
 -- Anima Items
 i(184147);	-- Agony Enrichment Device
 i(186201);	-- Ancient Anima Vessel
+i(186204);	-- Anima-Stained Glass Shards
 i(187349);	-- Anima Laden Egg
 i(181540);	-- Animaflower Bud
 i(181477);	-- Ardendew Pearl
@@ -50,6 +51,7 @@ i(184384);	-- Hibernal Sproutling
 i(181550);	-- Hopebreaker's Field Injector
 i(181621);	-- Hyper-Reactive Slime Sample
 i(181377);	-- Illustrated Combat Meditation Aid
+i(186200);	-- Infused Dendrite
 i(184774);	-- Juvenile Sporespindle
 i(184382);	-- Luminous Sylberry
 i(184307);	-- Maldraxxi Armor Scraps
@@ -92,6 +94,7 @@ i(184776);	-- Urn of Arena Soil
 i(186206);	-- Vault Emberstone
 i(184765);	-- Vesper Strikehammer
 i(184371);	-- Vivacity of Collaboration
+i(186202);	-- Wafting Koricone
 i(181643);	-- Weeping Corpseshroom
 i(184149);	-- Widowbloom-Infused Fragrance
 i(181648);	-- Ziggurat Focusing Crystal
@@ -243,6 +246,7 @@ i(169391);	-- Bubble-eyed Rolly
 i(169292);	-- Charged Scale of the Blue Aspect
 i(146694);	-- Chipped Felsong Mantle
 i(163212);	-- Cleansing Thurible
+i(185916);	-- Codex of Memories
 i(146686);	-- Colorless Shroud of Xavius
 i(183042);	-- Colossal Power Core
 i(169235);	-- Confusing Spring Box
@@ -251,6 +255,7 @@ i(169250);	-- Crude Eating Utensil
 i(9265);	-- Cuergo's Hidden Treasure
 i(182955);	-- Cypher of Dampening
 i(182688);	-- Cypher of Obfuscation
+i(185963);	-- Diviner's Rune Chit
 i(169232);	-- Dud Blast Canister
 i(143656);	-- Echo of Time (N)
 i(143657);	-- Echo of Time (H)
@@ -290,6 +295,7 @@ i(169236);	-- Latch-and-Lock Trigger
 i(146952);	-- Legendary Tailor's Materials
 i(146977);	-- Legendary Tanner's Kit
 i(147209);	-- Legendary Wardenscale Supplies
+i(186157);	-- Lodestaff
 i(168280);	-- Lost Scale of the Scarlet Broodmother
 i(147582);	-- Mark of the Sentinax
 i(79269);	-- Marsh Lily

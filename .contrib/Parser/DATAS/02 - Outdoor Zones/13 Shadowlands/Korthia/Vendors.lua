@@ -41,29 +41,42 @@ _.Zones =
 							["questID"] = 64348,
 							["cost"] = { { "c", 1931, 1000 } },	-- 1,000x Catalogued Research
 						}),
+						--[[ does not show on the vendor after first unlocking rep.  uncomment if its visibility is determined by reaching higher rep levels or some other factor
 						i(187136, {	-- Research Report: Careful Examination
 							["cost"] = { { "c", 1931, 4000 } },	-- 4,000x Catalogued Research
 						}),
+						--]]
 						i(187138, {	-- Research Report: First Alloys
 							["cost"] = { { "c", 1931, 8000 } },	-- 8,000x Catalogued Research
 						}),
+						--[[ does not show on the vendor after first unlocking rep.  uncomment if its visibility is determined by reaching higher rep levels or some other factor
 						i(187137, {	-- Research Report: Relic Finding Techniques
 							["questID"] = 64368,
 							["cost"] = { { "c", 1931, 5000 } },	-- 5,000x Catalogued Research
 						}),
+						--]]
 						i(187145, {	-- Treatise: Recognizing Stygia and its Uses
 							["questID"] = 64307,
-							["cost"] = { { "c", 1931, 2000 } },	-- 2,000x Catalogued Research
+							["cost"] = { { "c", 1931, 800 } },	-- 800x Catalogued Research
 						}),
 						i(186721, {	-- Treatise: Relics Abound in the Shadowlands
 							["cost"] = { { "c", 1931, 2000 } },	-- 2,000x Catalogued Research
 						}),
 						i(186722, {	-- Treatise: The Study of Anima and Harnessing Every Drop
 							["questID"] = 64027,
-							["cost"] = { { "c", 1931, 2000 } },	-- 2,000x Catalogued Research
+							["cost"] = { { "c", 1931, 1500 } },	-- 1,500x Catalogued Research
 						}),
 						--
-						i(186984, {	-- Korthian Archivists' Key
+						i(187612, {	-- Key of Flowing Waters
+							["cost"] = { { "c", 1931, 25 } },	-- 25x Catalogued Research
+						}),
+						i(187614, {	-- Key of Many Thoughts
+							["cost"] = { { "c", 1931, 25 } },	-- 25x Catalogued Research
+						}),
+						i(187613, {	-- Key of the Inner Chambers
+							["cost"] = { { "c", 1931, 25 } },	-- 25x Catalogued Research
+						}),
+						i(186984, {	-- Korthite Crystal Key
 							["cost"] = { { "c", 1931, 25 } },	-- 25x Catalogued Research
 						}),
 						i(186731, {	-- Repaired Riftkey
@@ -72,16 +85,18 @@ _.Zones =
 						i(186718, {	-- Teleporter Repair Kit
 							["cost"] = { { "c", 1931, 50 } },	-- 50x Catalogued Research
 						}),
+						i(187508, {	-- Trained Gromit Carrier
+							["cost"] = { { "c", 1931, 35 } },	-- 35x Catalogued Research
+						}),
 						--
 						i(186991, {	-- Transmute: Stones to Ore
-							["cost"] = { { "c", 1931, 2500 } },	-- 2,500x Catalogued Research
+							["cost"] = { { "c", 1931, 2000 } },	-- 2,000x Catalogued Research
 						}),
 					},
 				}),
 				n(179321, {	-- Duchess Mynx <Death's Advance Quartermaster>
 					["coord"] = { 63.5, 23.3, KORTHIA },
 					["g"] = {
-					--	TODO: venthyr has two "Renathal's ..." ensembles but the other covenants i've checked only have 1.  unsure if the second ensemble is unlocked after doing something specific or if venthyr just get 2 for some reason?
 						i(186647, {	-- Amber Shardhide (MOUNT!)
 							["cost"] = { { "c", 1767, 5000 } },	-- 5,000x Stygia
 						}),
@@ -303,9 +318,11 @@ _.Zones =
 							},
 						}),
 						--
+						--[[ not visible on the vendor on second day of live at neutral rep - uncomment if visibility is based on rep/other factors
 						i(187410, {	-- Death's Advance Battlefield Drape
 							["cost"] = { { "c", 1767, 500 } },	-- 500x Stygia
 						}),
+						--]]
 						i(186543, {	-- Domestic Aunian (PET!)
 							["cost"] = {
 								{ "i", 163036, 50 },	-- 50x Polished Pet Charm

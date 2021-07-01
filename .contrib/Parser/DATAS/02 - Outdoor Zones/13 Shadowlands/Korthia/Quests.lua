@@ -7,7 +7,14 @@ _.Zones =
 	m(SHADOWLANDS, {
 		m(KORTHIA, {
 			n(QUESTS, {
+			--	TODO: 64567, "The Missing Scholar," triggered when turning in #63732, "Interrupt the Interrogations."  based on quest text on wowhead, this appears to be an alternate way to start the research chain - not sure if that means at a certain point if you haven't looted a single treasure/rare to get "Researching Korthian Relics," you will at some point receive this alternate version?????  it's also possible it's just an NYI quest.  i never ran into it on PTR; originally you picked up "Interrupt the Interrogations" without a preceding quest and then at one point they added "Researching Korthian Relics" to get you there more naturally.
+			
 			--	confirmed on live
+				q(63755, {	-- A Matter of Urgency
+					["sourceQuests"] = { 64106 },	-- A Unified Effort
+					["provider"] = { "n", 177155 },	-- Pathscribe Roh-Vess
+					["coord"] = { 65.1, 23.1, KORTHIA },
+				}),
 				q(63848, {	-- A Show of Gratitude
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance
 					["provider"] = { "n", 177927 },	-- Tal-Galan
@@ -17,6 +24,15 @@ _.Zones =
 					["sourceQuests"] = { 63902 },	-- Good News, Everyone!
 					["provider"] = { "n", 177228 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 63.0, 25.6, KORTHIA },
+					["_drop"] = { "g" },	-- drop anima trash
+				}),
+				q(63736, {	-- An Infusion of Anima
+					["sourceQuests"] = {
+						63733,	-- Carving Out a Path
+						63734,	-- The Sundered Staff
+					},
+					["provider"] = { "n", 177928 },	-- Archivist Roh-Dahl
+					["coord"] = { 39.4, 51.3, KORTHIA },
 				}),
 				q(64560, {	-- Anima Reclamation (intro version)
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance (must be on quest)
@@ -24,10 +40,72 @@ _.Zones =
 					["isDaily"] = true,
 					["coord"] = { 61.8, 25.6, KORTHIA },
 				}),
+				q(63861, {	-- Beginning the Collection
+					["sourceQuests"] = { 63738 },	-- Establishing the Archive
+					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
+					["coord"] = { 62.7, 22.5, KORTHIA },
+					["g"] = {
+						i(185636),	-- The Archivist's Codex
+					},
+				}),
+				q(63733, {	-- Carving Out a Path
+					["sourceQuests"] = { 63732 },	-- Interrupt the Interrogations
+					["provider"] = { "n", 178713 },	-- Archivist Roh-Dahl
+					["coord"] = { 58.9, 58.1, KORTHIA },
+				}),
+				q(64290, {	-- Collecting Research
+					["sourceQuests"] = { 64289 },	-- Picking Up the Pieces
+					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
+					["coord"] = { 61.6, 21.7, KORTHIA },
+					["g"] = {	-- TODO: there are no plate rewards currently linked - are there any or is plate just...left out?
+						i(186664),	-- Korthian Caretaker's Sandals
+						i(186665),	-- Korthian Caretaker's Mitts
+						i(186734),	-- Shardhide Leather Treads
+						i(186735),	-- Shardhide Leather Handlers
+						i(186741),	-- Razorwing Scale Footguards
+						i(186742),	-- Razorwing Scale Fists
+					},
+				}),
+				q(63740, {	-- Consulting the Experts
+					["sourceQuests"] = {
+						63733,	-- Carving Out a Path
+						63734,	-- The Sundered Staff
+					},
+					["provider"] = { "n", 177928 },	-- Archivist Roh-Dahl
+					["coord"] = { 39.4, 51.3, KORTHIA },
+				}),
 				q(63855, {	-- Ease of Passage
 					["sourceQuests"] = { 63848 },	-- A Show of Gratitude
 					["provider"] = { "n", 178470 },	-- Ve'nari
 					["coord"] = { 65.9, 23.0, KORTHIA },
+				}),
+				q(63760, {	-- Echoes of Fate
+					["sourceQuests"] = { 63759 },	-- Redirect the Search
+					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
+					["coord"] = { 56.9, 22.3, KORTHIA },
+				}),
+				q(64438, {	-- Empowering Equipment
+					["sourceQuests"] = { 64290 },	-- Collecting Research
+					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
+					["coord"] = { 61.6, 21.7, KORTHIA },
+				}),
+				q(63738, {	-- Establishing the Archive
+					["sourceQuests"] = { 63737 },	-- Finding One's True Purpose
+					["provider"] = { "n", 178992 },	-- Scholar Roh-Suir
+					["coord"] = { 36.0, 32.3, KORTHIA },
+				}),
+				q(63737, {	-- Finding One's True Purpose
+					["sourceQuests"] = { 63739 },	-- Hope Ascending
+					["provider"] = { "n", 178991 },	-- Archivist Roh-Dahl
+					["coord"] = { 35.8, 32.2, KORTHIA },
+				}),
+				q(63739, {	-- Hope Ascending
+					["sourceQuests"] = {
+						63736,	-- An Infusion of Anima
+						63740,	-- Consulting the Experts
+					},
+					["provider"] = { "n", 177928 },	-- Archivist Roh-Dahl
+					["coord"] = { 39.4, 51.3, KORTHIA },
 				}),
 				q(64557, {	-- In Darkness, Found
 					["sourceQuests"] = { 63902 },	-- Good News, Everyone!
@@ -43,10 +121,26 @@ _.Zones =
 						i(187543),	-- Death's Advance War Chest
 					},
 				}),
+				q(63732, {	-- Interrupt the Interrogations
+					["sourceQuests"] = { 63731 },	-- Shattered Relics
+					["provider"] = { "n", 178694 },	-- Scholar Roh-Suir
+					["coord"] = { 59.0, 58.1, KORTHIA },
+				}),
 				q(63663, {	-- Korthia, the City of Secrets
 					["sourceQuests"] = { 63662 },	-- Mysteries of the Maw
 					["provider"] = { "n", 177202 },	-- Ve'nari
 					["coord"] = { 58.3, 14.3, KORTHIA },
+				}),
+				q(63757, {	-- Looting the Looters
+					["sourceQuests"] = { 63755 },	-- A Matter of Urgency
+					["provider"] = { "i", 185915 },	-- Korthian Artifact
+					["crs"] = { 177204 },	-- Mawsworn Interrogator
+				}),
+				q(64511, {	-- Missing Relics
+					["sourceQuests"] = { 64506 },	-- What Must Be Found
+					["description"] = "Requires Tier 2 Research.",
+					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
+					["coord"] = { 62.7, 22.5, KORTHIA },
 				}),
 				q(64561, {	-- Observational Records (intro version)
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance (must be on quest)
@@ -59,10 +153,33 @@ _.Zones =
 					["provider"] = { "n", 177227 },	-- Tal-Galan
 					["coord"] = { 63.8, 23.7, KORTHIA },
 				}),
+				q(64289, {	-- Picking Up the Pieces
+					["sourceQuests"] = { 63738 },	-- Establishing the Archive
+					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
+					["coord"] = { 62.7, 22.5, KORTHIA },
+				}),
+				q(63759, {	-- Redirect the Search
+					["sourceQuests"] = {
+						63757,	-- Looting the Looters
+						63756,	-- Rescued from Torment
+						63758,	-- The Last Place You Look
+					},
+					["provider"] = { "n", 177924 },	-- Caretaker Kah-Than
+				}),
+				q(63756, {	-- Rescued from Torment
+					["sourceQuests"] = { 63755 },	-- A Matter of Urgency
+					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
+					["coord"] = { 56.2, 38.8, KORTHIA },
+				}),
 				q(63731, {	-- Researching Korthian Relics
 					["sourceQuests"] = { 63662 },	-- Mysteries of the Maw
 					["description"] = "The item that starts this quest can be looted from any treasure chest or rare in Korthia.",
 					["provider"] = { "i", 187177 },	-- Researching Korthian Relics
+				}),
+				q(63761, {	-- Revenge Delayed
+					["sourceQuests"] = { 63759 },	-- Redirect the Search
+					["provider"] = { "n", 177850 },	-- Protector Rih-Mat
+					["coord"] = { 55.6, 22.2, KORTHIA },
 				}),
 				q(63949, {	-- Shaping Fate
 					["sourceQuests"] = { 63902 },	-- Good News, Everyone!
@@ -72,7 +189,6 @@ _.Zones =
 					["g"] = {
 					--	TODO: figure out the contents of this chest and how/where to display it (if it comes from multiple things)
 						i(186196, {	-- Death's Advance War Chest
-							i(186197),	-- Seal of Death's Unity (TODO: add rep item if this makes it to live, it wouldn't let me use it while in Korthia on PTR)
 						}),
 					},
 				}),
@@ -81,11 +197,37 @@ _.Zones =
 					["provider"] = { "n", 177228 },	-- Highlord Bolvar Fordragon
 					["coord"] = { 62.8, 24.9, KORTHIA },
 				}),
+				q(63758, {	-- The Last Place You Look
+					["sourceQuests"] = { 63755 },	-- A Matter of Urgency
+					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
+					["coord"] = { 56.2, 38.8, KORTHIA },
+				}),
+				q(63734, {	-- The Sundered Staff
+					["sourceQuests"] = { 63732 },	-- Interrupt the Interrogations
+					["provider"] = { "n", 178713 },	-- Archivist Roh-Dahl
+					["coord"] = { 58.9, 58.1, KORTHIA },
+				}),
+				q(63763, {	-- They Could Be Anyone
+					["sourceQuests"] = { 63762 },	-- Under the Illusion
+					["provider"] = { "i", 185740 },	-- Head of Azodius
+					["coord"] = { 56.5, 17.4, KORTHIA },
+					["crs"] = { 177243 },	-- Azodius
+				}),
+				q(63762, {	-- Under the Illusion
+					["sourceQuests"] = { 63760 },	-- Echoes of Fate
+					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
+					["coord"] = { 56.5, 17.4, KORTHIA },
+				}),
 				q(64562, {	-- We Need a Healer - You! (intro version)
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance (must be on quest)
 					["provider"] = { "n", 179216 },	-- Mikanikos
 					["isDaily"] = true,
 					["coord"] = { 61.4, 23.2, KORTHIA },
+				}),
+				q(64506, {	-- What Must Be Found
+					["sourceQuests"] = { 63861 },	-- Beginning the Collection
+					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
+					["coord"] = { 62.6, 22.5, KORTHIA },
 				}),
 				q(63994, {	-- Who is the Maw Walker?
 					["sourceQuests"] = { 63663 },	-- Korthia, the City of Secrets
@@ -99,11 +241,6 @@ _.Zones =
 					["provider"] = { "n", 177919 },	-- Urgent Message from Ardenweald
 					["coord"] = { 63.4, 24.6, KORTHIA },
 				}),
-				q(63755, {	-- A Matter of Urgency
-					["sourceQuests"] = { 64007 },	-- Charge of the Covenants
-					["provider"] = { "n", 177155 },	-- Pathscribe Roh-Vess
-					["coord"] = { 65.1, 23.1, KORTHIA },
-				}),
 				q(63579, {	-- A Paladin's Soul
 					["sourceQuests"] = { 63683 },	-- Winter's Sigil
 					["provider"] = { "n", 179356 },	-- Thenios
@@ -112,22 +249,6 @@ _.Zones =
 						1968,	-- TG107_Floor
 						1967,	-- TG106_Floor
 						1969,	-- TG108_Floor
-					},
-				}),
-				q(63736, {	-- An Infusion of Anima
-					["sourceQuests"] = {
-						63733,	-- Carving Out a Path
-						63734,	-- The Sundered Staff
-					},
-					["provider"] = { "n", 177928 },	-- Archivist Roh-Dahl
-					["coord"] = { 39.4, 51.3, KORTHIA },
-				}),
-				q(63861, {	-- Beginning the Collection
-					["sourceQuests"] = { 63738 },	-- Establishing the Archive
-					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
-					["coord"] = { 62.7, 22.5, KORTHIA },
-					["g"] = {
-						i(185636),	-- The Archivist's Codex
 					},
 				}),
 				q(63899, {	-- Book of Binding: The Mad Witch
@@ -147,28 +268,10 @@ _.Zones =
 					["provider"] = { "i", 186014 },	-- Bulwark of Divine Intent
 					["coord"] = { 18.5, 38.0, KORTHIA },
 				}),
-				q(63733, {	-- Carving Out a Path
-					["sourceQuests"] = { 63732 },	-- Interrupt the Interrogations
-					["provider"] = { "n", 178713 },	-- Archivist Roh-Dahl
-					["coord"] = { 58.9, 58.1, KORTHIA },
-				}),
 				q(63912, {	-- Celestial Shadowlands Chart
 					["sourceQuests"] = { 64506 },	-- What Must Be Found
 					["provider"] = { "i", 187201 },	-- Celestial Shadowlands Chart
 					["coord"] = { 45.5, 56.0, KORTHIA },
-				}),
-				q(64290, {	-- Collecting Research
-					["sourceQuests"] = { 64289 },	-- Picking Up the Pieces
-					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
-					["coord"] = { 61.6, 21.7, KORTHIA },
-				}),
-				q(63740, {	-- Consulting the Experts
-					["sourceQuests"] = {
-						63733,	-- Carving Out a Path
-						63734,	-- The Sundered Staff
-					},
-					["provider"] = { "n", 177928 },	-- Archivist Roh-Dahl
-					["coord"] = { 39.4, 51.3, KORTHIA },
 				}),
 				q(63717, {	-- Defending the Vault
 					["sourceQuests"] = { 63714 },	-- To the Vault
@@ -179,8 +282,11 @@ _.Zones =
 					["sourceQuests"] = { 64506 },	-- What Must Be Found
 					["description"] = "The item that starts this quest and the Rune Chits themselves can drop from the daily Korthian treasure chests.",
 					["provider"] = { "i", 187055 },	-- Pouch of Rune Chits
-					["cost"] = { { "i", 185962, 20 } },	-- 20x Rune Chit
+				--	["cost"] = { { "i", 185962, 20 } },	-- 20x Rune Chit
 					["g"] = {
+						objective(1, {    -- 0/20 Rune Chits
+							["cost"] = { { "i", 185962, 20 } },    -- 20x Rune Chit
+						}),
 						i(187154),	-- Ancient Korthian Runes (TOY!)
 					},
 				}),
@@ -201,21 +307,6 @@ _.Zones =
 					["coord"] = { 39.3, 52.4, KORTHIA },
 					["cost"] = { { "i", 186718, 1 } },	-- Teleporter Repair Kit
 				}),
-				q(63760, {	-- Echoes of Fate
-					["sourceQuests"] = { 63759 },	-- Redirect the Search
-					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
-					["coord"] = { 56.9, 22.3, KORTHIA },
-				}),
-				q(63738, {	-- Establishing the Archive
-					["sourceQuests"] = { 63737 },	-- Finding One's True Purpose
-					["provider"] = { "n", 178992 },	-- Scholar Roh-Suir
-					["coord"] = { 36.0, 32.3, KORTHIA },
-				}),
-				q(63737, {	-- Finding One's True Purpose
-					["sourceQuests"] = { 63739 },	-- Hope Ascending
-					["provider"] = { "n", 178991 },	-- Archivist Roh-Dahl
-					["coord"] = { 35.8, 32.2, KORTHIA },
-				}),
 				q(63713, {	-- Hooking Over
 					["sourceQuests"] = {
 						63711,	-- Bone Tools
@@ -223,19 +314,6 @@ _.Zones =
 					},
 					["provider"] = { "n", 177452 },	-- Bonesmith Heirmir
 					["coord"] = { 34.9, 35.3, KORTHIA },
-				}),
-				q(63739, {	-- Hope Ascending
-					["sourceQuests"] = {
-						63736,	-- An Infusion of Anima
-						63740,	-- Consulting the Experts
-					},
-					["provider"] = { "n", 177928 },	-- Archivist Roh-Dahl
-					["coord"] = { 39.4, 51.3, KORTHIA },
-				}),
-				q(63732, {	-- Interrupt the Interrogations
-					["sourceQuests"] = { 63731 },	-- Shattered Relics
-					["provider"] = { "n", 178694 },	-- Scholar Roh-Suir
-					["coord"] = { 59.0, 58.1, KORTHIA },
 				}),
 				q(63725, {	-- Into the Vault
 					["sourceQuests"] = {
@@ -265,13 +343,6 @@ _.Zones =
 					["provider"] = { "n", 177449 },	-- Bonesmith Heirmir
 					["coord"] = { 57.2, 29.8, KORTHIA },
 				}),
-				q(63757, {	-- Looting the Looters
-				--	TODO: verify SQ.  i had already killed a ton of mobs so i think it is dependent on turning this in, but you may also need to have picked up "the last place you look" and "rescued from torment"
-				--	also add crs for mob(s) that drop it, mob i looted had already despawned so i wasn't able to verify the npcid
-					["sourceQuests"] = { 63755 },	-- A Matter of Urgency
-					["provider"] = { "i", 185915 },	-- Korthian Artifact
-				--	["crs"] = {  },	--
-				}),
 				q(63712, {	-- Lost Records
 					["sourceQuests"] = { 63710 },	-- The Anima Trail
 					["provider"] = { "n", 177451 },	-- Tal-Galan - TODO: verify NPC once on live, it's currently named "Tal-Galan (temp)"
@@ -288,16 +359,6 @@ _.Zones =
 					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
 					["coord"] = { 62.7, 22.5, KORTHIA },
 				}),
-				q(64511, {	-- Missing Relics
-					["sourceQuests"] = {	-- TODO: not sure if the prereq is these quests (contextually it makes sense) or Tier 2 research, or both.  i had also picked up, but not finished, 63892, "Diviner's Rune Chits."  these 5 are the first set of research that he directed me to collect, so at least having discovered the diviner's rune chits quest may also be required
-						63899,	-- Book of Binding: The Mad Witch
-						63912,	-- Celestial Shadowlands Chart
-						63911,	-- Singing Steel Ingot
-						63860,	-- Talisman of the Eternal Scholar
-					},
-					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
-					["coord"] = { 62.7, 22.5, KORTHIA },
-				}),
 				q(64526, {	-- Mysterious Rifts
 					["sourceQuests"] = {	-- TODO: not sure if the prereq is simply Tier 4 research, or if previous relics are required
 						63915,	-- Drum of Driving
@@ -307,36 +368,6 @@ _.Zones =
 					},
 					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
 					["coord"] = { 62.7, 22.5, KORTHIA },
-				}),
-				q(64289, {	-- Picking Up the Pieces
-					["sourceQuests"] = { 63738 },	-- Establishing the Archive
-					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
-					["coord"] = { 61.6, 21.7, KORTHIA },
-					["g"] = { -- TODO: unsure if these rewards vary from class to class + if they don't, remainder of armor class rewards need to be added
-					--	NOT DONE: death knight, demon hunter, druid, hunter, mage, monk, paladin, rogue, warlock, warrior
-						i(186665),	-- Korthian Caretaker's Mitts
-						i(186664),	-- Korthian Caretaker's Sandals
-						i(186742),	-- Razorwing Scale Fists
-						i(186741),	-- Razorwing Scale Footguards
-					},
-				}),
-				q(63759, {	-- Redirect the Search
-					["sourceQuests"] = {
-						63757,	-- Looting the Looters
-						63756,	-- Rescued from Torment
-						63758,	-- The Last Place You Look
-					},
-					["provider"] = { "n", 177924 },	-- Caretaker Kah-Than
-				}),
-				q(63756, {	-- Rescued from Torment
-					["sourceQuests"] = { 63755 },	-- A Matter of Urgency
-					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
-					["coord"] = { 56.2, 38.8, KORTHIA },
-				}),
-				q(63761, {	-- Revenge Delayed
-					["sourceQuests"] = { 63759 },	-- Redirect the Search
-					["provider"] = { "n", 177850 },	-- Protector Rih-Mat
-					["coord"] = { 55.6, 22.2, KORTHIA },
 				}),
 				q(63916, {	-- Sack of Strange Soil
 					["sourceQuests"] = { 64506 },	-- What Must Be Found
@@ -394,25 +425,10 @@ _.Zones =
 					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
 					["coord"] = { 62.7, 22.5, KORTHIA },
 				}),
-				q(64438, {	-- The Fruits of Research
-					["sourceQuests"] = { 64290 },	-- Collecting Research
-					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
-					["coord"] = { 61.6, 21.7, KORTHIA },
-				}),
 				q(63705, {	-- The Knowledge Keepers
 					["sourceQuests"] = { 63703 },	-- Vault of Secrets
 					["provider"] = { "n", 177423 },	-- Tal-Galan
 					["coord"] = { 57.4, 29.9, KORTHIA },
-				}),
-				q(63758, {	-- The Last Place You Look
-					["sourceQuests"] = { 63755 },	-- A Matter of Urgency
-					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
-					["coord"] = { 56.2, 38.8, KORTHIA },
-				}),
-				q(63734, {	-- The Sundered Staff
-					["sourceQuests"] = { 63732 },	-- Interrupt the Interrogations
-					["provider"] = { "n", 178713 },	-- Archivist Roh-Dahl
-					["coord"] = { 58.9, 58.1, KORTHIA },
 				}),
 				q(64305, {	-- The Tormentors of Torghast
 				--	TODO: not 100% on this SQ - i did the chain through "Good News, Everyone!" and picked up all the one-time quests that were up, then logged out.  when i logged back in later that day, this quest was up.  i'm PRETTY SURE i had picked up all the yellow quests in the area already but i guess maybe i missed one (even though it was literally right next to me lol)?  anyway, could use verification
@@ -420,22 +436,10 @@ _.Zones =
 					["provider"] = { "n", 179321 },	-- Duchess Mynx
 					["coord"] = { 63.4, 23.3, KORTHIA },
 				}),
-				q(63763, {	-- They Could Be Anyone
-				--	TODO: verify that quest still exists on live.  all quest text lines are listed as "DEPRECATED" atm and there's another newer quest where you learn the nathrezim are in korthia
-					["sourceQuests"] = { 63762 },	-- Under the Illusion
-					["provider"] = { "i", 185740 },	-- Head of Azodius
-					["coord"] = { 56.5, 17.4, KORTHIA },
-					["crs"] = { 177243 },	-- Azodius
-				}),
 				q(63714, {	-- To the Vault
 					["sourceQuests"] = { 63713 },	-- Hooking Over
 					["provider"] = { "n", 177451 },	-- Tal-Galan - TODO: verify NPC once on live, it's currently named "Tal-Galan (temp)"
 					["coord"] = { 34.9, 35.3, KORTHIA },
-				}),
-				q(63762, {	-- Under the Illusion
-					["sourceQuests"] = { 63760 },	-- Echoes of Fate
-					["provider"] = { "n", 177610 },	-- Caretaker Kah-Than
-					["coord"] = { 56.5, 17.4, KORTHIA },
 				}),
 				q(63726, {	-- Untangling the Sigil
 					["sourceQuests"] = { 63725 },	-- Into the Vault
@@ -456,13 +460,29 @@ _.Zones =
 					["provider"] = { "n", 177423 },	-- Tal-Galan
 					["coord"] = { 57.4, 29.9, KORTHIA },
 				}),
-				q(64506, {	-- What Must Be Found
-					["sourceQuests"] = { 63861 },	-- Beginning the Collection
-					["provider"] = { "n", 178257 },	-- Archivist Roh-Suir
-					["coord"] = { 62.6, 22.5, KORTHIA },
-				}),
 
 				-- Korthia Daily
+			--	confirmed on live
+				q(63934, {	-- Assail Mail
+					["sourceQuests"] = { 64556 },	-- In Need of Assistance
+					["provider"] = { "n", 178802 },	-- Messenger Mnemis
+					["isDaily"] = true,
+					["coord"] = { 61.4, 22.4, KORTHIA },
+				}),
+				q(63964, {	-- Broker's Bounty: Grimtalon
+					["sourceQuests"] = { 64556 },	-- In Need of Assistance
+					["provider"] = { "o", 368772 },	-- Sigilscored Scroll
+					["isDaily"] = true,
+					["coord"] = { 64.7, 25.6, KORTHIA },
+				}),
+				q(63782, {	-- Mawsworn Rituals
+					["sourceQuests"] = { 64556 },	-- In Need of Assistance
+					["provider"] = { "n", 178799 },	-- Arios Riftbearer
+					["isDaily"] = true,
+					["coord"] = { 61.5, 23.5, KORTHIA },
+				}),
+
+			--	ptr data
 				i(186017),	-- Korthite Crystal - rewarded by some dailies and found in some treasures, but does not seem statically attached to anything specific.  acquisition/availability may be based on having completed the campaign questline to the point where you get to the Vault of Secrets
 				q(64271, {	-- A More Civilized Way
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance
@@ -482,19 +502,7 @@ _.Zones =
 					["isDaily"] = true,
 					["coord"] = { 61.8, 25.6, KORTHIA },
 				}),
-				q(63934, {	-- Assail Mail
-					["sourceQuests"] = { 64556 },	-- In Need of Assistance
-					["provider"] = { "n", 178802 },	-- Messenger Mnemis
-					["isDaily"] = true,
-					["coord"] = { 61.4, 22.4, KORTHIA },
-				}),
 				q(63793, {	-- Broker's Bounty: Ensydius the Defiler
-					["sourceQuests"] = { 64556 },	-- In Need of Assistance
-					["provider"] = { "o", 368772 },	-- Sigilscored Scroll
-					["isDaily"] = true,
-					["coord"] = { 64.7, 25.6, KORTHIA },
-				}),
-				q(63964, {	-- Broker's Bounty: Grimtalon
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance
 					["provider"] = { "o", 368772 },	-- Sigilscored Scroll
 					["isDaily"] = true,
@@ -630,12 +638,6 @@ _.Zones =
 					["provider"] = { "n", 178795 },	-- Nadjia the Mistblade
 					["isDaily"] = true,
 					["coord"] = { 61.8, 25.1, KORTHIA },
-				}),
-				q(63782, {	-- Mawsworn Rituals
-					["sourceQuests"] = { 64556 },	-- In Need of Assistance
-					["provider"] = { "n", 178799 },	-- Arios Riftbearer
-					["isDaily"] = true,
-					["coord"] = { 61.5, 23.5, KORTHIA },
 				}),
 				q(63937, {	-- Nasty, Big, Pointy Teeth
 					["sourceQuests"] = { 64556 },	-- In Need of Assistance

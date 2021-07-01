@@ -30,6 +30,7 @@ _.Zones =
 						crit(4, {	-- Dislodged Nest
 							["achievementID"] = 15099,	-- Treasures of Korthia
 						}),
+						i(187339),	-- Silver Shardhide Whistle (TOY!)
 					},
 				}),
 				o(369204, {	-- Displaced Relic
@@ -138,6 +139,7 @@ _.Zones =
 					["isDaily"] = true,
 					["coords"] = {
 						{ 35.7, 31.1, KORTHIA },
+						{ 37.4, 34.7, KORTHIA },
 						{ 39.5, 30.7, KORTHIA },
 						{ 39.7, 34.8, KORTHIA },
 					},
@@ -173,13 +175,13 @@ _.Zones =
 				o(369185, {	-- Korthian Relic Box
 					["description"] = "In the cave.",
 					["coord"] = { 41.2, 43.2, KORTHIA },
-					["cost"] = { { "i", 187613, 1 } },	-- Key of the Inner Chambers
-					["g"] = {
-						i(187119, {	-- Ring of Self Reflection
+					["cost"] = { { "i", 186984, 1 } },	-- Korthite Crystal Key
+					["g"] = {	-- TODO opened this today and it had guise of the changeling inside instead of ring of self reflection, so i assume the ring was moved to 369304, needs verification (haven't progressed in the campaign enough to get to the island)
+						i(187047, {	-- Guise of the Changeling
 							["sourceQuests"] = { 64511 },	-- Missing Relics
-							["questID"] = 63921,	-- Ring of Self-Reflection
+							["questID"] = 63909,	-- Guise of the Changeling
 							["g"] = {
-								i(187140),	-- Ring of Duplicity (TOY!)
+								i(187155),	-- Guise of the Changeling (TOY!)
 							},
 						}),
 					},
@@ -187,7 +189,7 @@ _.Zones =
 				o(369245, {	-- Korthian Relic Box
 					["description"] = "On the edge of the lower cliff.",
 					["coord"] = { 33.0, 41.9, KORTHIA },
-					["cost"] = { { "i", 186984, 1 } },	-- Korthian Archivists' Key
+					["cost"] = { { "i", 187612, 1 } },	-- Key of Flowing Waters
 					["g"] = {
 						i(187052, {	-- The Netherstar
 							["sourceQuests"] = { 64511 },	-- Missing Relics
@@ -199,11 +201,11 @@ _.Zones =
 					["coord"] = { 43.8, 76.9, KORTHIA },
 					["cost"] = { { "i", 186984, 1 } },	-- Korthian Archivists' Key
 					["g"] = {
-						i(187047, {	-- Guise of the Changeling
+						i(187119, {	-- Ring of Self Reflection
 							["sourceQuests"] = { 64511 },	-- Missing Relics
-							["questID"] = 63909,	-- Guise of the Changeling
+							["questID"] = 63921,	-- Ring of Self-Reflection
 							["g"] = {
-								i(187155),	-- Guise of the Changeling (TOY!)
+								i(187140),	-- Ring of Duplicity (TOY!)
 							},
 						}),
 					},
@@ -245,7 +247,6 @@ _.Zones =
 				o(369339, {	-- Mawsworn Cache
 					["questID"] = 64363,
 					["isDaily"] = true,
-				--	["coord"] = { 61.2, 57.9, KORTHIA }, TODO old coords?  was always here inside the building, but as of 6/2 i found it nearby but outside, next day slightly further.  leaving this here in case i need to append the old coord to the new ones
 					["coords"] = {
 						{ 56.8, 56.1, KORTHIA },
 						{ 58.3, 52.8, KORTHIA },

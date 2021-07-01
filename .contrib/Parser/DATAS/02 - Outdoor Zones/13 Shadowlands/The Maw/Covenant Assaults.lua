@@ -355,61 +355,6 @@ _.Zones =
 							}),
 						}),
 						n(TREASURES, {
-							i(186188, {	-- Lil'Abom (PET!)
-							--	TODO: maybe move to battle pet section?  but idk because all the parts come from treasures :\
-							--	originally was not on PTR, then showed up during necrolord assault.  then was up without assault, the necrolord assault came back and pet parts all disappeared.  so i'm really not sure what the fuck the criteria are for seeing/looting these objects lol.  there is an assault quest that requires you to help build abominations so it may be tied to that, but it wasn't up last time the NL assault was active so i'm not sure
-								["cost"] = {
-									{ "i", 186183, 1 },	-- Lil'Abom Head
-									{ "i", 186185, 1 },	-- Lil'Abom Legs
-									{ "i", 186186, 1 },	-- Lil'Abom Right Hand
-									{ "i", 186187, 1 },	-- Lil'Abom Spare Arm
-									{ "i", 186184, 1 },	-- Lil'Abom Torso
-								},
-							}),
-							o(368666, {	-- Lil'Abom's Head
-								["questID"] = 64010,
-								["isDaily"] = true,
-							--	["coord"] = { 30.3, 63.3, THE_MAW }, original coord
-								["coord"] = { 32.1, 56.0, THE_MAW },	-- new coord?  or possibly multiple spawnpoints
-								["g"] = {
-									i(186183),	-- Lil'Abom Head
-								},
-							}),
-							o(368663, {	-- Lil'Abom's Right Hand
-								["description"] = "At the back of the cave, behind a rock on the left side.",
-								["questID"] = 64008,
-								["isDaily"] = true,
-								["coord"] = { 38.5, 58.5, THE_MAW },
-								["g"] = {
-									i(186186),	-- Lil'Abom Right Hand
-								},
-							}),
-							o(368665, {	-- Lil'Abom's Spare Arm
-								["questID"] = 64009,
-								["isDaily"] = true,
-							--	["coord"] = { 39.2, 66.5, THE_MAW },
-								["coord"] = { 33.3, 65.8, THE_MAW },
-								["g"] = {
-									i(186187),	-- Lil'Abom Spare Arm
-								},
-							}),
-							o(368667, {	-- Lil'Abom's Torso
-								["questID"] = 64011,
-								["isDaily"] = true,
-							--	["coord"] = { 39.9, 62.6, THE_MAW }, old coord?  possibly multiple spawnpoints
-								["coord"] = { 36.9, 67.4, THE_MAW },
-								["g"] = {
-									i(186184),	-- Lil'Abom Torso
-								},
-							}),
-							o(368668, {	-- Lil'Abom's Trunk
-								["questID"] = 64013,
-								["isDaily"] = true,
-								["coord"] = { 29.4, 67.2, THE_MAW },
-								["g"] = {
-									i(186185),	-- Lil'Abom Legs
-								},
-							}),
 							o(369141, {	-- Mawsworn Cache
 								["questID"] = 64209,
 								["isDaily"] = true,
@@ -581,13 +526,17 @@ _.Zones =
 								n(TREASURES, {
 									i(186190, {	-- Etherwyrm Cage Key
 										["questID"] = 64003,	-- tracking quest triggered when looting key
+										["isDaily"] = true,
 										["coord"] = { 19.1, 43.6, THE_MAW },
 										["cr"] = 179030,	-- Elusive Keybinder
 									}),
 									o(368645, {	-- Rift Hidden Cache
 										["questID"] = 63993,
 										["isDaily"] = true,
-										["coord"] = { 20.5, 47.4, THE_MAW },
+										["coords"] = {
+											{ 20.5, 47.4, THE_MAW },
+											{ 22.6, 46.2, THE_MAW },
+										},
 										["g"] = {
 											i(187251),	-- Shaded Skull Shoulderguards
 										},
@@ -601,10 +550,12 @@ _.Zones =
 										},
 									}),
 									o(368347, {	-- Rift Hidden Cache
-										["description"] = "In a small cave.",
 										["questID"] = 63996,
 										["isDaily"] = true,
-										["coord"] = { 20.7, 29.8, THE_MAW },
+										["coords"] = {
+											{ 20.7, 29.8, THE_MAW },	-- in a small cave
+											{ 25.1, 27.1, THE_MAW },
+										},
 										["g"] = {
 											i(187251),	-- Shaded Skull Shoulderguards
 										},
@@ -621,7 +572,10 @@ _.Zones =
 									o(368649, {	-- Rift Hidden Cache
 										["questID"] = 63998,
 										["isDaily"] = true,
-										["coord"] = { 19.0, 43.9, THE_MAW },
+										["coords"] = {
+											{ 19.0, 33.4, THE_MAW },
+											{ 19.0, 43.9, THE_MAW },
+										},
 										["g"] = {
 											i(187251),	-- Shaded Skull Shoulderguards
 										},
@@ -641,6 +595,7 @@ _.Zones =
 							o(368653, {	-- Etherwyrm Cage
 								["description"] = "At the back of the cave.",
 								["questID"] = 64000,
+								["isDaily"] = true,
 								["coord"] = { 20.7, 39.7, THE_MAW },
 								["cost"] = { { "i", 186190, 1 } },	-- Etherwyrm Cage Key
 								["g"] = {
@@ -653,7 +608,9 @@ _.Zones =
 								["achievementID"] = 15000,	-- United Front
 							}),
 							i(185991, {	-- War Chest of the Wild Hunt
+							--	TODO: battlefield drape may be from any covenant assault chest?  on PTR it was sold by a vendor
 								i(186000),	-- Wild Hunt Legsplitter (MOUNT!)
+								i(187410),	-- Death's Advance Battlefield Drape
 								i(186547),	-- Invasive Buzzer (PET!)
 							}),
 						}),
