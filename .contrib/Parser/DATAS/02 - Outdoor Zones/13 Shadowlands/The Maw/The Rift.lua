@@ -44,6 +44,8 @@ _.Zones =
 								crit(10, {	-- Guard Orguluus
 									["achievementID"] = 15107,	-- Conquering Korthia
 								}),
+								i(187398),	-- Chestguard of the Shadeguard
+								i(187363),	-- Orguluus' Spear
 							},
 						}),
 						n(179735, {	-- Torglluun
@@ -103,6 +105,15 @@ _.Zones =
 							["g"] = {
 								i(187113),	-- Personal Ball and Chain (TOY!)
 							},
+						}),
+					}),
+					n(TREASURES, {
+						-- TODO: objectID instead of quest
+						q(64269, {	-- Stolen Anima Vessel Loot trigger
+							["name"] = "Looted a Stolen Anima Vessel.",
+							["isDaily"] = true,
+							-- ["coords"] = {
+							-- },
 						}),
 					}),
 				},

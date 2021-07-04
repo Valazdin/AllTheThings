@@ -149,6 +149,7 @@ i(13508);	-- Eye of Arachnida
 i(129210);	-- Fel Crystal Fragments
 i(127768);	-- Fel Petal
 i(37431);	-- Fetch Ball
+i(116984);	-- Frost Wyrm Egg
 i(139792);	-- Fruitful Bauble
 i(180874);	-- Gargon Whistle
 i(44618);	-- Glass of Aged Dalaran Red
@@ -219,6 +220,10 @@ i(117013);	-- Wand of Lightning Shield
 i(180697);	-- Wing Commanders Insignia
 i(85266);	-- Winter Blossom Tree
 i(128851);	-- Roasted juicycrunch carrots
+
+
+-- "Mount Equipment"
+i(174767);	-- Mogu Relic
 
 
 -- Quest Items
@@ -463,6 +468,7 @@ i(179392);	-- Orb of Burgeoning Ambition
 i(72201);	-- Plump Intestines
 i(9316);	-- Prismatic Punch Card
 i(183987);	-- Prisoner Cage Key
+i(185615);	-- Recovered Phantasma
 i(79104);	-- Rusty Watering Can
 i(171210);	-- Satchel of Nature's Bounty
 i(139590);	-- Scroll of Teleport: Ravenholdt

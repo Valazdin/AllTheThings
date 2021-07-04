@@ -108,6 +108,7 @@ _.Zones =
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
 						}),
 						i(184312),	-- Borr-Geth's Fiery Brimstone
+						i(186223),	-- Coif of the Molten Terror
 					},
 				}),
 				n(180246, {	-- Carriage Crusher
@@ -154,9 +155,10 @@ _.Zones =
 					},
 				}),
 				n(160770, {	-- Darithis the Bleak
+					["description"] = "At the back of the cave.",
 					["questID"] = 62281,
 					["isDaily"] = true,
-					["coord"] = { 61.0, 48.6, THE_MAW },
+					["coord"] = { 59.3, 51.9, THE_MAW },
 					["g"] = {
 						crit(5, {	-- Darithis the Bleak
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
@@ -280,7 +282,7 @@ _.Zones =
 					},
 				}),
 				n(169827, {	-- Ekphoras, Herald of Grief
-				--	["questID"] = 61125,	-- Malevolent Stygia
+					["questID"] = 60666,
 					["isDaily"] = true,
 					["coord"] = { 42.2, 21.0, THE_MAW },
 					["g"] = {
@@ -352,7 +354,6 @@ _.Zones =
 							["achievementID"] = 15107,	-- Conquering Korthia
 						}),
 						i(186659),	-- Fallen Charger (MOUNT!)
-						i(186042),	-- Forsaken Crusader's Blade
 					},
 				}),
 				n(172523, {	-- Houndmaster Vasanok
@@ -390,6 +391,7 @@ _.Zones =
 						crit(21, {	-- Ikras the Devourer
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
 						}),
+						i(186214),	-- Maw Snakeskin Boots
 					},
 				}),
 				n(170692, {	-- Krala <Death's Wings>
@@ -709,6 +711,7 @@ _.Zones =
 						crit(20, {	-- Yero the Skittish
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
 						}),
+						i(186228),	-- Helm of the Skittish Hero
 					},
 				}),
 				n(177444, {	-- Ylva <Mate of Guarm>
@@ -761,6 +764,7 @@ _.Zones =
 
 _.HiddenQuestTriggers = {
 	q(61136),	-- Agonix bonus objective
+	q(60920),	-- Akros bonus objective
 	q(59230),	-- Dartanos bonus objective
 	q(60903),	-- Krala bonus objective
 	q(61125),	-- Malevolent Stygia bonus objective
@@ -768,4 +772,16 @@ _.HiddenQuestTriggers = {
 	q(62211),	-- Skittering Broodmother bonus objective
 	q(59441),	-- Soulsmith Yol-Mattar bonus objective
 	q(61728),	-- Valis bonus objective
+
+	q(64258),	-- Carriage Crusher / Traitor Balthier
+	q(64439),	-- Carriage Crusher / Traitor Balthier
+	q(64701),	-- Stolen Anima Supplies 2nd trigger ?
 };
+
+_.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
+	n(-10100, {	-- Shadowlands
+		n(-319, {	-- Weapons
+			i(186042),	-- Forsaken Crusader's Blade (PTR Only)
+		}),
+	}),
+});

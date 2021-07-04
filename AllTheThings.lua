@@ -1957,7 +1957,7 @@ MergeProperties = function(g, o, noReplace)
 	end
 end
 MergeObjects = function(g, g2, cloneOnAdd)
-	if #g2 > 25 then
+	if g2 and #g2 > 25 then
 		local hashTable,t = {};
 		for i,o in ipairs(g) do
 			local hash = GetHash(o);
@@ -4603,6 +4603,16 @@ local function UpdateSearchResults(searchResults)
 		app:RefreshData(true, true);
 	end
 end
+-- Pulls the field search results for the rawID's and passes the results into UpdateSearchResults
+local function UpdateRawIDs(field, ids)
+	if ids and #ids > 0 then
+		local groups = {};
+		for _,id in ipairs(ids) do
+			MergeObjects(groups, SearchForField(field, id));
+		end
+		UpdateSearchResults(groups);
+	end
+end
 app.SearchForLink = SearchForLink;
 
 -- Map Information Lib
@@ -5689,41 +5699,42 @@ end
 	]]--
 
 	-- Paragon Hook
-	local paragonCacheID = {
+	-- local paragonCacheID = {
 		-- Paragon Cache Rewards
 		-- [QuestID] = [ItemCacheID"]	-- Faction // Quest Title
-		[54454] = 166300,	-- 7th Legion // Supplies from the 7th Legion
-		[48976] = 152922,	-- Argussian Reach // Paragon of the Argussian Reach
-		[46777] = 152108,	-- Armies of Legionfall // The Bounties of Legionfall
-		[48977] = 152923,	-- Army of the Light // Paragon of the Army of the Light
-		[54453] = 166298,	-- Champions of Azeroth // Supplies from Magni
-		[46745] = 152102,	-- Court of Farondis // Supplies from the Court
-		[46747] = 152103,	-- Dreamweavers // Supplies from the Dreamweavers
-		[46743] = 152104,	-- Highmountain Tribes // Supplies from Highmountain
-		[54455] = 166299,	-- Honorbound // Supplies from the Honorbound
-		[54456] = 166297,	-- Order of Embers // Supplies from the Order of Embers
-		[54458] = 166295,	-- Proudmoore Admiralty // Supplies from the Proudmoore Admiralty
-		[54457] = 166294,	-- Storm's Wake // Supplies from Storm's Wake
-		[54460] = 166282,	-- Talanji's Expedition // Supplies from Talanji's Expedition
-		[46748] = 152105,	-- The Nightfallen // Supplies from the Nightfallen
-		[46749] = 152107,	-- The Wardens // Supplies from the Wardens
-		[54451] = 166245,	-- Tortollan Seekers // Baubles from the Seekers
-		[46746] = 152106,	-- Valarjar // Supplies from the Valarjar
-		[54461] = 166290,	-- Voldunai // Supplies from the Voldunai
-		[54462] = 166292,	-- Zandalari Empire // Supplies from the Zandalari Empire
-		[55976] = 169939,	-- Waveblade Ankoan // Supplies From the Waveblade Ankoan
-		[53982] = 169940,	-- Unshackled // Supplies From The Unshackled
-		[55348] = 170061,	-- Rustbolt // Supplies from the Rustbolt Resistance
-		[58096] = 174483,	-- Rajani // Supplies from the Rajani
-		[58097] = 174484,	-- Uldum Accord // Supplies from the Uldum Accord
-		[61095] = 180646,	-- Undying Army // Supplies from The Undying Army
-		[61098] = 180649,	-- Wild Hunt // Supplies from The Wild Hunt
-		[61100] = 180648,	-- Court of Harvesters // Supplies from the Court of Harvesters
-		[61097] = 180647,	-- The Ascended // Supplies from The Ascended
-	};
-	hooksecurefunc("ReputationParagonFrame_SetupParagonTooltip",function(frame)
+		-- [54454] = 166300,	-- 7th Legion // Supplies from the 7th Legion
+		-- [48976] = 152922,	-- Argussian Reach // Paragon of the Argussian Reach
+		-- [46777] = 152108,	-- Armies of Legionfall // The Bounties of Legionfall
+		-- [48977] = 152923,	-- Army of the Light // Paragon of the Army of the Light
+		-- [54453] = 166298,	-- Champions of Azeroth // Supplies from Magni
+		-- [46745] = 152102,	-- Court of Farondis // Supplies from the Court
+		-- [46747] = 152103,	-- Dreamweavers // Supplies from the Dreamweavers
+		-- [46743] = 152104,	-- Highmountain Tribes // Supplies from Highmountain
+		-- [54455] = 166299,	-- Honorbound // Supplies from the Honorbound
+		-- [54456] = 166297,	-- Order of Embers // Supplies from the Order of Embers
+		-- [54458] = 166295,	-- Proudmoore Admiralty // Supplies from the Proudmoore Admiralty
+		-- [54457] = 166294,	-- Storm's Wake // Supplies from Storm's Wake
+		-- [54460] = 166282,	-- Talanji's Expedition // Supplies from Talanji's Expedition
+		-- [46748] = 152105,	-- The Nightfallen // Supplies from the Nightfallen
+		-- [46749] = 152107,	-- The Wardens // Supplies from the Wardens
+		-- [54451] = 166245,	-- Tortollan Seekers // Baubles from the Seekers
+		-- [46746] = 152106,	-- Valarjar // Supplies from the Valarjar
+		-- [54461] = 166290,	-- Voldunai // Supplies from the Voldunai
+		-- [54462] = 166292,	-- Zandalari Empire // Supplies from the Zandalari Empire
+		-- [55976] = 169939,	-- Waveblade Ankoan // Supplies From the Waveblade Ankoan
+		-- [53982] = 169940,	-- Unshackled // Supplies From The Unshackled
+		-- [55348] = 170061,	-- Rustbolt // Supplies from the Rustbolt Resistance
+		-- [58096] = 174483,	-- Rajani // Supplies from the Rajani
+		-- [58097] = 174484,	-- Uldum Accord // Supplies from the Uldum Accord
+		-- [61095] = 180646,	-- Undying Army // Supplies from The Undying Army
+		-- [61098] = 180649,	-- Wild Hunt // Supplies from The Wild Hunt
+		-- [61100] = 180648,	-- Court of Harvesters // Supplies from the Court of Harvesters
+		-- [61097] = 180647,	-- The Ascended // Supplies from The Ascended
+	-- };
+	-- hooksecurefunc("ReputationParagonFrame_SetupParagonTooltip",function(frame)
+		-- print("ReputationParagonFrame_SetupParagonTooltip")
 		-- Let's make sure the user isn't in combat and if they are do they have In Combat turned on.  Finally check to see if Tootltips are turned on.
-		if CanAttachTooltips() then
+		-- if CanAttachTooltips() then
 			-- Source: //Interface//FrameXML//ReputationFrame.lua Line 360
 			-- Using hooksecurefunc because of how Blizzard coded the frame.  Couldn't get GameTooltip to work like the above ones.
 			-- //Interface//FrameXML//ReputationFrame.lua Segment code
@@ -5763,26 +5774,29 @@ end
 					EmbeddedItemTooltip:Show();
 				end
 			--]]
-			local paragonQuestID = select(3, C_Reputation.GetFactionParagonInfo(frame.factionID));
-			if paragonQuestID then
-				local itemID = paragonCacheID[paragonQuestID];
-				if itemID then
-					local link = select(2, GetItemInfo(itemID));
-					if link then
-						-- Attach tooltip to the Paragon Frame
-						GameTooltip:SetOwner(EmbeddedItemTooltip, "ANCHOR_NONE")
-						GameTooltip:SetPoint("TOPLEFT", EmbeddedItemTooltip, "TOPRIGHT");
-						GameTooltip:SetHyperlink(link);
-					end
-				end
-			end
-		end
-	end);
+			-- local paragonQuestID = select(3, C_Reputation.GetFactionParagonInfo(frame.factionID));
+			-- print("info",frame.factionID,paragonQuestID,C_Reputation.GetFactionParagonInfo(frame.factionID))
+			-- if paragonQuestID then
+			-- 	local itemID = paragonCacheID[paragonQuestID];
+			-- 	print("itemID",itemID)
+			-- 	if itemID then
+			-- 		local link = select(2, GetItemInfo(itemID));
+			-- 		print("link",link)
+			-- 		if link then
+			-- 			-- Attach tooltip to the Paragon Frame
+			-- 			-- GameTooltip:SetOwner(EmbeddedItemTooltip, "ANCHOR_NONE")
+			-- 			-- GameTooltip:SetPoint("TOPLEFT", EmbeddedItemTooltip, "TOPRIGHT");
+			-- 			GameTooltip:SetHyperlink(link);
+			-- 		end
+			-- 	end
+			-- end
+	-- 	end
+	-- end);
 
 	-- Hide Paragon Tooltip when cleared
-	hooksecurefunc("ReputationParagonFrame_OnLeave",function(self)
-		GameTooltip:Hide();
-	end);
+	-- hooksecurefunc("ReputationParagonFrame_OnLeave",function(self)
+	-- 	GameTooltip:Hide();
+	-- end);
 end)();
 
 -- Lib Helpers
@@ -7145,7 +7159,7 @@ end
 app.events.TAXIMAP_OPENED = function()
 	local allNodeData = C_TaxiMap_GetAllTaxiNodes(app.GetCurrentMapID());
 	if allNodeData then
-		local updates, searchResults, nodeID = {};
+		local newFPs, nodeID;
 		local currentCharFPs, acctFPs = app.CurrentCharacter.FlightPaths, ATTAccountWideData.FlightPaths;
 		for j,nodeData in ipairs(allNodeData) do
 			if nodeData.state and nodeData.state < 2 then
@@ -7153,18 +7167,14 @@ app.events.TAXIMAP_OPENED = function()
 				if not currentCharFPs[nodeID] then
 					acctFPs[nodeID] = 1;
 					currentCharFPs[nodeID] = 1;
-					searchResults = SearchForField("flightPathID", nodeID);
-					if searchResults then
-						for j,searchResult in ipairs(searchResults) do
-							table.insert(updates, searchResult);
-						end
-					end
+					if not newFPs then newFPs = { nodeID }
+					else tinsert(newFPs, nodeID); end
 				end
 			end
 		end
 		-- Need to update the dynamic Flight Paths category as well
 		app.UpdateGroup(app.Categories, app.FlightPathsCategory);
-		UpdateSearchResults(updates);
+		UpdateRawIDs("flightPathID", newFPs);
 	end
 end
 end)();
@@ -8010,25 +8020,83 @@ end)();
 
 -- Item Lib
 (function()
+-- TODO: Once Item information is stored in a single source table, this mechanism can reference that instead of using a cache table here
+local cache = {};
+local function GetCached(t)
+	local id = t.modItemID;
+	if not id then return nil; end
+	if not rawget(cache, id) then rawset(cache, id, {}); end
+	return rawget(cache, id), id;
+end
+local function GetCachedField(t, field)
+	--[[ Debug Prints ]
+	-- local t, id = GetCached(t);
+	-- if t[field] then
+	-- 	print("GetCachedField",id,field,t[field]);
+	-- end
+	--]]
+	t = GetCached(t);
+	return t[field];
+end
+-- Consolidated function to handle how many retries for information an Item may have
+local function HandleItemRetries(t)
+	if rawget(t, "retries") then
+		rawset(t, "retries", rawget(t, "retries") + 1);
+		if t.retries > app.MaximumItemInfoRetries then
+			local itemName = "Item #" .. t.itemID .. "*";
+			rawset(t, "title", L["FAILED_ITEM_INFO"]);
+			rawset(t, "text", itemName);
+			rawset(t, "retries", nil);
+			rawset(t, "link", nil);
+			rawset(t, "s", nil);
+			return itemName;
+		end
+	else
+		rawset(t, "retries", 1);
+	end
+end
+-- Consolidated function to cache available Item information
+local function RawSetItemInfoFromLink(t, link)
+	local name, link, quality, _, _, _, _, _, _, icon, _, _, _, b = GetItemInfo(link);
+	if link then
+		--[[ Debug Prints ]
+		-- local t, id = GetCached(t);
+		-- print("rawset item",id)
+		--]]
+		t = GetCached(t);
+		rawset(t, "retries", nil);
+		rawset(t, "name", name);
+		rawset(t, "link", link);
+		rawset(t, "icon", icon);
+		rawset(t, "q", quality);
+		if quality > 6 then
+			-- heirlooms return as 1 but are technically BoE for our concern
+			rawset(t, "b", 2);
+		else
+			rawset(t, "b", b);
+		end
+		return link;
+	else
+		HandleItemRetries(t);
+	end
+end
 local itemFields = {
 	["key"] = function(t)
 		return "itemID";
 	end,
 	["text"] = function(t)
-		return t.link;
+		return GetCachedField(t, "text") or t.link;
 	end,
 	["icon"] = function(t)
-		return t.itemID and select(5, GetItemInfoInstant(t.itemID)) or "Interface\\Icons\\INV_Misc_QuestionMark";
+		return GetCachedField(t, "icon") or (t.itemID and select(5, GetItemInfoInstant(t.itemID))) or "Interface\\Icons\\INV_Misc_QuestionMark";
 	end,
 	["link"] = function(t)
-		if t.rawlink then
-			local _, link, quality, _, _, _, _, _, _, icon = GetItemInfo(t.rawlink);
-			rawset(t, "retries", nil);
-			rawset(t, "link", link);
-			rawset(t, "icon", icon);
-			rawset(t, "q", quality);
-			return link;
-		end
+		local cachedLink = GetCachedField(t, "link");
+		if cachedLink then return cachedLink; end
+
+		-- item already has a pre-determined itemLink so use that
+		if t.rawlink then return RawSetItemInfoFromLink(t, t.rawlink); end
+		-- need to 'create' a valid accurate link for this item
 		local itemLink = t.itemID;
 		if itemLink then
 			local bonusID = t.bonusID;
@@ -8048,48 +8116,65 @@ local itemFields = {
 			else
 				itemLink = string.format("item:%d:::::::::::::", itemLink);
 			end
-			local _, link, quality, _, _, _, _, _, _, icon, _, _, _, b = GetItemInfo(itemLink);
-			-- print("Retry", rawget(t, "retries"), itemLink, link)
-			if link then
-				rawset(t, "retries", nil);
-				rawset(t, "link", link);
-				rawset(t, "icon", icon);
-				rawset(t, "q", quality);
-				-- TODO: can't rawset 'b' until determine if it's heirloom or not since that shows as 1
-				-- rawset(t, "b", b);
-				return link;
-			else
-				if rawget(t, "retries") then
-					rawset(t, "retries", rawget(t, "retries") + 1);
-					if t.retries > app.MaximumItemInfoRetries then
-						local itemName = "Item #" .. t.itemID .. "*";
-						rawset(t, "title", L["FAILED_ITEM_INFO"]);
-						rawset(t, "text", itemName);
-						rawset(t, "retries", nil);
-						rawset(t, "link", nil);
-						rawset(t, "s", nil);
-						return itemName;
-					end
-				else
-					rawset(t, "retries", 1);
-				end
-			end
+			-- save this link so it doesn't need to be built again
+			rawset(t, "rawlink", itemLink);
+			return RawSetItemInfoFromLink(t, itemLink);
+			-- local _, link, quality, _, _, _, _, _, _, icon, _, _, _, b = GetItemInfo(itemLink);
+			-- -- print("Retry", rawget(t, "retries"), itemLink, link)
+			-- if link then
+			-- 	rawset(t, "retries", nil);
+			-- 	rawset(t, "link", link);
+			-- 	rawset(t, "icon", icon);
+			-- 	rawset(t, "q", quality);
+			-- 	if quality > 6 then
+			-- 		-- heirlooms return as 1 but are technically BoE for our concern
+			-- 		rawset(t, "b", 2);
+			-- 	else
+			-- 		rawset(t, "b", b);
+			-- 	end
+			-- 	return link;
+			-- else
+			-- 	HandleItemRetries(t);
+			-- 	-- if rawget(t, "retries") then
+			-- 	-- 	rawset(t, "retries", rawget(t, "retries") + 1);
+			-- 	-- 	if t.retries > app.MaximumItemInfoRetries then
+			-- 	-- 		local itemName = "Item #" .. t.itemID .. "*";
+			-- 	-- 		rawset(t, "title", L["FAILED_ITEM_INFO"]);
+			-- 	-- 		rawset(t, "text", itemName);
+			-- 	-- 		rawset(t, "retries", nil);
+			-- 	-- 		rawset(t, "link", nil);
+			-- 	-- 		rawset(t, "s", nil);
+			-- 	-- 		return itemName;
+			-- 	-- 	end
+			-- 	-- else
+			-- 	-- 	rawset(t, "retries", 1);
+			-- 	-- end
+			-- end
 		end
 	end,
 	["name"] = function(t)
-		local link = t.link;
-		return link and GetItemInfo(link);
+		return GetCachedField(t, "name") or RETRIEVING_DATA;
+		-- local link = t.link;
+		-- return link and GetItemInfo(link);
 	end,
 	["specs"] = function(t)
 		return GetFixedItemSpecInfo(t.itemID);
 	end,
+	["retries"] = function(t)
+		return GetCachedField(t, "retries");
+	end,
 	["b"] = function(t)
-		local link = t.link;
-		if link then
-			return select(14, GetItemInfo(link));
-		end
+		return GetCachedField(t, "b") or 2;
+		-- local link = t.link;
+		-- -- return link and select(14, GetItemInfo(link)) or 2;
+		-- if link then
+		-- 	-- rawset(t, "b", select(14, GetItemInfo(link)));
+		-- 	print("rawset.b",t.modItemID,rawget(t, "b"))
+		-- 	return rawget(t, "b");
+		-- end
 		-- assume BoE item since it is unsourced
-		return 2;
+		-- print("default BoE",t.modItemID)
+		-- return 2;
 	end,
 	["f"] = function(t)
 		-- TODO: this logic causes tons of lag. why do we need to determine if an item is a quest item for filtering?
@@ -8108,7 +8193,7 @@ local itemFields = {
 		-- end
 		-- Unknown item type after Parser, so make sure we save the filter for later references
 		rawset(t, "f", 50);
-		return rawget(t, "t");
+		return rawget(t, "f");
 	end,
 	["tsm"] = function(t)
 		local itemLink = t.itemID;
@@ -8375,8 +8460,8 @@ fields.metaAfterFailure = function(t) return newMeta; end;
 end)();
 
 local fields = RawCloneData(itemFields);
-fields.collectible = itemFields.collectibleAsQuest;
-fields.collected = itemFields.collectedAsQuest;
+-- fields.collectible = itemFields.collectibleAsQuest;
+-- fields.collected = itemFields.collectedAsQuest;
 fields.trackable = itemFields.trackableAsQuest;
 fields.saved = itemFields.savedAsQuest;
 app.BaseItemWithQuestID = app.BaseObjectFields(fields);
@@ -8887,7 +8972,7 @@ end
 
 -- Refresh a specific Mount or all Mounts if not provided with a specific ID
 local RefreshMounts = function(newMountID)
-	local collectedSpells, newSpellIDResults = ATTAccountWideData.Spells;
+	local collectedSpells, newMounts = ATTAccountWideData.Spells;
 	-- Think learning multiple mounts at once or multiple mounts without leaving combat
 	-- would fail to update all the mounts, so probably just best to check all mounts if this is triggered
 	-- plus it's not laggy now to do that so it should be fine
@@ -8898,20 +8983,15 @@ local RefreshMounts = function(newMountID)
 			if not collectedSpells[spellID] then
 				collectedSpells[spellID] = 1;
 				app.CurrentCharacter.Spells[spellID] = 1;
-				if not newSpellIDResults then newSpellIDResults = SearchForField("spellID", spellID);
-				else
-					for _,result in ipairs(SearchForField("spellID", spellID)) do
-						tinsert(newSpellIDResults, result);
-					end
-				end
+				if not newMounts then newMounts = { spellID }
+				else tinsert(newMounts, spellID); end
 			end
 		end
 	end
-
-	if newSpellIDResults then
-		UpdateSearchResults(newSpellIDResults);
-		app:TakeScreenShot();
+	UpdateRawIDs("spellID", newMounts);
+	if #newMounts > 0 then
 		app:PlayRareFindSound();
+		app:TakeScreenShot();
 	end
 end
 app.events.NEW_MOUNT_ADDED = function(newMountID, ...)
@@ -12469,7 +12549,13 @@ function app:CreateMiniListForGroup(group)
 									end
 									found = sq;
 								end
-								if found and not found.isBreadcrumb then
+								if found
+									-- default logic ignores needing to progress through breadcrumbs
+									and not found.isBreadcrumb
+									-- ensure the character meets the custom collect for the quest
+									and app.CheckCustomCollects(found)
+									-- ensure the current settings do not filter the quest
+									and app.RecursiveGroupRequirementsFilter(found) then
 									sourceQuest = CloneData(found);
 									sourceQuest.collectible = true;
 									sourceQuest.visible = true;
@@ -13292,7 +13378,7 @@ RowOnEnter = function (self)
 			else
 				GameTooltip:AddLine(title, 1, 1, 1);
 			end
-		elseif reference.questID and reference.retries then
+		elseif reference.questID and reference.retries and not reference.itemID then
 			GameTooltip:AddLine(L["QUEST_MAY_BE_REMOVED"] .. tostring(reference.retries), 1, 1, 1);
 		end
 		if reference.lvl then
@@ -15947,7 +16033,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 			local switchDungeonDifficulty = function(row, button)
 				self.data = raidassistant;
 				SetDungeonDifficultyID(row.ref.difficultyID);
-				self:Update(true);
+				Callback(self.Update, self);
 				return true;
 			end
 			local switchRaidDifficulty = function(row, button)
@@ -15977,9 +16063,9 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 						else
 							SetRaidDifficultyID(difficultyID);
 						end
+						Callback(self.Update, self);
 					end
 				end);
-				self:Update(true);
 				return true;
 			end
 			local switchLegacyRaidDifficulty = function(row, button)
@@ -16008,9 +16094,9 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 						else
 							SetLegacyRaidDifficultyID(difficultyID);
 						end
+						Callback(self.Update, self);
 					end
 				end);
-				self:Update(true);
 				return true;
 			end
 			raidassistant = {
@@ -16028,7 +16114,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 						['visible'] = true,
 						['OnClick'] = function(row, button)
 							self.data = lootspecialization;
-							self:Update(true);
+							Callback(self.Update, self);
 							return true;
 						end,
 						['OnUpdate'] = function(data)
@@ -16048,7 +16134,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 						['visible'] = true,
 						['OnClick'] = function(row, button)
 							self.data = dungeondifficulty;
-							self:Update(true);
+							Callback(self.Update, self);
 							return true;
 						end,
 						['OnUpdate'] = function(data)
@@ -16070,7 +16156,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 							-- Don't allow you to change difficulties when you're in LFR / Raid Finder
 							if app.RaidDifficulty == 7 or app.RaidDifficulty == 17 then return true; end
 							self.data = raiddifficulty;
-							self:Update(true);
+							Callback(self.Update, self);
 							return true;
 						end,
 						['OnUpdate'] = function(data)
@@ -16093,7 +16179,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 							-- Don't allow you to change difficulties when you're in LFR / Raid Finder
 							if app.RaidDifficulty == 7 or app.RaidDifficulty == 17 then return true; end
 							self.data = legacyraiddifficulty;
-							self:Update(true);
+							Callback(self.Update, self);
 							return true;
 						end,
 						['OnUpdate'] = function(data)
@@ -16123,7 +16209,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 						['OnClick'] = function(row, button)
 							if IsAltKeyDown() then
 								row.ref.saved = not row.ref.saved;
-								self:Update();
+								Callback(self.Update, self);
 							else
 								ResetInstances();
 							end
@@ -16152,7 +16238,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 								PVEFrame_ToggleFrame("GroupFinderFrame")
 							end
 							self.data = raidassistant;
-							self:BaseUpdate(true);
+							Callback(self.BaseUpdate, self, true);
 							return true;
 						end,
 						['OnUpdate'] = function(data)
@@ -16170,7 +16256,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 								PVEFrame_ToggleFrame("GroupFinderFrame")
 							end
 							self.data = raidassistant;
-							self:BaseUpdate(true);
+							Callback(self.BaseUpdate, self, true);
 							return true;
 						end,
 						['OnUpdate'] = function(data)
@@ -16185,7 +16271,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 				["description"] = L["LOOT_SPEC_DESC_2"],
 				['OnClick'] = function(row, button)
 					self.data = raidassistant;
-					self:Update(true);
+					Callback(self.Update, self);
 					return true;
 				end,
 				['OnUpdate'] = function(data)
@@ -16202,7 +16288,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 							['OnClick'] = function(row, button)
 								self.data = raidassistant;
 								SetLootSpecialization(row.ref.id);
-								self:Update(true);
+								Callback(self.Update, self);
 							end,
 						});
 						for i=1,numSpecializations,1 do
@@ -16216,7 +16302,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 								['OnClick'] = function(row, button)
 									self.data = raidassistant;
 									SetLootSpecialization(row.ref.id);
-									self:Update(true);
+									Callback(self.Update, self);
 								end,
 							});
 						end
@@ -16233,7 +16319,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 				["description"] = L["DUNGEON_DIFF_DESC_2"],
 				['OnClick'] = function(row, button)
 					self.data = raidassistant;
-					self:Update(true);
+					Callback(self.Update, self);
 					return true;
 				end,
 				['visible'] = true,
@@ -16266,7 +16352,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 				["description"] = L["RAID_DIFF_DESC_2"],
 				['OnClick'] = function(row, button)
 					self.data = raidassistant;
-					self:Update(true);
+					Callback(self.Update, self);
 					return true;
 				end,
 				['visible'] = true,
@@ -16296,7 +16382,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 				["description"] = L["LEGACY_RAID_DIFF_DESC_2"],
 				['OnClick'] = function(row, button)
 					self.data = raidassistant;
-					self:Update(true);
+					Callback(self.Update, self);
 					return true;
 				end,
 				['visible'] = true,
@@ -16328,7 +16414,7 @@ app:GetWindow("RaidAssistant", UIParent, function(self)
 			self.data = raidassistant;
 
 			-- Setup Event Handlers and register for events
-			self:SetScript("OnEvent", function(self, e, ...) self:Update(); end);
+			self:SetScript("OnEvent", function(self, e, ...) Callback(self.Update, self); end);
 			self:RegisterEvent("PLAYER_LOOT_SPEC_UPDATED");
 			self:RegisterEvent("PLAYER_DIFFICULTY_CHANGED");
 			self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
@@ -16877,7 +16963,7 @@ app:GetWindow("Tradeskills", UIParent, function(self, force, got)
 				end
 
 				-- Cache learned recipes
-				local learned, recipeID = 0;
+				local learned, recipeID = {};
 				local reagentCache = app.GetDataMember("Reagents", {});
 				local recipeIDs = C_TradeSkillUI.GetAllRecipeIDs();
 				for i = 1,#recipeIDs do
@@ -16902,7 +16988,7 @@ app:GetWindow("Tradeskills", UIParent, function(self, force, got)
 								app.CurrentCharacter.Spells[recipeID] = 1;
 								if not ATTAccountWideData.Spells[recipeID] then
 									ATTAccountWideData.Spells[recipeID] = 1;
-									learned = learned + 1;
+									tinsert(learned, recipeID);
 								end
 							end
 						end
@@ -16962,18 +17048,18 @@ app:GetWindow("Tradeskills", UIParent, function(self, force, got)
 						end
 					end
 				end
-
 				-- If something new was "learned", then refresh the data.
-				if learned > 0 then
-					app:RefreshData(false, true);
-					app.print(L["CACHED_RECIPES_1"] .. learned .. L["CACHED_RECIPES_2"]);
-					wipe(searchCache);
+				UpdateRawIDs("spellID", learned);
+				if #learned > 0 then
+					app:PlayRareFindSound();
+					app:TakeScreenShot();
 				end
 			end
 		end
 		self.RefreshRecipes = function(self)
+			-- print("RefreshRecipes")
 			if app.CollectibleRecipes then
-				DelayedCallback(self.CacheAndUpdate, 1, self);
+				DelayedCallback(self.CacheAndUpdate, 0.5, self);
 			end
 		end
 		self.CacheAndUpdate = function(self)
@@ -17022,11 +17108,7 @@ app:GetWindow("Tradeskills", UIParent, function(self, force, got)
 				end);
 				return;
 			end
-			StartCoroutine("UpdateTradeSkills", function()
-				while InCombatLockdown() do coroutine.yield(); end
-				coroutine.yield();
-				self:Update();
-			end);
+			AfterCombatCallback(self.Update, self);
 		end
 		-- Setup Event Handlers and register for events
 		self:SetScript("OnEvent", function(self, e, ...)
@@ -17116,16 +17198,13 @@ app:GetWindow("Tradeskills", UIParent, function(self, force, got)
 					self.gettinMadAtDumbNamingConventions = true;
 					self.OldNewElement = TSMAPI_FOUR.UI.NewElement;
 					TSMAPI_FOUR.UI.NewElement = function(...)
-						StartCoroutine("UpdateTradeSkills", function()
-							while InCombatLockdown() do coroutine.yield(); end
-							coroutine.yield();
-							self:Update();
-						end);
+						AfterCombatCallback(self.Update, self);
 						return self.OldNewElement(...);
 					end
 				end
 			end
 		elseif TSMCraftingTradeSkillFrame then
+			-- print("TSMCraftingTradeSkillFrame")
 			if not self.cachedTSMFrame then
 				local f = TSMCraftingTradeSkillFrame;
 				self.cachedTSMFrame = f;

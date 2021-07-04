@@ -198,6 +198,7 @@ _.Zones =
 						crit(17, {	-- Screaming Shade
 							["achievementID"] = 15107,	-- Conquering Korthia
 						}),
+						i(187400),	-- Mantle of Screaming Shadows
 					},
 				}),
 				n(179911, {	-- Silent Soulstalker
@@ -209,6 +210,7 @@ _.Zones =
 						crit(18, {	-- Silent Soulstalker
 							["achievementID"] = 15107,	-- Conquering Korthia
 						}),
+						i(187381),	-- Rift-Touched Bindings
 					},
 				}),
 				n(179985, {	-- Stygian Stonecrusher
@@ -352,6 +354,7 @@ _.Zones =
 						crit(28, {	-- Zelnithop
 							["achievementID"] = 15107,	-- Conquering Korthia
 						}),
+						i(186542),	-- Korthian Specimen (PET!)
 						i(187371),	-- Velvet Gromit Handwraps
 					},
 				}),
@@ -361,6 +364,7 @@ _.Zones =
 };
 
 _.HiddenQuestTriggers = {
+	-- q(64535),	-- extra trigger on Yarxhov the Pillager, or some other tracking...
 	q(64572),	-- i think this is a daily lockout for receiving a Soultwining Crescent from a rare (also triggers on treasures)
 	q(64699),	-- popped when looting 48-research item Encrypted Korthian Journal from Fleshwing
 	q(64703),	-- popped when looting 48-research item Half-Completed Runeforge Pattern from Xyraxz

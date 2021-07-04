@@ -68,6 +68,9 @@ _.ExpansionFeatures =
 						i(187414, {	-- Fractal Thoughtbinder
 							["timeline"] = { "added 9.1.0.38312" },
 						}),
+						i(187415, {	-- Mind-Expanding Prism
+							["timeline"] = { "added 9.1.0.38312" },
+						}),
 						-- Mounts
 						i(183617),	-- Chittering Animite
 						i(183052),	-- Darkwarren Hardshell
@@ -95,6 +98,9 @@ _.ExpansionFeatures =
 						i(187569, {	-- Broker's Tailoring Mote of Potentiation
 							["timeline"] = { "added 9.1.0.38312" },
 						}),
+						i(187574, {	-- Broker's Overflowing Bucket
+							["timeline"] = { "added 9.1.0.38312" },
+						}),
 						i(184643),	-- Champion's Enchanting Cache
 						i(184632),	-- Champion's Fish Cache
 						i(184642),	-- Champion's Herbalism Cache
@@ -110,6 +116,8 @@ _.ExpansionFeatures =
 						i(184645),	-- Hero's Skinning Cache
 						i(184644),	-- Hero's Tailoring Cache
 						i(181468),	-- Veiled Augment Rune
+						-- Gear
+						i(185854),	-- Stone-Etched Shawl
 					},
 				}),
 				n(-901, {	-- Covenant Callings

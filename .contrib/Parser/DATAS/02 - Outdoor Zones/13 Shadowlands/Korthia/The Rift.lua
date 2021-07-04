@@ -51,6 +51,7 @@ _.Zones =
 									["achievementID"] = 15107,	-- Conquering Korthia
 								}),
 								i(187405),	-- Choker of the Hidden Observer
+								i(187420),	-- Maw-Ocular Viewfinder
 							},
 						}),
 					}),
@@ -106,6 +107,7 @@ _.Zones =
 							["coords"] = {
 								{ 54.1, 54.7, KORTHIA },
 								{ 54.8, 42.3, KORTHIA },
+								{ 55.5, 65.0, KORTHIA },
 							},
 							["g"] = {
 								i(187251),	-- Shaded Skull Shoulderguards

@@ -30,6 +30,7 @@ _.Toys =
 			i(88801),		-- Flippable Table
 		}),
 		prof(ENCHANTING, {
+			i(186973),		-- Anima-ted Leash
 			i(128536),		-- Leylight Brazier
 		}),
 		prof(ENGINEERING, {
@@ -102,6 +103,7 @@ _.Toys =
 			i(129960),		-- Leather Pet Bed
 			i(129958),		-- Leather Pet Leash
 			i(130102),		-- Mother's Skinning Knife
+			i(186702),		-- Pallid Bone Flute
 		}),
 	}),
 };

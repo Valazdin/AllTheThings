@@ -10,7 +10,8 @@ _.Zones =
 			--	TODO: (?) korthian relic boxes currently do not have questIDs and don't actually even disappear immediately when you open them - if quests for them get implemented, they need to be added
 				i(187216),	-- Soultwining Crescent
 				i(185962, {	-- Rune Chit
-					["sourceQuests"] = { 64506 },	-- What Must Be Found
+				--	["sourceQuests"] = { 64506 },	-- What Must Be Found
+				--	["questID"] = 63892,	-- Diviner's Rune Chits
 				}),
 				o(369194, {	-- Anima Laden Egg
 					["description"] = "In a tree.",
@@ -123,6 +124,7 @@ _.Zones =
 						{ 42.3, 34.6, KORTHIA },
 						{ 43.6, 36.6, KORTHIA },
 						{ 45.6, 34.3, KORTHIA },
+						{ 52.4, 25.0, KORTHIA },
 						{ 55.1, 16.4, KORTHIA },
 					},
 					["g"] = {
@@ -176,7 +178,7 @@ _.Zones =
 					["description"] = "In the cave.",
 					["coord"] = { 41.2, 43.2, KORTHIA },
 					["cost"] = { { "i", 186984, 1 } },	-- Korthite Crystal Key
-					["g"] = {	-- TODO opened this today and it had guise of the changeling inside instead of ring of self reflection, so i assume the ring was moved to 369304, needs verification (haven't progressed in the campaign enough to get to the island)
+					["g"] = {
 						i(187047, {	-- Guise of the Changeling
 							["sourceQuests"] = { 64511 },	-- Missing Relics
 							["questID"] = 63909,	-- Guise of the Changeling
@@ -199,7 +201,7 @@ _.Zones =
 				}),
 				o(369304, {	-- Korthian Relic Box
 					["coord"] = { 43.8, 76.9, KORTHIA },
-					["cost"] = { { "i", 186984, 1 } },	-- Korthian Archivists' Key
+					["cost"] = { { "i", 187613, 1 } },	-- Key of the Inner Chambers
 					["g"] = {
 						i(187119, {	-- Ring of Self Reflection
 							["sourceQuests"] = { 64511 },	-- Missing Relics
@@ -240,7 +242,10 @@ _.Zones =
 						{ 62.9, 34.9, KORTHIA },
 					},
 					["g"] = {
+						i(187097),	-- Construct's Shoulderplates
 						i(187026),	-- Field Warden's Torture Kit
+						i(187020),	-- Necrobinder's Shoulderpads
+						i(187018),	-- Ritualist's Shoulder-Scythes
 						i(187431),	-- Sleeping Armament
 					},
 				}),
@@ -255,7 +260,10 @@ _.Zones =
 						{ 62.3, 58.6, KORTHIA },
 					},
 					["g"] = {
+						i(187097),	-- Construct's Shoulderplates
 						i(187026),	-- Field Warden's Torture Kit
+						i(187020),	-- Necrobinder's Shoulderpads
+						i(187018),	-- Ritualist's Shoulder-Scythes
 						i(187431),	-- Sleeping Armament
 					},
 				}),
@@ -271,7 +279,10 @@ _.Zones =
 						{ 56.5, 74.7, KORTHIA },
 					},
 					["g"] = {
+						i(187097),	-- Construct's Shoulderplates
 						i(187026),	-- Field Warden's Torture Kit
+						i(187020),	-- Necrobinder's Shoulderpads
+						i(187018),	-- Ritualist's Shoulder-Scythes
 						i(187431),	-- Sleeping Armament
 					},
 				}),
@@ -405,8 +416,11 @@ _.Zones =
 						{ 38.2, 51.7, KORTHIA },
 						{ 39.6, 50.2, KORTHIA },
 						{ 41.0, 50.5, KORTHIA },
+						{ 44.6, 75.8, KORTHIA },
+						{ 49.2, 54.5, KORTHIA },
 					},
 					["g"] = {
+						i(186999),	-- Pattern: Pallid Bone Flute
 						i(187007),	-- Recipe: Bonemeal Bread
 						i(187442),	-- Scholar's Ancient Pack
 					},
@@ -422,6 +436,7 @@ _.Zones =
 						{ 45.6, 81.4, KORTHIA },
 						{ 46.3, 56.7, KORTHIA },
 						{ 47.2, 76.8, KORTHIA },
+						{ 48.8, 52.1, KORTHIA },
 						{ 50.6, 67.1, KORTHIA },
 						{ 53.9, 76.1, KORTHIA },
 						{ 54.2, 72.3, KORTHIA },
@@ -432,6 +447,7 @@ _.Zones =
 						{ 56.8, 38.8, KORTHIA },
 						{ 57.3, 34.9, KORTHIA },
 						{ 57.3, 48.0, KORTHIA },
+						{ 57.6, 49.8, KORTHIA },
 						{ 58.8, 33.6, KORTHIA },
 						{ 59.8, 35.9, KORTHIA },
 						{ 60.3, 39.0, KORTHIA },
@@ -439,6 +455,9 @@ _.Zones =
 						{ 61.0, 32.9, KORTHIA },
 						{ 61.4, 38.1, KORTHIA },
 						{ 62.4, 37.5, KORTHIA },
+					},
+					["g"] = {
+						i(186993),	-- Design: Porous Stone Statue
 					},
 				}),
 				o(369296, {	-- Shardhide Stash
@@ -499,6 +518,7 @@ _.Zones =
 						}),
 						i(187240),	-- Field Warden's Watchful Eye
 						i(187023),	-- Instructor's Mantle
+						i(187020),	-- Necrobinder's Shoulderpads
 					},
 				}),
 			}),
