@@ -243,7 +243,9 @@ _.Zones =
 					},
 					["g"] = {
 						i(187097),	-- Construct's Shoulderplates
+						i(187016),	-- Eviscerator's Spiked Mantle
 						i(187026),	-- Field Warden's Torture Kit
+						i(187013),	-- Interceptor's Pauldrons
 						i(187020),	-- Necrobinder's Shoulderpads
 						i(187018),	-- Ritualist's Shoulder-Scythes
 						i(187431),	-- Sleeping Armament
@@ -261,7 +263,9 @@ _.Zones =
 					},
 					["g"] = {
 						i(187097),	-- Construct's Shoulderplates
+						i(187016),	-- Eviscerator's Spiked Mantle
 						i(187026),	-- Field Warden's Torture Kit
+						i(187013),	-- Interceptor's Pauldrons
 						i(187020),	-- Necrobinder's Shoulderpads
 						i(187018),	-- Ritualist's Shoulder-Scythes
 						i(187431),	-- Sleeping Armament
@@ -277,10 +281,13 @@ _.Zones =
 						{ 54.0, 72.8, KORTHIA },
 						{ 56.4, 69.5, KORTHIA },
 						{ 56.5, 74.7, KORTHIA },
+						{ 47.9, 66.8, KORTHIA },
 					},
 					["g"] = {
 						i(187097),	-- Construct's Shoulderplates
+						i(187016),	-- Eviscerator's Spiked Mantle
 						i(187026),	-- Field Warden's Torture Kit
+						i(187013),	-- Interceptor's Pauldrons
 						i(187020),	-- Necrobinder's Shoulderpads
 						i(187018),	-- Ritualist's Shoulder-Scythes
 						i(187431),	-- Sleeping Armament
@@ -295,7 +302,7 @@ _.Zones =
 						--	TODO: commented are unconfirmed
 							i(185858),	-- Korthian Caretaker's Crest
 							i(186666),	-- Korthian Caretaker's Crown
-						--	i(185871),	-- Razorwing Scale Coif
+							i(185871),	-- Razorwing Scale Coif
 						--	i(186743),	-- Razorwing Scale Hood
 							i(186736),	-- Shardhide Leather Cowl
 							i(185864),	-- Shardhide Leather Hood
@@ -516,6 +523,7 @@ _.Zones =
 							},
 							["name"] = "Third Chain",
 						}),
+						i(187016),	-- Eviscerator's Spiked Mantle
 						i(187240),	-- Field Warden's Watchful Eye
 						i(187023),	-- Instructor's Mantle
 						i(187020),	-- Necrobinder's Shoulderpads

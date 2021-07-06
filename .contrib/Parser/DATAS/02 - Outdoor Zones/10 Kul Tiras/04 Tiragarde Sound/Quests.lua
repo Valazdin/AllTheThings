@@ -1471,3 +1471,74 @@ _.Zones =
 		}),
 	}),
 };
+_.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
+	n(-10052, {	-- Battle for Azeroth
+		n(-163, {	-- Armor
+			n(-43, {	-- Cloth
+				i(155045),	-- Navigator's Sash
+				i(155048),	-- Navigator's Cuffs
+				i(158231),	-- Navigator's Slippers
+				i(160078),	-- Navigator's Pantaloons
+				i(160088),	-- Navigator's Mittens
+			}),
+			n(-44, {	-- Leather
+				i(158233),	-- Freebooter Treads
+				i(160079),	-- Freebooter Britches
+				i(160089),	-- Freebooter Handcovers
+				i(155047),	-- Freebooter Belt
+				i(155051),	-- Freebooter Bracers
+			}),
+			n(-45, {	-- Mail
+				i(155046),	-- Outrigger Belt
+				i(155050),	-- Outrigger Bracers
+				i(158232),	-- Outrigger Footguards
+				i(160080),	-- Outrigger Chain Leggings
+				i(160090),	-- Outrigger Graspers
+			}),
+			n(-46, {	-- Plate
+				i(158230),	-- Sea Raider's Warboots
+				i(160081),	-- Sea Raider's Pants
+				i(160091),	-- Sea Raider's Grips
+				i(155044),	-- Sea Raider's Girdle
+				i(155049),	-- Sea Raider's Bracers
+			}),
+		}),
+		n(-319, {	-- Weapons
+			i(153414),	-- Hatch-Cover Bulwark
+			i(158517),	-- Hatch-Cover Bulwark
+			i(153405),	-- Scalawag's Cutlass
+			i(155227),	-- Proudmoore Battalion Shield
+			i(153402),	-- Scalawag's Sail Slicer
+			i(153403),	-- Scalawag's Claymore
+			i(153404),	-- Scalawag's Spikefist
+			i(153406),	-- Tideshaper Staff
+			i(153407),	-- Repurposed Dinghy Anchor
+			i(153415),	-- Harbormaster's Lantern
+			i(161932),	-- Manual of Elemental Enchancement
+			i(155581),	-- Scalawag's Warglaive
+			i(158505),	-- Scalawag's Sail Slicer
+			i(158507),	-- Scalawag's Spikefist
+			i(161299),	-- Stoat-Trapper's Bladefist
+			i(161300),	-- Stoat-Trapper's Striker
+			i(158510),	-- Repurposed Dinghy Anchor
+			i(158518),	-- Harbormaster's Lantern
+			i(159079),	-- Captivating Glowfly Lantern
+			i(161290),	-- Grimestone Greatmace
+			i(161291),	-- Grimestone Spellmace
+			i(161292),	-- Grimestone Spellmaul
+			i(158579),	-- Scalawag's Warglaive
+			i(153400),	-- Scalawag's Bolt-Thrower
+			i(158503),	-- Scalawag's Bolt Thrower
+			i(161933),	-- Manual of Reverse Wounding
+			i(158508),	-- Scalawag's Cutlass
+			i(161305),	-- Ashvane Captain's Shortsword
+			i(161308),	-- Ashvane Captain's Quickblade
+			i(161309),	-- Ashvane Captain's Gladius
+			i(158504),	-- Whaler's Pike
+			i(153401),	-- Whaler's Pike
+		}),
+		n(-322, { -- Cloaks
+			i(155091),	-- Thovas-Explorer's Cape
+		}),
+	}),
+});

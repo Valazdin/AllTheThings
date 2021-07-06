@@ -241,6 +241,7 @@ _.ExpansionFeatures =
 									i(180001),	-- Winterborn Staff
 									i(180018),	-- Winterborn Wand
 									i(180256),	-- Winterborn Warglaive
+									i(179607),	-- Winterborn Bulwark (According to Wowhead comments 9.0.5 hotfix this)
 								},
 							}),
 							i(181305, {	-- Faewoven Bulb
@@ -1717,6 +1718,7 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 					i(179716),	-- Ardenweald Covenant Cloth Wrist
 					i(179717),	-- Ardenweald Covenant Cloth Wrist
 					i(179718),	-- Ardenweald Covenant Cloth Wrist
+					i(179660),	-- Winterborn Tunic
 				}),
 				n(-44, {	-- Leather
 					i(175579),	-- Ardenweald Covenant Leather Chest
@@ -1956,6 +1958,18 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 				}),
 			}),
 			n(-319, {	-- Weapons
+				i(177719),	-- Ardenweald Covenant Dagger
+				i(177720),	-- Ardenweald Covenant Dagger
+				i(177721),	-- Ardenweald Covenant Dagger
+				i(177722),	-- Ardenweald Covenant Dagger
+				i(177723),	-- Ardenweald Covenant Dagger
+				i(177724),	-- Ardenweald Covenant Dagger
+				i(177725),	-- Ardenweald Covenant Offhand
+				i(177726),	-- Ardenweald Covenant Offhand
+				i(177727),	-- Ardenweald Covenant Offhand
+				i(177728),	-- Ardenweald Covenant Offhand
+				i(177729),	-- Ardenweald Covenant Offhand
+				i(177730),	-- Ardenweald Covenant Offhand
 				i(173932),	-- Ardenweald Covenant Fist Weapon
 				i(179572),	-- Ardenweald Covenant Fist Weapon
 				i(179573),	-- Ardenweald Covenant Fist Weapon
@@ -1968,6 +1982,12 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 				i(178099),	-- Ardenweald Covenant 2H Mace
 				i(178100),	-- Ardenweald Covenant 2H Mace
 				i(178101),	-- Ardenweald Covenant 2H Mace
+				i(179550),	-- Ardenweald Covenant Mace
+				i(179551),	-- Ardenweald Covenant Mace
+				i(179552),	-- Ardenweald Covenant Mace
+				i(179553),	-- Ardenweald Covenant Mace
+				i(179554),	-- Ardenweald Covenant Mace
+				i(179555),	-- Ardenweald Covenant Mace
 				i(180250),	-- Ardenweald Covenant Warglaives
 				i(180251),	-- Ardenweald Covenant Warglaives
 				i(180252),	-- Ardenweald Covenant Warglaives
@@ -1988,6 +2008,7 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 				i(180078),	-- Ardenweald Covenant Bow
 				i(180080),	-- Ardenweald Covenant Bow
 				i(180082),	-- Ardenweald Covenant Bow
+				i(182350),	-- Ardenweald Raid Mace STR
 			}),
 		}),
 	}),

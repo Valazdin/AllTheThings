@@ -1985,4 +1985,73 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 	n(QUESTS, {
 		q(59225),	-- [DNT] Azerite Reward Test Quest - BJI
 	}),
+	n(-10052, {	-- Battle for Azeroth
+		n(-163, {	-- Armor
+			n(-43, {	-- Cloth
+				i(158657),	-- Zanchuli Shoes
+				i(158663),	-- Zanchuli Grasps
+				i(158675),	-- Zanchuli Bracelets
+				i(161236),	-- Zanchuli Bracers
+				i(161242),	-- Zanchuli Belt
+				i(161246),	-- Zanchuli Woolies
+				i(161248),	-- Zanchuli Pantaloons
+			}),
+			n(-44, {	-- Leather
+				i(158655),	-- Jambani Boots
+				i(158665),	-- Jambani Grasps
+				i(161243),	-- Jambani Cincture
+				i(161249),	-- Jambani Britches
+				i(161250),	-- Jambani Leggings
+			}),
+			n(-45, {	-- Mail
+				i(158656),	-- Torcalin Striders
+				i(158662),	-- Torcalin Grasps
+				i(158673),	-- Torcalin Armguards
+				i(161238),	-- Torcalin Bands
+				i(161244),	-- Torcalin Cincture
+				i(161251),	-- Torcalin Leggings
+				i(161252),	-- Torcalin Pants
+			}),
+			n(-46, {	-- Plate
+				i(158658),	-- Rastari Greatboots
+				i(158664),	-- Rastari Grips
+				i(158674),	-- Rastari Wristwraps
+				i(161239),	-- Rastari Armbands
+				i(161245),	-- Rastari Cincture
+				i(161253),	-- Rastari Greaves
+				i(161254),	-- Rastari Pants
+			}),
+		}),
+		n(-319, {	-- Weapons
+			i(154985),	-- Golden Protectorate
+			i(158576),	-- Golden Protectorate
+			i(154976),	-- Necropolis Sentry's Sword
+			i(154973),	-- Golden Devilsaur Fang
+			i(154975),	-- Scalebeast Claws
+			i(154977),	-- Mojo-Drainer's Staff
+			i(154978),	-- Dinomancy Cudgel
+			i(153641),	-- Manual of Elemental Enchancement
+			i(154986),	-- Devilsaur Voodoo Figure
+			i(154974),	-- Tiki-Thumper
+			i(155272),	-- Loa-Defender's Waraxe
+			i(155582),	-- Loa-Claimer's Warglaives
+			i(158564),	-- Golden Devilsaur Fang
+			i(158566),	-- Scalebeast Claws
+			i(158569),	-- Dinomancy Cudgel
+			i(158577),	-- Devilsaur Voodoo Figure
+			i(161284),	-- Faithless Dinorider's Focus
+			i(161285),	-- Faithless Wingrider's Focus
+			i(158565),	-- Tiki-Thumper
+			i(161311),	-- Crescent of Zak'rajan
+			i(161286),	-- Faithless Dinorider's Shield
+			i(161287),	-- Faithless Wingrider's Shield
+			i(158562),	-- Howdah-Rider's Bow
+			i(154971),	-- Howdah-Rider's Bow
+			i(153642),	-- Manual of Reverse Wounding
+			i(158567),	-- Necropolis Sentry's Sword
+			i(166889),	-- Zandalari Prelate's Lightblade
+			i(158563),	-- Tomb-Rustler's Polearm
+			i(154972),	-- Tomb-Rustler's Polearm
+		}),
+	}),
 });

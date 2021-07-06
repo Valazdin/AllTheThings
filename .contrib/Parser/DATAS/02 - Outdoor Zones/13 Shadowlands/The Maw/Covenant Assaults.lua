@@ -611,6 +611,7 @@ _.Zones =
 								i(186000),	-- Wild Hunt Legsplitter (MOUNT!)
 								i(187410),	-- Death's Advance Battlefield Drape
 								i(186547),	-- Invasive Buzzer (PET!)
+								i(185052),	-- Hippo Soul
 							}),
 						}),
 					},
@@ -652,12 +653,12 @@ _.Zones =
 											["cr"] = 179475,	-- Kael'thas Sunstrider
 										}),
 										crit(6, {	-- Lost Sybille
-										--	["coord"] = { , , THE_MAW },
-										--	["cr"] = ,	--
+											["coord"] = { 31.3, 20.5, THE_MAW },
+											["cr"] = 179476,	-- Lost Sybille
 										}),
 										crit(7, {	-- Vulca
-										--	["coord"] = { , , THE_MAW },
-										--	["cr"] = ,	--
+											["coord"] = { 27.3, 20.2, THE_MAW },
+											["cr"] = 179477,	-- Vulca
 										}),
 										crit(8, {	-- Iven
 											["coord"] = { 32.7, 14.8, THE_MAW },
