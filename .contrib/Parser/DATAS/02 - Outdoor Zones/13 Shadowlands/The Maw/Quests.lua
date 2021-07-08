@@ -79,7 +79,7 @@ _.Zones =
 						["isWeekly"] = true,
 					}),
 					n(-913,  {	-- Tormentors of Torghast
-						["description"] = "You can only get the cache once a week, but you can continue to participate in the events for achievement credit and |cFF0070ddBahmeht Chain Links|r.",
+						["description"] = "You can only get the cache once a week, but you can continue to participate in the events for achievement credit individual boss loot.",
 						["isWeekly"] = true,
 						["questID"] = 63854,
 						["g"] = {
@@ -252,6 +252,7 @@ _.Zones =
 								["isDaily"] = true,
 								["g"] = {
 									i(186244),	-- Shakorzeth's Gorget
+									i(186225),	-- Shoulder Joint Spindles
 								},
 							}),
 							n(177427, {	-- The Mass of Souls
@@ -267,6 +268,7 @@ _.Zones =
 								["isDaily"] = true,
 								["g"] = {
 									i(186233),	-- Spaulders of the Skyborn Damned
+									i(186003),	-- Versya's Stygian Longbow
 								},
 							}),
 							n(178886, {	-- Zul'gath the Flayer
@@ -297,6 +299,7 @@ _.Zones =
 									i(184658),	-- Dread Harrier's Pauldrons
 									i(184660),	-- Dreadguard's Greathelm
 									i(184654),	-- Forgotten Shade's Shawl
+									i(186042),	-- Forsaken Crusader's Blade (drop data on wh from Naelcrotix + Lumisende, i assume it's shared across all)
 									i(184659),	-- Grips of the Dreadhound Tamer
 									i(184656),	-- Mawsworn Assassin's Doublet
 									i(184655),	-- Sash of the Ethereal Servant
@@ -961,6 +964,7 @@ _.Zones =
 				q(64541, {	-- The Cost of Death
 				--	not flagged daily/weekly in API - you trade 800 Stygia to Ve'nari in return for 1,000 reputation with her.  TODO: verify this is a one-time quest.  quest text makes it seem like it will be repeatable in one way or another.  ETA: this popped up again on my priest but i'm not sure if it's daily/weekly still
 					["provider"] = { "n", 162804 },	-- Ve'nari
+					["isWeekly"] = true,
 					["coord"] = { 46.8, 41.7, THE_MAW },
 					["cost"] = { { "c", 1767, 800 } },	-- 800x Stygia
 				}),
@@ -1021,7 +1025,7 @@ _.HiddenQuestTriggers = {
 	q(64692),	-- triggered when killing Manifestation of Pain / Zul'gath the Flayer
 	q(64693),	-- triggered when killing Manifestation of Pain
 	q(64694),	-- triggered when killing Malleus Grakizz
-	q(64695),	-- triggered when killing Algel the Haunter / Gruukuuek the Elder
+	q(64695),	-- triggered when killing Algel the Haunter / Gruukuuek the Elder / Gralebboih (5th of week)
 	q(64696),	-- triggered when killing Promathiz / Sentinel Shakorzeth
 	q(64697),	-- triggered when killing Malleus Grakizz / Sentinel Shakorzeth / Versya the Damned
 	q(64698),	-- triggered when killing Intercessor Razzra / Zul'gath the Flayer (4th Tormentor of week?)
@@ -1036,6 +1040,7 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 		}),
 	}),
 	n(QUESTS, {
+		q(64126),	-- triggered when killing Dathlane the Herald, WotJ boss - TODO - move questIDs to individual bosses if they've been separated since they have new drops
 		q(60902),	-- A Dark Song
 		q(61496),	-- A Familiar Energy
 		q(60141),	-- Coldheart Interstitia

@@ -168,6 +168,7 @@ _.Zones =
 						crit(5, {	-- Darithis the Bleak
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
 						}),
+						i(186220),	-- Stygian Chestcage
 					},
 				}),
 				n(158025, {	-- Darklord Taraxis
@@ -230,9 +231,7 @@ _.Zones =
 								}),
 							},
 						}),
-						q(61140, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
+						i(186620),	-- Rezara's Fencing Grips
 					},
 				}),
 				n(179791, {	-- Deomen the Vortex
@@ -272,9 +271,6 @@ _.Zones =
 						i(186622, {	-- Robe of Drifting Sorrow
 							["timeline"] = { "added 9.1.0.38312" },
 						}),
-						q(59183, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
 					},
 				}),
 				n(170774, {	-- Eketra <The Impaler>
@@ -285,6 +281,7 @@ _.Zones =
 						crit(8, {	-- Eketra
 							["achievementID"] = 14744,	-- Better to Be Lucky Than Dead
 						}),
+						i(186563),	-- Spear of the Impaler
 					},
 				}),
 				n(169827, {	-- Ekphoras, Herald of Grief
@@ -482,9 +479,6 @@ _.Zones =
 								}),
 							},
 						}),
-						q(62618, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
 					},
 				}),
 				n(162845, {	-- Orrholyn <Lord of Bloodletting>
@@ -529,9 +523,7 @@ _.Zones =
 						crit(19, {	-- Ratgusher
 							["achievementID"] = 14660,	-- It's About Sending a Message
 						}),
-						q(63044, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
+						i(186627),	-- Belt of Ten Thousand Tails
 						i(183136),	-- Incendiary Mawrat
 					},
 				}),
@@ -645,9 +637,6 @@ _.Zones =
 						crit(17, {	-- Stygian Incinerator
 							["achievementID"] = 14660,	-- It's About Sending a Message
 						}),
-						q(62539, {	-- Bonus Objective
-							["isDaily"] = true,
-						}),
 						i(186631, {	-- Emberfused Band
 							["timeline"] = { "added 9.1.0.38312" },
 						}),
@@ -748,15 +737,15 @@ _.Zones =
 								177443,	-- Vargir
 							},
 						}),
+						i(187393),	-- Sterling Hound-Handler's Gauntlets
+						i(186217),	-- Supple Helhound Leather Pants
+						i(187359),	-- Ylva's Water Dish
 						i(186970, {	-- Feeder's Hand and Key
 							["questID"] = 62683,
 							["g"] = {
 								i(186727),	-- Seal Breaker Key
 							},
 						}),
-						i(187393),	-- Sterling Hound-Handler's Gauntlets
-						i(186217),	-- Supple Helhound Leather Pants
-						i(187359),	-- Ylva's Water Dish
 					},
 				}),
 				i(182329, {	-- Domination's Calling
@@ -776,13 +765,18 @@ _.HiddenQuestTriggers = {
 	q(61136),	-- Agonix bonus objective
 	q(60920),	-- Akros bonus objective
 	q(59230),	-- Dartanos bonus objective
+	q(61140),	-- Dath Rezara bonus objective
+	q(59183),	-- Drifting Sorrow bonus objective
 	q(62209),	-- Houndmaster Vasanok bonus objective
 	q(60903),	-- Krala bonus objective
 	q(61125),	-- Malevolent Stygia bonus objective
+	q(62618),	-- Odalrik bonus objective
 	q(60991),	-- Orrholyn bonus objective
+	q(63044),	-- Ratgusher bonus objective
 	q(60992),	-- Razkazzar bonus objective
 	q(62211),	-- Skittering Broodmother bonus objective
 	q(59441),	-- Soulsmith Yol-Mattar bonus objective
+	q(62539),	-- Stygian Incinerator bonus objective
 	q(61728),	-- Valis bonus objective
 
 	q(64258),	-- Carriage Crusher / Traitor Balthier
@@ -792,8 +786,5 @@ _.HiddenQuestTriggers = {
 
 _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 	n(-10100, {	-- Shadowlands
-		n(-319, {	-- Weapons
-			i(186042),	-- Forsaken Crusader's Blade (PTR Only)
-		}),
 	}),
 });

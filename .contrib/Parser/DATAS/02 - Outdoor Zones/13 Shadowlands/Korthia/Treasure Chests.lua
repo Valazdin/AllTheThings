@@ -76,103 +76,74 @@ _.Zones =
 						i(187354),	-- Abandoned Broker Satchel
 					},
 				}),
-				o(369327, {	-- Invasive Mawshroom
-					["questID"] = 64351,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 54.2, 41.2, KORTHIA },
-						{ 56.8, 51.5, KORTHIA },
-						{ 57.3, 39.4, KORTHIA },
-						{ 58.2, 40.5, KORTHIA },
-						{ 60.3, 41.6, KORTHIA },
-						{ 60.7, 38.2, KORTHIA },
-					},
-					["g"] = {
-						i(186990),	-- Recipe: Blossom Burst
-						i(186988),	-- Recipe: Glory Burst
-						i(186989),	-- Recipe: Marrow Burst
-						i(186987),	-- Recipe: Torch Burst
-						i(186986),	-- Recipe: Widow Burst
-						i(187153),	-- Tasty Mawshroom
-					},
-				}),
-				o(369329, {	-- Invasive Mawshroom
-					["questID"] = 64354,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 48.5, 41.2, KORTHIA },
-						{ 49.4, 40.7, KORTHIA },
-						{ 49.5, 31.7, KORTHIA },
-						{ 49.9, 32.5, KORTHIA },
-						{ 51.4, 46.8, KORTHIA },
-						{ 53.7, 37.9, KORTHIA },
-					},
-					["g"] = {
-						i(186990),	-- Recipe: Blossom Burst
-						i(186988),	-- Recipe: Glory Burst
-						i(186989),	-- Recipe: Marrow Burst
-						i(186987),	-- Recipe: Torch Burst
-						i(186986),	-- Recipe: Widow Burst
-						i(187153),	-- Tasty Mawshroom
-					},
-				}),
-				o(369330, {	-- Invasive Mawshroom
-					["questID"] = 64355,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 42.1, 35.8, KORTHIA },
-						{ 42.3, 34.6, KORTHIA },
-						{ 43.6, 36.6, KORTHIA },
-						{ 45.6, 34.3, KORTHIA },
-						{ 52.4, 25.0, KORTHIA },
-						{ 55.1, 16.4, KORTHIA },
-					},
-					["g"] = {
-						i(186990),	-- Recipe: Blossom Burst
-						i(186988),	-- Recipe: Glory Burst
-						i(186989),	-- Recipe: Marrow Burst
-						i(186987),	-- Recipe: Torch Burst
-						i(186986),	-- Recipe: Widow Burst
-						i(187153),	-- Tasty Mawshroom
-					},
-				}),
-				o(369331, {	-- Invasive Mawshroom
-					["questID"] = 64356,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 35.7, 31.1, KORTHIA },
-						{ 37.4, 34.7, KORTHIA },
-						{ 39.5, 30.7, KORTHIA },
-						{ 39.7, 34.8, KORTHIA },
-					},
-					["g"] = {
-						i(186990),	-- Recipe: Blossom Burst
-						i(186988),	-- Recipe: Glory Burst
-						i(186989),	-- Recipe: Marrow Burst
-						i(186987),	-- Recipe: Torch Burst
-						i(186986),	-- Recipe: Widow Burst
-						i(187153),	-- Tasty Mawshroom
-					},
-				}),
-				o(369332, {	-- Invasive Mawshroom
-					["questID"] = 64357,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 39.6, 30.0, KORTHIA },
-						{ 41.2, 44.9, KORTHIA },
-						{ 43.4, 56.3, KORTHIA },
-						{ 45.2, 47.9, KORTHIA },
-						{ 46.5, 48.5, KORTHIA },
-						{ 54.8, 55.5, KORTHIA },
-					},
-					["g"] = {
-						i(186990),	-- Recipe: Blossom Burst
-						i(186988),	-- Recipe: Glory Burst
-						i(186989),	-- Recipe: Marrow Burst
-						i(186987),	-- Recipe: Torch Burst
-						i(186986),	-- Recipe: Widow Burst
-						i(187153),	-- Tasty Mawshroom
-					},
+				o_repeated({	-- Invasive Mawshroom
+					-- Contains
+					i(186990),	-- Recipe: Blossom Burst
+					i(186988),	-- Recipe: Glory Burst
+					i(186989),	-- Recipe: Marrow Burst
+					i(186987),	-- Recipe: Torch Burst
+					i(186986),	-- Recipe: Widow Burst
+					i(187153),	-- Tasty Mawshroom
+					-- Objects
+					o(369327, {	-- Invasive Mawshroom
+						["questID"] = 64351,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 54.2, 41.2, KORTHIA },
+							{ 56.8, 51.5, KORTHIA },
+							{ 57.3, 39.4, KORTHIA },
+							{ 58.2, 40.5, KORTHIA },
+							{ 60.3, 41.6, KORTHIA },
+							{ 60.7, 38.2, KORTHIA },
+						},
+					}),
+					o(369329, {	-- Invasive Mawshroom
+						["questID"] = 64354,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 48.5, 41.2, KORTHIA },
+							{ 49.4, 40.7, KORTHIA },
+							{ 49.5, 31.7, KORTHIA },
+							{ 49.9, 32.5, KORTHIA },
+							{ 51.4, 46.8, KORTHIA },
+							{ 53.7, 37.9, KORTHIA },
+						},
+					}),
+					o(369330, {	-- Invasive Mawshroom
+						["questID"] = 64355,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 42.1, 35.8, KORTHIA },
+							{ 42.3, 34.6, KORTHIA },
+							{ 43.6, 36.6, KORTHIA },
+							{ 45.6, 34.3, KORTHIA },
+							{ 52.4, 25.0, KORTHIA },
+							{ 55.1, 16.4, KORTHIA },
+						},
+					}),
+					o(369331, {	-- Invasive Mawshroom
+						["questID"] = 64356,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 35.7, 31.1, KORTHIA },
+							{ 37.4, 34.7, KORTHIA },
+							{ 38.8, 33.8, KORTHIA },
+							{ 39.5, 30.7, KORTHIA },
+							{ 39.7, 34.8, KORTHIA },
+						},
+					}),
+					o(369332, {	-- Invasive Mawshroom
+						["questID"] = 64357,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 39.6, 30.0, KORTHIA },
+							{ 41.2, 44.9, KORTHIA },
+							{ 43.4, 56.3, KORTHIA },
+							{ 45.2, 47.9, KORTHIA },
+							{ 46.5, 48.5, KORTHIA },
+							{ 54.8, 55.5, KORTHIA },
+						},
+					}),
 				}),
 				o(369185, {	-- Korthian Relic Box
 					["description"] = "In the cave.",
@@ -233,162 +204,91 @@ _.Zones =
 						i(187346),	-- Lost Memento
 					},
 				}),
-				o(368876, {	-- Mawsworn Cache
-					["questID"] = 64021,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 58.8, 33.6, KORTHIA },
-						{ 60.2, 39.1, KORTHIA },
-						{ 62.9, 34.9, KORTHIA },
-					},
-					["g"] = {
-						i(187097),	-- Construct's Shoulderplates
-						i(187016),	-- Eviscerator's Spiked Mantle
-						i(187026),	-- Field Warden's Torture Kit
-						i(187013),	-- Interceptor's Pauldrons
-						i(187020),	-- Necrobinder's Shoulderpads
-						i(187018),	-- Ritualist's Shoulder-Scythes
-						i(187431),	-- Sleeping Armament
-					},
+				o_repeated({	-- Mawsworn Cache
+					-- Contains
+					i(187097),	-- Construct's Shoulderplates
+					i(187016),	-- Eviscerator's Spiked Mantle
+					i(187026),	-- Field Warden's Torture Kit
+					i(187013),	-- Interceptor's Pauldrons
+					i(187020),	-- Necrobinder's Shoulderpads
+					i(187018),	-- Ritualist's Shoulder-Scythes
+					i(187431),	-- Sleeping Armament
+					-- Objects
+					o(368876, {	-- Mawsworn Cache
+						["questID"] = 64021,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 58.8, 33.6, KORTHIA },
+							{ 60.2, 39.1, KORTHIA },
+							{ 62.9, 34.9, KORTHIA },
+						},
+					}),
+					o(369339, {	-- Mawsworn Cache
+						["questID"] = 64363,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 56.8, 56.1, KORTHIA },
+							{ 58.3, 52.8, KORTHIA },
+							{ 61.1, 51.6, KORTHIA },
+							{ 61.2, 57.9, KORTHIA },
+							{ 62.3, 58.6, KORTHIA },
+						},
+					}),
+					o(369341, {	-- Mawsworn Cache
+						["questID"] = 64364,
+						["isDaily"] = true,
+						["coords"] = {
+							{ 43.1, 31.4, KORTHIA },
+							{ 47.7, 74.3, KORTHIA },
+							{ 51.3, 64.7, KORTHIA },
+							{ 54.0, 72.8, KORTHIA },
+							{ 56.4, 69.5, KORTHIA },
+							{ 56.5, 74.7, KORTHIA },
+							{ 47.9, 66.8, KORTHIA },
+						},
+					}),
 				}),
-				o(369339, {	-- Mawsworn Cache
-					["questID"] = 64363,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 56.8, 56.1, KORTHIA },
-						{ 58.3, 52.8, KORTHIA },
-						{ 61.1, 51.6, KORTHIA },
-						{ 61.2, 57.9, KORTHIA },
-						{ 62.3, 58.6, KORTHIA },
-					},
-					["g"] = {
-						i(187097),	-- Construct's Shoulderplates
-						i(187016),	-- Eviscerator's Spiked Mantle
-						i(187026),	-- Field Warden's Torture Kit
-						i(187013),	-- Interceptor's Pauldrons
-						i(187020),	-- Necrobinder's Shoulderpads
-						i(187018),	-- Ritualist's Shoulder-Scythes
-						i(187431),	-- Sleeping Armament
-					},
-				}),
-				o(369341, {	-- Mawsworn Cache
-					["questID"] = 64364,
-					["isDaily"] = true,
-					["coords"] = {
-						{ 43.1, 31.4, KORTHIA },
-						{ 47.7, 74.3, KORTHIA },
-						{ 51.3, 64.7, KORTHIA },
-						{ 54.0, 72.8, KORTHIA },
-						{ 56.4, 69.5, KORTHIA },
-						{ 56.5, 74.7, KORTHIA },
-						{ 47.9, 66.8, KORTHIA },
-					},
-					["g"] = {
-						i(187097),	-- Construct's Shoulderplates
-						i(187016),	-- Eviscerator's Spiked Mantle
-						i(187026),	-- Field Warden's Torture Kit
-						i(187013),	-- Interceptor's Pauldrons
-						i(187020),	-- Necrobinder's Shoulderpads
-						i(187018),	-- Ritualist's Shoulder-Scythes
-						i(187431),	-- Sleeping Armament
-					},
-				}),
-				o(369333, {	-- Nest of Unusual Materials
-					["questID"] = 64358,
-					["isDaily"] = true,
-					["coord"] = { 41.0, 39.7, KORTHIA },
-					["g"] = {
-						i(187440, {	-- Feather-Stuffed Helm
-						--	TODO: commented are unconfirmed
-							i(185858),	-- Korthian Caretaker's Crest
-							i(186666),	-- Korthian Caretaker's Crown
-							i(185871),	-- Razorwing Scale Coif
-						--	i(186743),	-- Razorwing Scale Hood
-							i(186736),	-- Shardhide Leather Cowl
-							i(185864),	-- Shardhide Leather Hood
-							i(185876),	-- Vault Guardian's Helm
-						--	i(186748),	-- Vault Guardian's Visor
-						}),
-						i(187442),	-- Scholar's Ancient Pack
-						i(187008),	-- Recipe: Porous Rock Candy
-					},
-				}),
-				o(369334, {	-- Nest of Unusual Materials
-					["questID"] = 64359,
-					["isDaily"] = true,
-					["coord"] = { 42.2, 55.9, KORTHIA },
-					["g"] = {
-						i(187440, {	-- Feather-Stuffed Helm
-							i(185858),	-- Korthian Caretaker's Crest
-							i(186666),	-- Korthian Caretaker's Crown
-						--	i(185871),	-- Razorwing Scale Coif
-						--	i(186743),	-- Razorwing Scale Hood
-							i(186736),	-- Shardhide Leather Cowl
-							i(185864),	-- Shardhide Leather Hood
-							i(185876),	-- Vault Guardian's Helm
-						--	i(186748),	-- Vault Guardian's Visor
-						}),
-						i(187442),	-- Scholar's Ancient Pack
-						i(187008),	-- Recipe: Porous Rock Candy
-					},
-				}),
-				o(369335, {	-- Nest of Unusual Materials
-					["description"] = "Climb across the tree to reach the nest.",
-					["questID"] = 64360,
-					["isDaily"] = true,
-					["coord"] = { 52.4, 43.8, KORTHIA },
-					["g"] = {
-						i(187440, {	-- Feather-Stuffed Helm
-							i(185858),	-- Korthian Caretaker's Crest
-							i(186666),	-- Korthian Caretaker's Crown
-						--	i(185871),	-- Razorwing Scale Coif
-						--	i(186743),	-- Razorwing Scale Hood
-							i(186736),	-- Shardhide Leather Cowl
-							i(185864),	-- Shardhide Leather Hood
-							i(185876),	-- Vault Guardian's Helm
-						--	i(186748),	-- Vault Guardian's Visor
-						}),
-						i(187442),	-- Scholar's Ancient Pack
-						i(187008),	-- Recipe: Porous Rock Candy
-					},
-				}),
-				o(369336, {	-- Nest of Unusual Materials
-					["questID"] = 64361,
-					["isDaily"] = true,
-					["coord"] = { 63.7, 31.4, KORTHIA },
-					["g"] = {
-						i(187440, {	-- Feather-Stuffed Helm
-							i(185858),	-- Korthian Caretaker's Crest
-							i(186666),	-- Korthian Caretaker's Crown
-						--	i(185871),	-- Razorwing Scale Coif
-						--	i(186743),	-- Razorwing Scale Hood
-							i(186736),	-- Shardhide Leather Cowl
-							i(185864),	-- Shardhide Leather Hood
-							i(185876),	-- Vault Guardian's Helm
-						--	i(186748),	-- Vault Guardian's Visor
-						}),
-						i(187442),	-- Scholar's Ancient Pack
-						i(187008),	-- Recipe: Porous Rock Candy
-					},
-				}),
-				o(369337, {	-- Nest of Unusual Materials
-					["questID"] = 64362,
-					["isDaily"] = true,
-					["coord"] = { 52.3, 72.7, KORTHIA },
-					["g"] = {
-						i(187440, {	-- Feather-Stuffed Helm
-							i(185858),	-- Korthian Caretaker's Crest
-							i(186666),	-- Korthian Caretaker's Crown
-						--	i(185871),	-- Razorwing Scale Coif
-						--	i(186743),	-- Razorwing Scale Hood
-							i(186736),	-- Shardhide Leather Cowl
-							i(185864),	-- Shardhide Leather Hood
-							i(185876),	-- Vault Guardian's Helm
-						--	i(186748),	-- Vault Guardian's Visor
-						}),
-						i(187442),	-- Scholar's Ancient Pack
-						i(187008),	-- Recipe: Porous Rock Candy
-					},
+				o_repeated({	-- Nest of Unusual Materials
+					-- Contains
+					i(187440, {	-- Feather-Stuffed Helm
+						i(185858),	-- Korthian Caretaker's Crest
+						i(186666),	-- Korthian Caretaker's Crown
+						i(185871),	-- Razorwing Scale Coif
+					--	i(186743),	-- Razorwing Scale Hood
+						i(186736),	-- Shardhide Leather Cowl
+						i(185864),	-- Shardhide Leather Hood
+						i(185876),	-- Vault Guardian's Helm
+					--	i(186748),	-- Vault Guardian's Visor
+					}),
+					i(187442),	-- Scholar's Ancient Pack
+					i(187008),	-- Recipe: Porous Rock Candy
+					-- Objects
+					o(369333, {	-- Nest of Unusual Materials
+						["questID"] = 64358,
+						["isDaily"] = true,
+						["coord"] = { 41.0, 39.7, KORTHIA },
+					}),
+					o(369334, {	-- Nest of Unusual Materials
+						["questID"] = 64359,
+						["isDaily"] = true,
+						["coord"] = { 42.2, 55.9, KORTHIA },
+					}),
+					o(369335, {	-- Nest of Unusual Materials
+						["description"] = "Climb across the tree to reach the nest.",
+						["questID"] = 64360,
+						["isDaily"] = true,
+						["coord"] = { 52.4, 43.8, KORTHIA },
+					}),
+					o(369336, {	-- Nest of Unusual Materials
+						["questID"] = 64361,
+						["isDaily"] = true,
+						["coord"] = { 63.7, 31.4, KORTHIA },
+					}),
+					o(369337, {	-- Nest of Unusual Materials
+						["questID"] = 64362,
+						["isDaily"] = true,
+						["coord"] = { 52.3, 72.7, KORTHIA },
+					}),
 				}),
 				o(369232, {	-- Offering Box
 					["description"] = "To open the treasure, climb up the outside of the building and loot the |cFFFFFFFFSmall Offering Key|r at |cFFFFFFFF43.5 67.5|r.",
@@ -421,6 +321,7 @@ _.Zones =
 						{ 34.7, 45.8, KORTHIA },
 						{ 37.1, 53.7, KORTHIA },
 						{ 38.2, 51.7, KORTHIA },
+						{ 39.0, 54.7, KORTHIA },
 						{ 39.6, 50.2, KORTHIA },
 						{ 41.0, 50.5, KORTHIA },
 						{ 44.6, 75.8, KORTHIA },
@@ -442,6 +343,7 @@ _.Zones =
 						{ 45.3, 49.5, KORTHIA },
 						{ 45.6, 81.4, KORTHIA },
 						{ 46.3, 56.7, KORTHIA },
+						{ 46.4, 49.7, KORTHIA },
 						{ 47.2, 76.8, KORTHIA },
 						{ 48.8, 52.1, KORTHIA },
 						{ 50.6, 67.1, KORTHIA },
@@ -544,4 +446,10 @@ _.HiddenQuestTriggers = {
 	q(64700),	-- looting 100-research item Ripped Cosmology Chart
 	q(64702),	-- looting 48-research item Scroll of Shadowlands Fables
 	q(64705),	-- looting 150-research item from a treasure
+	q(64787),	-- Korthia treasure repeatable quest
+	q(64788),	-- Pile of Bones repeatable quest (37.1, 53.6)
+	q(64789),	-- Shardhide Stash repeatable quest (49.6, 26.8; 50.4, 31.2)
+	q(64790),	-- Relic Cache repeatable quest (59.8, 36.0; 61.4, 38.1)
+	q(64791),	-- Relic Cache repeatable quest
+	q(64792),	-- Relic Cache repeatable quest
 };

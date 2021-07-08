@@ -158,6 +158,8 @@ _.Zones =
 							i(185993, {	-- Ascended War Chest
 						--	TODO: figure out the contents of this chest
 								i(186546),	-- Copperback Etherwyrm (PET!)
+								i(187410),	-- Death's Advance Battlefield Drape
+								i(187185),	-- Vesper of Faith (TOY!)
 							}),
 						}),
 						n(-77, {	-- Special
@@ -350,6 +352,7 @@ _.Zones =
 							i(185992, {	-- War Chest of the Undying Army
 						--	TODO: figure out the contents of this chest
 								i(186103),	-- Undying Darkhound's Harness (MOUNT!)
+								i(187410),	-- Death's Advance Battlefield Drape
 								i(186557),	-- Fodder (PET!)
 							}),
 						}),
@@ -607,7 +610,6 @@ _.Zones =
 								["achievementID"] = 15000,	-- United Front
 							}),
 							i(185991, {	-- War Chest of the Wild Hunt
-							--	TODO: battlefield drape may be from any covenant assault chest?  on PTR it was sold by a vendor
 								i(186000),	-- Wild Hunt Legsplitter (MOUNT!)
 								i(187410),	-- Death's Advance Battlefield Drape
 								i(186547),	-- Invasive Buzzer (PET!)
@@ -754,6 +756,7 @@ _.Zones =
 							}),
 							i(185990, {	-- Harvester's War Chest
 								i(185996),	-- Harvester's Dredwing Saddle (MOUNT!)
+								i(187410),	-- Death's Advance Battlefield Drape
 							}),
 						}),
 					},
@@ -783,5 +786,9 @@ _.HiddenQuestTriggers = {
 
 --	Venthyr
 	q(63938),	-- triggered when returning Shadow to Reldorn on "They Grow Up So Quickly"
+	q(63939),	-- triggered when returning Goo Goo to Reldorn on "They Grow Up So Quickly"
+	q(63940),	-- triggered when returning Roots to Reldorn on "They Grow Up So Quickly"
+	q(63941),	-- triggered when returning Creep to Reldorn on "They Grow Up So Quickly"
 	q(63942),	-- triggered when returning Bubbles to Reldorn on "They Grow Up So Quickly"
+	-- TODO: q( ),	-- triggered when returning Stinky to Reldorn on "They Grow Up So Quickly"
 };

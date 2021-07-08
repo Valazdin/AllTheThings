@@ -104,7 +104,7 @@ _.Zones =
 					["isDaily"] = true,
 				}),
 				i(187054, {	-- Lost Razorwing Egg
-					["questID"] = 64281,	-- 2nd daily drop
+					-- ["questID"] = 64280,	-- 1st daily drop / people report multiple per day & have received the mount, so idk what this questID is then...
 					["crs"] = {
 						177295,	-- Colossal Worldeater
 						177913,	-- Hungering Behemoth
@@ -122,7 +122,7 @@ _.Zones =
 							["name"] = "Daily Drop #1",
 							["isDaily"] = true,
 						}),
-						q(64281, {	-- Daily Drop #2
+						q(64281, {	-- Daily Drop #2 -- probably collecting the mount, will confirm if no one else does prior
 							["name"] = "Daily Drop #2",
 							["isDaily"] = true,
 						}),
@@ -159,6 +159,7 @@ _.Zones =
 				i(187334),	-- Shattered Void Tablet
 				i(187460),	-- Strangely Intricate Key
 				i(187331),	-- Tattered Fae Designs
+				i(187458),	-- Unearthed Teleporter Sigil
 				i(187459),	-- Vial of Mysterious Liquid
 				i(187478),	-- White Razorwing Talon
 			--	Cosmetics
@@ -232,4 +233,5 @@ _.Zones =
 
 _.HiddenQuestTriggers = {
 	q(64534),	-- triggered when looting Korthian Relic - i(187311), "Azgoth's Tattered Maps"
+	q(64535),	-- triggered when looting Korthian Relic - i(187333), "Core of an Unknown Titan"
 };

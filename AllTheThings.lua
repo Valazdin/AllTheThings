@@ -1374,6 +1374,40 @@ local function RawCloneData(data)
 	end
 	return clone;
 end
+local function GetSourceID(itemLink)
+	if C_Item.IsDressableItemByID(itemLink) then
+		-- Updated function courtesy of CanIMogIt, Thanks AmiYuy and Team! :D
+		local sourceID = select(2, C_TransmogCollection.GetItemInfo(itemLink));
+		if sourceID then return sourceID, true; end
+
+		-- if app.DEBUG_PRINT then print("Failed to directly retrieve SourceID",itemLink) end
+		local itemID, _, _, slotName = GetItemInfoInstant(itemLink);
+		if slotName then
+			local slots = inventorySlotsMap[slotName];
+			if slots then
+				DressUpModel:SetUnit('player');
+				DressUpModel:Undress();
+				for _,slot in pairs(slots) do
+					DressUpModel:TryOn(itemLink, slot);
+					local tmogInfo = DressUpModel:GetItemTransmogInfo(slot);
+					-- print("SlotInfo",slot)
+					-- app.PrintTable(tmogInfo)
+					local sourceID = tmogInfo and tmogInfo.appearanceID;
+					if sourceID and sourceID ~= 0 then
+						-- Added 5/4/2018 - Account for DressUpModel lag... sigh
+						local sourceItemLink = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sourceID));
+						-- print("SourceID from DressUpModel",sourceID,sourceItemLink)
+						if sourceItemLink and tonumber(sourceItemLink:match("item:(%d+)")) == itemID then
+							return sourceID, true;
+						end
+					end
+				end
+			end
+		end
+		return nil, true;
+	end
+	return nil, false;
+end
 -- verifies that an item group either has no sourceID or that its sourceID matches what the in-game API returns
 -- based on the itemID and modID of the item
 local function VerifySourceID(item)
@@ -1400,7 +1434,7 @@ local function VerifySourceID(item)
 		-- quality below UNCOMMON means no source
 		if item.q and item.q < 2 then return true; end
 
-		local linkInfoSourceID = app.GetSourceID(item.link);
+		local linkInfoSourceID = GetSourceID(item.link);
 		if linkInfoSourceID and linkInfoSourceID ~= item.s then
 			print("Mismatched SourceID",item.link,item.s,"=>",linkInfoSourceID);
 			return;
@@ -1411,38 +1445,6 @@ local function VerifySourceID(item)
 	end
 	-- at this point the game source information matches the information for this item group
 	return true;
-end
-local function GetSourceID(itemLink)
-	if C_Item.IsDressableItemByID(itemLink) then
-		-- Updated function courtesy of CanIMogIt, Thanks AmiYuy and Team! :D
-		local sourceID = select(2, C_TransmogCollection.GetItemInfo(itemLink));
-		if sourceID then return sourceID, true; end
-
-		-- in PTR this doesn't exist anymore?
-		if DressUpModel.GetSlotTransmogSources then
-			local itemID, _, _, slotName = GetItemInfoInstant(itemLink);
-			if slotName then
-				local slots = inventorySlotsMap[slotName];
-				if slots then
-					DressUpModel:SetUnit('player');
-					DressUpModel:Undress();
-					for i, slot in pairs(slots) do
-						DressUpModel:TryOn(itemLink, slot);
-						local sourceID = DressUpModel:GetSlotTransmogSources(slot);
-						if sourceID and sourceID ~= 0 then
-							-- Added 5/4/2018 - Account for DressUpModel lag... sigh
-							local sourceItemLink = select(6, C_TransmogCollection.GetAppearanceSourceInfo(sourceID));
-							if sourceItemLink and tonumber(sourceItemLink:match("item:(%d+)")) == itemID then
-								return sourceID, true;
-							end
-						end
-					end
-				end
-			end
-		end
-		return nil, true;
-	end
-	return nil, false;
 end
 app.IsComplete = function(o)
 	if o.total then return o.total == o.progress; end
@@ -3710,6 +3712,12 @@ local function GetCachedSearchResults(search, method, paramA, paramB, ...)
 					group = item.group;
 					left = group.text or RETRIEVING_DATA;
 					if not working and (left == RETRIEVING_DATA or left:find("%[]")) then working = true; end
+
+					-- If this group has a specific Class requirement, tack that on as well
+					if group.c and #group.c == 1 then
+						local class = GetClassInfo(group.c[1]);
+						left = left .. " " .. app.TryColorizeName(group, class);
+					end
 					if group.icon then item.prefix = item.prefix .. "|T" .. group.icon .. ":0|t "; end
 
 					-- If this group has specialization requirements, let's attempt to show the specialization icons.
@@ -4666,8 +4674,8 @@ app.SearchForLink = SearchForLink;
 -- Map Information Lib
 local function AddTomTomWaypoint(group, auto, recur)
 	if TomTom
-		-- only plot visible things
-		and group.visible
+		-- only plot visible things or if being
+		and (group.visible or auto)
 		-- which aren't saved, unless this is the Thing that was directly clicked
 		and (not recur or not group.saved)
 		then
@@ -4702,6 +4710,8 @@ local function AddTomTomWaypoint(group, auto, recur)
 			end
 		end
 		if group.g then
+			-- if plotting waypoints of a 'repeated' object, inherently plot the contained object waypoints even when not visible
+			local auto = group.objectID and not group.coord and not group.coords;
 			for i,subgroup in ipairs(group.g) do
 				-- only automatically plot subGroups if they are not quests with incomplete source quests
 				-- TODO: use 'isLockedBy' property for quests
@@ -8215,6 +8225,9 @@ local itemFields = {
 	["retries"] = function(t)
 		return GetCachedField(t, "retries");
 	end,
+	["q"] = function(t)
+		return GetCachedField(t, "q");
+	end,
 	["b"] = function(t)
 		return GetCachedField(t, "b") or 2;
 		-- local link = t.link;
@@ -8512,8 +8525,8 @@ fields.metaAfterFailure = function(t) return newMeta; end;
 end)();
 
 local fields = RawCloneData(itemFields);
--- fields.collectible = itemFields.collectibleAsQuest;
--- fields.collected = itemFields.collectedAsQuest;
+fields.collectible = itemFields.collectibleAsQuest;
+fields.collected = itemFields.collectedAsQuest;
 fields.trackable = itemFields.trackableAsQuest;
 fields.saved = itemFields.savedAsQuest;
 app.BaseItemWithQuestID = app.BaseObjectFields(fields);
@@ -9375,7 +9388,7 @@ local objectFields = {
 		return IsQuestFlaggedCompletedForObject(t);
 	end,
 	["savedAsQuest"] = function(t)
-		return IsQuestFlaggedCompletedForObject(t) == 1;
+		return IsQuestFlaggedCompleted(t.questID);
 	end,
 	["trackableAsQuest"] = app.ReturnTrue,
 	["repeatableAsQuest"] = function(t)
@@ -9390,6 +9403,23 @@ local objectFields = {
 				end
 			end
 		end
+	end,
+	["repeatable"] = function(t)
+		-- only used for generic objects with no other way of being tracked as repeatable
+		if not t.g then return; end
+		for _,group in ipairs(t.g) do
+			if group.objectID and group.repeatable then return true; end
+		end
+		-- every contained sub-object is not repeatable, so the repeated object should also be marked as not repeatable
+	end,
+	["saved"] = function(t)
+		-- only used for generic objects with no other way of being tracked as saved
+		if not t.g then return; end
+		for _,group in ipairs(t.g) do
+			if group.objectID and not group.saved then return; end
+		end
+		-- every contained sub-object is already saved, so the repeated object should also be marked as saved
+		return true;
 	end,
 };
 app.BaseObject = app.BaseObjectFields(objectFields);
@@ -10267,7 +10297,8 @@ local fields = {
 		return t.requireSkill;
 	end,
 	["b"] = function(t)
-		return t.itemID and app.AccountWideRecipes and 2;
+		-- If not tracking Recipes Account-Wide, then pretend that every Recipe is BoP
+		return t.itemID and app.AccountWideRecipes and 2 or 1;
 	end,
 	-- Represents the ModID-included ItemID value for this Item group, will be equal to ItemID or 0 if no ModID is present
 	["modItemID"] = function(t)
@@ -12843,12 +12874,13 @@ local function SetRowData(self, row, data)
 		-- no or bad sourceID or requested to reSource and is of a proper source-able quality
 		elseif data.reSource and (not data.q or data.q > 1) then
 			-- If it doesn't, the source ID will need to be harvested.
-			local s = GetSourceID(text) or (data.artifactID and data.s);
+			local s, success = GetSourceID(text) or (data.artifactID and data.s);
 			if s and s > 0 then
 				data.reSource = nil;
 				-- only save the source if it is different than what we already have
 				if not data.s or data.s < 1 or data.s ~= s or (data.artifactID and data.s) then
 					print("SourceID Update",data.text,data.s,"=>",s);
+					-- print(GetItemInfo(text))
 					data.s = s;
 					if data.collected then
 						data.parent.progress = data.parent.progress + 1;
@@ -12884,8 +12916,10 @@ local function SetRowData(self, row, data)
 						AllTheThingsHarvestItems[data.itemID] = item;
 					end
 				end
+			elseif success then
+				print("Success without a SourceID", text);
 			else
-				--print("NARP", text);
+				-- print("NARP", text);
 				data.s = nil;
 				data.reSource = nil;
 				data.parent.total = data.parent.total - 1;
@@ -13107,7 +13141,7 @@ local function RowOnClick(self, button)
 		-- All non-Shift Right Clicks open a mini list or the settings.
 		if button == "RightButton" then
 			if IsAltKeyDown() and (self.index > 0 or window.isQuestChain) then
-				AddTomTomWaypoint(reference, false);
+				AddTomTomWaypoint(reference);
 			elseif IsShiftKeyDown() then
 				if app.Settings:GetTooltipSetting("Sort:Progress") then
 					app.print("Sorting selection by total progress...");
@@ -18257,7 +18291,7 @@ app:GetWindow("Debugger", UIParent, function(self, force)
 					-- print("Looted Item",itemString)
 					local itemID = GetItemInfoInstant(itemString);
 					-- app.DEBUG_PRINT = true;
-					AddObject({ ["unit"] = j, ["g"] = { { ["itemID"] = itemID, ["rawlink"] = itemString, ["s"] = app.GetSourceID(itemString) } } });
+					AddObject({ ["unit"] = j, ["g"] = { { ["itemID"] = itemID, ["rawlink"] = itemString, ["s"] = GetSourceID(itemString) } } });
 					-- app.DEBUG_PRINT = nil;
 				end
 			end

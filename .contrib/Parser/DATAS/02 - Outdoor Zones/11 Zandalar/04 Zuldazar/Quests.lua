@@ -1802,6 +1802,7 @@ _.Zones =
 				q(53450, {	-- King Da'ka (A)
 					["provider"] = { "n", 129589 },	-- The Monkey King
 					["coord"] = { 51.4, 53.0, 862 },
+					["sourceQuests"] = { 53449 },	-- Apes of Wrath
 					["races"] = ALLIANCE_ONLY,
 				}),
 				q(49282, {	-- Morgrum's Extended Survey
@@ -2052,6 +2053,11 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 			i(166889),	-- Zandalari Prelate's Lightblade
 			i(158563),	-- Tomb-Rustler's Polearm
 			i(154972),	-- Tomb-Rustler's Polearm
+			i(166887),	-- Pakura Priest Staff
+			i(158568),	-- Mojo-Drainer Staff
+			i(152871),	-- Seapriest's Wand (H)
+			i(152873),	-- Talanji's Salutary Scepter (H)
+			i(158580),	-- Loa-Claimer's Wariglaives
 		}),
 	}),
 });

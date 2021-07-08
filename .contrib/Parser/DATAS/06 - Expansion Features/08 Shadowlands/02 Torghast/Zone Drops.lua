@@ -105,6 +105,19 @@ _.ExpansionFeatures =
 					},
 				}),
 			--	Blues
+				i(187417, {	-- Adamant Vaults Cell
+					["crs"] = {
+						176578,	-- Vault Sentinel
+					},
+				}),
+				i(187075, {	-- Box of Rattling Chains (TOY!)
+					["crs"] = {
+						151331,	-- Cellblock Sentinel
+						170418,	-- Goxul the Devourer
+						157122,	-- Patrician Cromwell
+						159190,	-- Synod
+					},
+				}),
 				i(183192, {	-- Frenzied Mawrat
 					["crs"] = {
 						151331,	-- Cellblock Sentinel

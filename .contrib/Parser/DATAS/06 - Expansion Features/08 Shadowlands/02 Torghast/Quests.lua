@@ -49,6 +49,17 @@ _.ExpansionFeatures =
 					["provider"] = { "n", 164937 },    -- Runecarver
 					["coord"] = { 50.4, 53.8, 1912 },    -- The Runecarver's Oubliette
 				}),
+				q(63727, {	-- The Primus Returns
+				--	TODO: maybe move to korthia for visibility?
+					["sourceQuests"] = { 63726 },	-- Untangling the Sigil
+					["provider"] = { "n", 177569 },	-- The Primus
+					["coord"] = { 50.2, 58.4, 1912 },	-- The Runecarver's Oubliette
+					["g"] = {
+						i(185965, {	-- Memories of Sunless Skies
+							["questID"] = 63893,	-- quest may need to be moved to HQT if the item can only be used once per account
+						}),
+					},
+				}),
 				q(62800, {	-- The Vessels of Jewels
 					["sourceQuests"] = { 60272 },    -- The Weak Link
 					["requireSkill"] = JEWELCRAFTING,
@@ -319,19 +330,6 @@ _.ExpansionFeatures =
 				}),
 				]]--
 
-				-- 9.1 PTR QUESTS -- TODO: SORT ON LIVE
-				q(63727, {	-- The Primus Returns
-				--	TODO: maybe move to korthia for visibility?
-					["sourceQuests"] = { 63726 },	-- Untangling the Sigil
-					["provider"] = { "n", 177569 },	-- The Primus
-					["coord"] = { 50.2, 58.4, 1912 },	-- The Runecarver's Oubliette
-					["g"] = {
-						i(185965, {	-- Memories of Sunless Skies
-							["questID"] = 63893,	-- quest may need to be moved to HQT if the item can only be used once per account
-						}),
-					},
-				}),
-
 
 
 
@@ -572,6 +570,14 @@ _.ExpansionFeatures =
 					["isWeekly"] = true,
 					["name"] = "Fracture Chambers, Layer 8",
 				}),
+				q(63872, {	-- Fracture Chambers, Layer 9
+					["isWeekly"] = true,
+					["name"] = "Fracture Chambers, Layer 9",
+				}),
+				q(63873, {	-- Fracture Chambers, Layer 10
+					["isWeekly"] = true,
+					["name"] = "Fracture Chambers, Layer 10",
+				}),
 
 				-- Mort'regar
 				q(58204, {	-- Mort'regar, Layer 1
@@ -605,6 +611,14 @@ _.ExpansionFeatures =
 				q(61978, {	-- Mort'regar, Layer 8
 					["isWeekly"] = true,
 					["name"] = "Mort'regar, Layer 8",
+				}),
+				q(63884, {	-- Mort'regar, Layer 9
+					["isWeekly"] = true,
+					["name"] = "Mort'regar, Layer 9",
+				}),
+				q(63885, {	-- Mort'regar, Layer 10
+					["isWeekly"] = true,
+					["name"] = "Mort'regar, Layer 10",
 				}),
 
 				-- Skoldus Hall

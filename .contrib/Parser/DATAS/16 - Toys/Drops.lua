@@ -6,6 +6,7 @@ _.Toys =
 {
 	n(-26, {	-- Drop
 		i(127670),		-- Accursed Tome of the Sargerei
+		i(187417),		-- Adamant Vaults Cell
 		i(86589),		-- Ai-Li's Skymirror
 		i(175140),		-- All-Seeing Eyes
 		i(153204),		-- All-Seer's Eye
@@ -34,6 +35,7 @@ _.Toys =
 		i(187139),		-- Bottled Shade Heart
 		i(134023),		-- Bottled Tornado
 		i(128223),		-- Bottomless Stygana Mushroom Brew
+		i(187075),		-- Box of Rattling Chains
 		i(163713),		-- Brazier Cap
 		i(116113),		-- Breath of Talador
 		i(114227),		-- Bubble Wand

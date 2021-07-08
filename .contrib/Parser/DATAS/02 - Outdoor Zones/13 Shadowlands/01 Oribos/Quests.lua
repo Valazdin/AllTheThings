@@ -7,7 +7,7 @@ _.Zones =
 	m(SHADOWLANDS, {
 		m(ORIBOS, {
 			n(QUESTS, {
-				n(-9, {	-- PvP
+				pvp(n(-9, {	-- PvP
 					q(62910, {	-- Against Overwhelming Odds
 						["provider"] = { "n", 168011 },	-- Zo'sorg
 						["isWeekly"] = true,
@@ -21,6 +21,13 @@ _.Zones =
 						["races"] = HORDE_ONLY,
 						["coord"] = { 34.7, 56.5, ORIBOS },
 						["_drop"] = { "g" },	-- drop anima trash
+					}),
+					q(64304, {	-- New Opportunities Await
+						["provider"] = { "n", 168011 },	-- Zo'sorg
+						["coord"] = { 34.7, 57.3, ORIBOS },
+						["g"] = {
+							i(186980),	-- Unchained Gladiator's Shackles of Malediction
+						},
 					}),
 					q(62287, {	-- Observing Arenas
 						["provider"] = { "n", 174922 },	-- Strategist Zo'rak
@@ -52,7 +59,7 @@ _.Zones =
 						["coord"] = { 34.7, 56.5, ORIBOS },
 						["_drop"] = { "g" },	-- drop anima trash
 					}),
-				}),
+				})),
 				q(60151, {	-- A Doorway Through the Veil
 					["sourceQuests"] = { 60150 },	-- Tether to Home
 					["provider"] = { "n", 164079 },	-- Highlord Bolvar Fordragon
@@ -975,7 +982,7 @@ _.NeverImplemented = bubbleDown({ ["u"] = NEVER_IMPLEMENTED }, {
 				i(175645),	-- Oribos Quest Plate Waist
 				i(175646),	-- Oribos Quest Plate Wrist
 			}),
-			n(-322, {	-- Cloaks	
+			n(-322, {	-- Cloaks
 				i(179612),	-- Oribos Quest Cloth Cloak
 				i(179614),	-- Oribos Quest Leather Cloak
 				i(179615),	-- Oribos Quest Mail Cloak

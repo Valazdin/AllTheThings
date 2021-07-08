@@ -14,6 +14,7 @@ i(186201);	-- Ancient Anima Vessel
 i(186204);	-- Anima-Stained Glass Shards
 i(187349);	-- Anima Laden Egg
 i(181540);	-- Animaflower Bud
+i(187517);	-- Animaswell Prism
 i(181477);	-- Ardendew Pearl
 i(184381);	-- Astral Sapwood
 i(184773);	-- Battle-Tested Armor Component
@@ -315,6 +316,9 @@ i(169231);	-- Optical Override Drive
 i(163601);	-- Overgrown Anchor Weed
 i(167830);	-- Petrified Ebony Scale
 i(169325);	-- Petrified Ebony Scale
+i(187529);	-- Phylactery Shard (N)
+i(187530);	-- Phylactery Shard (H)
+i(187531);	-- Phylactery Shard (M)
 i(171989);	-- Pouch of Spores
 i(174078);	-- Primrose's Pyrotechnic Powder
 i(169237);	-- Pulsating Marble
